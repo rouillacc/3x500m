@@ -1,340 +1,685 @@
 <!DOCTYPE html>
-<html lang="fr" class="h-full bg-sky-50/50">
+<html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Lycée Alain 2026 - Évaluation CCF EPS Bac</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <style>
-    /* Empêche le zoom intempestif sur mobile/tablette lors du focus */
-    input, select, button { font-size: 13px !important; touch-action: manipulation; }
-    .sticky-header th { position: sticky; top: 0; z-index: 20; }
-    /* Masquage des flèches d'incrémentation pour input type number */
-    input[type=number]::-webkit-inner-spin-button, 
-    input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
-    
-    @media print {
-      body { background: white !important; font-size: 11px; }
-      .no-print { display: none !important; }
-      .print-only { display: block !important; }
-      table { width: 100% !important; border-collapse: collapse; }
-      th, td { border: 1px solid #cbd5e1 !important; padding: 4px 6px !important; }
-      .badge-print { border: none !important; background: transparent !important; color: black !important; }
-    }
-    .print-only { display: none; }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#0284c7">
+<title>Lycée Alain 2026 - Évaluation CCF EPS Bac</title>
+<style>
+:root{
+  --s50:#f0f9ff;--s100:#e0f2fe;--s200:#bae6fd;--s300:#7dd3fc;--s500:#0ea5e9;--s600:#0284c7;--s700:#0369a1;--s900:#0c4a6e;
+  --g50:#f8fafc;--g100:#f1f5f9;--g200:#e2e8f0;--g300:#cbd5e1;--g400:#94a3b8;--g500:#64748b;--g800:#1e293b;
+  --em:#059669;--am:#d97706;--rd:#dc2626;
+  --h:46px;
+  --sal:env(safe-area-inset-left,0px);--sar:env(safe-area-inset-right,0px);--sab:env(safe-area-inset-bottom,0px);
+  --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{height:100%;margin:0}
+body{display:flex;flex-direction:column;height:100vh;height:100dvh;overflow:hidden;background:var(--s50);color:var(--g800);
+  font:14px/1.3 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;-webkit-user-select:none;user-select:none;
+  padding:0 var(--sar) var(--sab) var(--sal)}
+button,input,select,textarea{font:inherit;color:inherit;touch-action:manipulation}
+button{cursor:pointer}
+input,select,textarea{-webkit-user-select:text;user-select:text}
+svg{display:block}
+
+/* ---------- Boutons ---------- */
+.btn{display:inline-flex;align-items:center;gap:6px;height:36px;padding:0 11px;border:1px solid var(--s300);background:#fff;color:var(--s900);border-radius:9px;font-weight:600;font-size:13px;white-space:nowrap}
+.btn:active{background:var(--s100)}
+.btn.pri{background:var(--s600);border-color:var(--s700);color:#fff}
+.btn.pri:active{background:var(--s700)}
+.btn svg{width:17px;height:17px;flex:none}
+
+/* ---------- En-tête ---------- */
+.top{display:flex;align-items:center;justify-content:space-between;gap:8px;min-height:var(--h);padding:5px 10px;background:#fff;border-bottom:1px solid var(--s200);flex:none}
+.brand{display:flex;align-items:center;gap:8px;min-width:0}
+.logo{width:30px;height:30px;border-radius:8px;background:linear-gradient(135deg,var(--s600),var(--s300));color:#fff;display:grid;place-items:center;flex:none}
+.logo svg{width:17px;height:17px}
+.brand b{font-size:14px;color:var(--s900);letter-spacing:-.01em;white-space:nowrap}
+.year{font-size:10px;font-weight:700;background:var(--s100);color:var(--s700);border:1px solid var(--s300);border-radius:4px;padding:0 5px}
+.sub{display:none;font-size:12px;color:var(--g400);white-space:nowrap}
+.stats{display:flex;gap:8px;align-items:center;background:var(--s50);border:1px solid var(--s200);border-radius:9px;padding:5px 10px;font-size:12px;font-weight:600;color:var(--s900);white-space:nowrap}
+.stats b{color:var(--s700)} .stats .ok{color:var(--em)} .stats i{color:var(--s300);font-style:normal}
+.actions{display:flex;gap:6px}
+.lbl-md{display:none}
+
+/* ---------- Barre séries + filtres ---------- */
+.bar{display:flex;align-items:center;gap:8px;padding:5px 10px;background:rgba(224,242,254,.75);border-bottom:1px solid var(--s200);flex:none}
+.tabs{display:flex;gap:5px;flex:1;min-width:0;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.tabs::-webkit-scrollbar{display:none}
+.tab{flex:none;height:34px;padding:0 13px;border:1px solid var(--s300);border-radius:9px;background:#fff;color:var(--s900);font-weight:700;font-size:13px;white-space:nowrap}
+.tab small{font-weight:500;opacity:.65;margin-left:5px;font-size:11px}
+.tab.on{background:var(--s600);border-color:var(--s700);color:#fff}
+.tab.add{border-style:dashed;color:var(--s700)}
+.tab.del{color:var(--rd);border-color:#fecaca;background:#fff5f5}
+.fsel{height:34px;border:1px solid var(--s300);border-radius:9px;background:#fff;padding:0 6px;font-size:13px;font-weight:600;color:var(--s900);max-width:150px}
+.chips{display:none;gap:4px;flex:none}
+.chip{height:34px;padding:0 11px;border:0;border-radius:9px;background:transparent;font-weight:600;font-size:13px;color:var(--s900);white-space:nowrap}
+.chip:active{background:var(--s200)}
+.chip.on{background:var(--s600);color:#fff}
+.chip.pend{color:#78350f}
+.chip.pend.on{background:var(--am);color:#fff}
+.search{position:relative;width:140px;flex:none}
+.search input{width:100%;height:34px;border:1px solid var(--s300);border-radius:9px;padding:0 8px 0 28px;background:#fff;font-size:14px}
+.search svg{position:absolute;left:9px;top:10px;width:14px;height:14px;color:var(--s500)}
+
+/* ---------- Tableau ---------- */
+.wrap{flex:1;min-height:0;overflow:auto;background:#fff;-webkit-overflow-scrolling:touch;overscroll-behavior:contain}
+#grid{border-collapse:separate;border-spacing:0;width:100%;min-width:900px;font-size:13px}
+#grid th{position:sticky;top:0;z-index:5;background:linear-gradient(#e0f2fe,#f0f9ff);color:var(--s900);font-weight:700;font-size:12px;padding:7px 4px;text-align:center;border-bottom:1px solid var(--s300);white-space:nowrap}
+#grid th.nm{left:0;z-index:7;text-align:left;padding-left:10px;background:#e0f2fe}
+#grid th[data-bm]{cursor:pointer}
+#grid th[data-bm] u{text-decoration:none;color:var(--s500);margin-left:2px}
+#grid th.h-ann{background:#bae6fd80}
+#grid th.h-note{background:var(--s600);color:#fff}
+#grid td{padding:3px 4px;border-bottom:1px solid var(--s100);text-align:center;height:44px;background:#fff}
+#grid td.nm{position:sticky;left:0;z-index:3;text-align:left;min-width:160px;border-right:1px solid var(--g200);padding-left:6px}
+tr.ev-C500 td.nm{box-shadow:inset 4px 0 0 var(--s500)}
+tr.ev-C250 td.nm{box-shadow:inset 4px 0 0 #10b981}
+tr.ev-M250 td.nm{box-shadow:inset 4px 0 0 #f59e0b}
+tr:focus-within td{background:var(--s50)}
+.nmw{display:flex;align-items:center;gap:6px;padding-left:4px}
+.idx{flex:none;width:20px;text-align:right;color:var(--g400);font-size:11px;font-weight:600}
+.in{height:38px;width:100%;border:1px solid transparent;border-radius:7px;background:transparent;padding:0 7px;font-size:15px}
+.in:focus{outline:2px solid var(--s500);outline-offset:-1px;background:#fff}
+.in.name{min-width:120px;font-weight:600}
+.in.tm{width:74px;text-align:center;font-family:var(--mono);font-size:16px;background:var(--g50);border-color:var(--g200)}
+.in.tm.ann{background:#e0f2fe;border-color:var(--s300)}
+.in.tm.bad{border-color:var(--rd);background:#fef2f2}
+.gd{width:36px;height:36px;border-radius:9px;border:1px solid;font-weight:800;font-size:14px}
+.gd.G{background:#dbeafe;color:#1d4ed8;border-color:#93c5fd}
+.gd.F{background:#fce7f3;color:#be185d;border-color:#f9a8d4}
+.sel{height:38px;border:1px solid var(--g300);border-radius:7px;background:#fff;font-size:14px;padding:0 4px}
+tr.ev-C500 .sel.ev{border-color:var(--s300);background:var(--s50)}
+tr.ev-C250 .sel.ev{border-color:#6ee7b7;background:#ecfdf5}
+tr.ev-M250 .sel.ev{border-color:#fcd34d;background:#fffbeb}
+.cm{cursor:pointer}
+.cm .v{display:inline-block;min-width:42px;padding:5px 7px;border-radius:7px;font-weight:700;font-family:var(--mono);box-shadow:inset 0 0 0 1px rgba(0,0,0,.07)}
+.cm:active .v{filter:brightness(.93)}
+.c-cumul .v{background:var(--g100)}
+.c-perf .v{background:#fef3c7;color:#78350f}
+.c-proj .v{background:#dbeafe;color:#1e3a8a}
+.c-reg .v{background:#d1fae5;color:#064e3b}
+.c-note .v{background:var(--s600);color:#fff;font-size:15px}
+.cm.empty .v{background:transparent!important;color:var(--g300)!important;box-shadow:none}
+.del{width:36px;height:36px;border:0;background:transparent;color:var(--g400);border-radius:9px;font-size:16px}
+.del:active{background:#fee2e2;color:var(--rd)}
+.emptymsg{padding:30px 10px!important;color:var(--g500);height:auto!important}
+.foot{flex:none;padding:3px 10px;font-size:11px;color:var(--s900);background:rgba(224,242,254,.75);border-top:1px solid var(--s200);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
+/* ---------- Fenêtres (barème / import) ---------- */
+.overlay{position:fixed;inset:0;background:rgba(15,23,42,.6);z-index:50;display:flex;align-items:center;justify-content:center;
+  padding:max(8px,env(safe-area-inset-top)) max(8px,env(safe-area-inset-right)) max(8px,env(safe-area-inset-bottom)) max(8px,env(safe-area-inset-left))}
+.overlay.hidden{display:none}
+.sheet{background:#fff;border:1px solid var(--s300);border-radius:12px;width:100%;max-width:880px;max-height:100%;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 20px 50px rgba(0,0,0,.3)}
+.sheet.sm{max-width:520px}
+.sheet-h{background:var(--s600);color:#fff;padding:4px 6px 4px 14px;display:flex;align-items:center;justify-content:space-between;gap:8px;flex:none}
+.sheet-h b{font-size:13px;letter-spacing:.02em}
+.x{border:0;background:transparent;color:#fff;font-size:28px;line-height:1;width:44px;height:38px}
+.sheet-t{display:flex;gap:5px;padding:6px 8px;overflow-x:auto;border-bottom:1px solid var(--s100);flex:none;scrollbar-width:none}
+.sheet-t::-webkit-scrollbar{display:none}
+.sheet-b{overflow:auto;padding:8px;flex:1;min-height:0;-webkit-overflow-scrolling:touch}
+.sheet-f{background:var(--g50);border-top:1px solid var(--g200);padding:6px 10px;display:flex;justify-content:flex-end;align-items:center;gap:8px;flex:none}
+.ctx{margin:0 0 8px;padding:7px 10px;border-radius:9px;background:#fffbeb;border:1px solid #fcd34d;color:#78350f;font-weight:600;font-size:13px}
+.ctx.neutral{background:var(--g50);border-color:var(--g200);color:var(--g500)}
+.rule{margin:0 0 8px;font-size:12px;color:var(--g500)}
+.bm-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.bm-t{width:100%;border-collapse:collapse;font-family:var(--mono);font-size:13px}
+.bm-t th{background:var(--g100);color:var(--g500);font-size:11px;padding:4px;text-align:center;position:static!important;border:0!important}
+.bm-t td{padding:5px 6px;border-bottom:1px solid var(--g100);text-align:center;height:auto;background:#fff}
+.bm-t tr.hl td{background:#fef08a;font-weight:800}
+.bm-t td.hg{background:var(--s100)}
+.bm-t tr.hl td.hg{background:#fde047}
+.bm-t.one{max-width:380px;margin:0 auto}
+.imp-ta{width:100%;border:1px solid var(--s200);border-radius:9px;padding:8px;font-family:var(--mono);font-size:14px}
+.chk{display:flex;align-items:center;gap:8px;margin-top:8px;font-size:13px}
+.chk input{width:18px;height:18px}
+#toast{position:fixed;left:50%;bottom:calc(14px + var(--sab));transform:translateX(-50%);background:#0f172a;color:#fff;padding:8px 14px;border-radius:10px;font-size:13px;font-weight:600;z-index:80;opacity:0;pointer-events:none;transition:opacity .2s;max-width:90vw}
+#toast.on{opacity:.95}
+
+.print-only{display:none}
+
+/* ---------- Adaptations écrans ---------- */
+@media (min-width:700px){.lbl-md{display:inline}}
+@media (min-width:1000px){.sub{display:inline}.search{width:180px}}
+@media (min-width:1000px) and (min-height:600px){.chips{display:flex}.fsel{display:none}}
+@media (max-height:480px){
+  :root{--h:40px}
+  .top{padding:3px 10px}.bar{padding:3px 10px}
+  .btn{height:32px}.tab,.fsel,.search input,.chip{height:30px}.search svg{top:8px}
+  .logo{width:26px;height:26px}
+  #grid td{height:40px}.in{height:34px}.gd,.del{height:32px}.sel{height:34px}
+  .foot{display:none}
+}
+@media (max-width:560px){.bm-grid{grid-template-columns:1fr}}
+
+/* ---------- Impression ---------- */
+@media print{
+  body{display:block;height:auto;overflow:visible;background:#fff;font-size:11px;padding:0}
+  .no-print{display:none!important}
+  .print-only{display:block!important}
+  .phead{display:flex!important;justify-content:space-between;align-items:center;border-bottom:2px solid #1e293b;padding:0 0 6px;margin:0 0 6px}
+  .phead h1{font-size:16px;margin:0}.phead p{margin:2px 0;font-size:11px}.phead .r{text-align:right}
+  .wrap{overflow:visible}
+  #grid{min-width:0;width:100%;font-size:11px}
+  #grid th,#grid td{position:static!important;border:1px solid #cbd5e1!important;padding:3px 4px!important;height:auto!important}
+  .in,.sel{border:0!important;background:transparent!important;-webkit-appearance:none;appearance:none;outline:0!important;height:auto!important;padding:0!important;font-size:11px!important;width:auto!important}
+  .gd{border:0;background:transparent!important;height:auto;width:auto}
+  .cm .v{background:transparent!important;color:#000!important;box-shadow:none;padding:0}
+  tr.ev-C500 td.nm,tr.ev-C250 td.nm,tr.ev-M250 td.nm{box-shadow:none}
+}
+</style>
 </head>
-<body class="h-full flex flex-col text-slate-800 antialiased font-sans select-none overflow-hidden">
+<body>
 
-  <!-- ================= EN-TÊTE ULTRA-COMPACT TABLETTE PAYSAGE ================= -->
-  <header class="no-print bg-white border-b border-sky-200 px-3 py-1 flex items-center justify-between shadow-xs shrink-0 z-30">
-    <div class="flex items-center gap-2">
-      <div class="w-7 h-7 rounded-md bg-gradient-to-tr from-sky-600 to-sky-400 text-white flex items-center justify-center font-bold shadow-xs">
-        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
-        </svg>
-      </div>
-      <div class="leading-tight">
-        <div class="flex items-center gap-1.5">
-          <span class="font-extrabold text-sm tracking-tight text-sky-950">LYCÉE ALAIN</span>
-          <span class="bg-sky-100 text-sky-700 text-[10px] font-bold px-1.5 py-0.2 rounded border border-sky-300">2026</span>
-          <span class="text-xs text-slate-400 font-medium hidden sm:inline">• CCF Bac Demi-Fond</span>
-        </div>
-      </div>
+<!-- ============ EN-TÊTE ============ -->
+<header class="top no-print">
+  <div class="brand">
+    <div class="logo"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg></div>
+    <b>LYCÉE ALAIN</b><span class="year">2026</span><span class="sub">• CCF Bac Demi-Fond</span>
+  </div>
+  <div class="stats" title="Statistiques de la série affichée">
+    <span>Élèves <b id="st-total">0</b></span><i>|</i>
+    <span>Moy <b id="st-moy">--</b>/20</span><i>|</i>
+    <span>Notés <b id="st-done" class="ok">0</b></span>
+  </div>
+  <div class="actions">
+    <button class="btn pri" id="b-add"><svg fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M12 4v16m8-8H4"/></svg><span>Élève</span></button>
+    <button class="btn" id="b-bm"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg><span>Barèmes</span></button>
+    <button class="btn" id="b-imp" aria-label="Importer"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"/></svg><span class="lbl-md">Import</span></button>
+    <button class="btn" id="b-exp" aria-label="Exporter"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg><span class="lbl-md">Export</span></button>
+    <button class="btn" id="b-prt" aria-label="Imprimer"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"/></svg></button>
+  </div>
+</header>
+
+<!-- ============ SÉRIES + FILTRES ============ -->
+<div class="bar no-print">
+  <div class="tabs" id="tabs" role="tablist" aria-label="Séries"></div>
+  <div class="chips" id="chips"></div>
+  <select class="fsel" id="fsel" aria-label="Filtre"></select>
+  <div class="search">
+    <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+    <input type="text" id="q" placeholder="Rechercher…" autocomplete="off">
+  </div>
+</div>
+
+<!-- Bordereau d'impression -->
+<div class="print-only phead">
+  <div>
+    <h1>LYCÉE ALAIN — SESSION BACCALAURÉAT 2026</h1>
+    <p>Bordereau d'évaluation CCF • Champ d'Apprentissage 1 (3×500 m / 3×250 m) — <b id="ph-serie"></b></p>
+  </div>
+  <div class="r"><p>Date d'épreuve : ____________________</p><p>Examinateur : _______________________</p></div>
+</div>
+
+<!-- ============ TABLEAU ============ -->
+<main class="wrap">
+  <table id="grid">
+    <thead><tr>
+      <th class="nm">Nom &amp; Prénom</th>
+      <th>Sexe</th>
+      <th>Épreuve</th>
+      <th>Série</th>
+      <th class="h-ann" title="Temps annoncé pour la 1ère fraction">🎯 Ann. C1</th>
+      <th>⏱️ C1</th><th>⏱️ C2</th><th>⏱️ C3</th>
+      <th data-bm="perf" title="Touchez pour voir le barème">🏁 Cumul<u>ⓘ</u></th>
+      <th data-bm="perf" title="Performance sur 10 pts — touchez pour voir le barème">Perf /10<u>ⓘ</u></th>
+      <th data-bm="proj" title="Projet d'allure sur 6 pts — touchez pour voir le barème">Proj /6<u>ⓘ</u></th>
+      <th data-bm="reg" title="Régularité sur 4 pts — touchez pour voir le barème">Rég /4<u>ⓘ</u></th>
+      <th class="h-note">NOTE /20</th>
+      <th class="no-print"></th>
+    </tr></thead>
+    <tbody id="tb"></tbody>
+  </table>
+</main>
+<div class="foot no-print">Saisie express : <b>142</b> → 1'42" · <b>45</b> → 45" · <b>Entrée</b> → élève suivant · Touchez <b>Cumul / Perf / Proj / Rég</b> pour afficher le barème</div>
+
+<!-- ============ BARÈMES ============ -->
+<div id="bm" class="overlay hidden no-print">
+  <div class="sheet">
+    <div class="sheet-h"><b>RÉFÉRENTIELS BACCALAURÉAT — PALIERS 0,5 PT</b><button class="x" id="bm-x" aria-label="Fermer">&times;</button></div>
+    <div class="sheet-t" id="bm-tabs"></div>
+    <div class="sheet-b" id="bm-body"></div>
+  </div>
+</div>
+
+<!-- ============ IMPORT ============ -->
+<div id="imp" class="overlay hidden no-print">
+  <div class="sheet sm">
+    <div class="sheet-h"><b>IMPORT RAPIDE PRONOTE / EXCEL</b><button class="x" id="imp-x" aria-label="Fermer">&times;</button></div>
+    <div class="sheet-b">
+      <p class="rule">Collez votre liste (un élève par ligne). Format : <b>DUPONT Jean [F/G] [C500/C250/M250] [S1/S2…]</b> — sexe, épreuve et série sont facultatifs (par défaut : G, épreuve du filtre ou 3×500, série affichée).</p>
+      <textarea id="imp-ta" class="imp-ta" rows="7" placeholder="DUPONT Alice F C500 S1&#10;MARTIN Lucas G C500 S2&#10;BERNARD Emma F M250"></textarea>
+      <label class="chk"><input type="checkbox" id="imp-rep"> Remplacer la liste existante</label>
     </div>
-
-    <!-- Stats rapides et actions compactes -->
-    <div class="flex items-center gap-2">
-      <div class="flex items-center gap-2 bg-sky-50 px-2 py-0.5 rounded border border-sky-200 text-xs text-sky-900 font-semibold">
-        <span>Élèves: <b id="stat-total" class="text-sky-700">0</b></span>
-        <span class="text-sky-300">|</span>
-        <span>Moy: <b id="stat-moy" class="text-sky-700">--</b>/20</span>
-        <span class="text-sky-300">|</span>
-        <span>Notés: <b id="stat-eval" class="text-emerald-600">0</b></span>
-      </div>
-
-      <div class="flex items-center gap-1">
-        <button onclick="addStudent()" class="bg-sky-600 hover:bg-sky-700 text-white px-2 py-1 rounded text-xs font-semibold flex items-center gap-1 transition shadow-xs">
-          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M12 4v16m8-8H4"/></svg>
-          <span>Élève</span>
-        </button>
-        <button onclick="openBaremesModal()" class="bg-white hover:bg-sky-50 text-sky-800 border border-sky-300 px-2 py-1 rounded text-xs font-medium flex items-center gap-1 transition">
-          <svg class="w-3.5 h-3.5 text-sky-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
-          <span>Barèmes (0.5)</span>
-        </button>
-        <button onclick="openImportModal()" class="bg-white hover:bg-sky-50 text-slate-700 border border-slate-300 px-2 py-1 rounded text-xs font-medium flex items-center gap-1 transition">
-          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"/></svg>
-          <span class="hidden md:inline">Import</span>
-        </button>
-        <button onclick="exportCSV()" class="bg-white hover:bg-sky-50 text-slate-700 border border-slate-300 px-2 py-1 rounded text-xs font-medium flex items-center gap-1 transition">
-          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
-          <span class="hidden md:inline">Export</span>
-        </button>
-        <button onclick="window.print()" class="bg-white hover:bg-sky-50 text-slate-700 border border-slate-300 px-2 py-1 rounded text-xs font-medium transition" title="Imprimer bordereau">
-          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"/></svg>
-        </button>
-      </div>
-    </div>
-  </header>
-
-  <!-- ================= BARRE D'OUTILS ET FILTRES (LIGNE FINE) ================= -->
-  <div class="no-print bg-sky-100/60 border-b border-sky-200 px-3 py-1 flex items-center justify-between gap-2 shrink-0">
-    <div class="flex items-center gap-1 text-xs">
-      <span class="text-[11px] font-bold text-sky-900 uppercase tracking-wide mr-1 hidden sm:inline">Filtres:</span>
-      <button onclick="setFilter('ALL')" id="filter-ALL" class="filter-btn px-2 py-0.5 rounded text-xs font-semibold bg-sky-600 text-white shadow-2xs">Tous (<span id="count-all">0</span>)</button>
-      <button onclick="setFilter('C500')" id="filter-C500" class="filter-btn px-2 py-0.5 rounded text-xs font-medium text-sky-900 hover:bg-sky-200/70">🏃 3x500m (<span id="count-c500">0</span>)</button>
-      <button onclick="setFilter('C250')" id="filter-C250" class="filter-btn px-2 py-0.5 rounded text-xs font-medium text-sky-900 hover:bg-sky-200/70">⚡ C.250m (<span id="count-c250">0</span>)</button>
-      <button onclick="setFilter('M250')" id="filter-M250" class="filter-btn px-2 py-0.5 rounded text-xs font-medium text-sky-900 hover:bg-sky-200/70">🚶 M.250m (<span id="count-m250">0</span>)</button>
-      <button onclick="setFilter('PENDING')" id="filter-PENDING" class="filter-btn px-2 py-0.5 rounded text-xs font-medium text-amber-900 hover:bg-amber-100/80">⏳ À noter (<span id="count-pending">0</span>)</button>
-    </div>
-
-    <div class="flex items-center gap-2">
-      <div class="text-[11px] text-sky-800 bg-white/70 px-2 py-0.5 rounded border border-sky-200 hidden lg:flex items-center gap-1 font-mono">
-        <span>Saisie express: <b>142</b> ➔ 1'42" • <b>45</b> ➔ 45" • <b>Entrée</b> ➔ suivant</span>
-      </div>
-      <div class="relative w-44">
-        <input type="text" id="search-input" oninput="renderTable()" placeholder="Rechercher élève..." class="w-full bg-white border border-sky-300 rounded px-2 py-0.5 pl-6 text-xs focus:ring-1 focus:ring-sky-500 focus:outline-hidden">
-        <svg class="w-3 h-3 text-sky-500 absolute left-2 top-1.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
-      </div>
+    <div class="sheet-f">
+      <button class="btn" id="imp-cancel">Annuler</button>
+      <button class="btn pri" id="imp-ok">Ajouter à la liste</button>
     </div>
   </div>
+</div>
 
-  <!-- BORDEREAU OFFICIEL EN CAS D'IMPRESSION -->
-  <div class="print-only p-4 mb-2">
-    <div class="flex justify-between items-center border-b-2 border-slate-800 pb-2 mb-2">
-      <div>
-        <h1 class="text-xl font-bold">LYCÉE ALAIN — SESSION BACCALAURÉAT 2026</h1>
-        <p class="text-sm">Bordereau d'évaluation CCF • Champ d'Apprentissage 1 (3x500m / 3x250m)</p>
-      </div>
-      <div class="text-right text-xs">
-        <p>Date d'épreuve : ____________________</p>
-        <p>Examinateur : _______________________</p>
-      </div>
-    </div>
-  </div>
+<div id="toast" role="status"></div>
 
-  <!-- ================= TABLEAU PRINCIPAL DE SAISIE ================= -->
-  <main class="flex-1 overflow-auto bg-white p-2">
-    <div class="min-w-[980px] h-full flex flex-col border border-sky-200 rounded-md shadow-2xs bg-white overflow-hidden">
-      <div class="flex-1 overflow-auto">
-        <table class="w-full border-collapse text-left text-xs">
-          <thead class="sticky-header bg-gradient-to-b from-sky-100 to-sky-50 border-b border-sky-300 text-sky-950 font-semibold select-none shadow-xs">
-            <tr>
-              <th class="py-1.5 px-2 w-10 text-center">#</th>
-              <th class="py-1.5 px-2 w-48">Nom & Prénom</th>
-              <th class="py-1.5 px-1.5 w-16 text-center">Sexe</th>
-              <th class="py-1.5 px-2 w-32">Épreuve</th>
-              <th class="py-1.5 px-2 w-24 text-center bg-sky-200/50 border-l border-r border-sky-300 text-sky-900" title="Temps annoncé pour la 1ère fraction">
-                🎯 Ann. C1
-              </th>
-              <th class="py-1.5 px-2 w-24 text-center">⏱️ C1</th>
-              <th class="py-1.5 px-2 w-24 text-center">⏱️ C2</th>
-              <th class="py-1.5 px-2 w-24 text-center">⏱️ C3</th>
-              <th class="py-1.5 px-2 w-24 text-center bg-slate-100/70 border-l border-slate-300 font-mono">🏁 Cumul</th>
-              <th class="py-1.5 px-1.5 w-16 text-center bg-amber-50/70 text-amber-950 border-l border-amber-200" title="Performance sur 10 pts (palier 0.5)">Perf /10</th>
-              <th class="py-1.5 px-1.5 w-16 text-center bg-blue-50/70 text-blue-950 border-l border-blue-200" title="Projet d'allure sur 6 pts (écart C1)">Proj /6</th>
-              <th class="py-1.5 px-1.5 w-16 text-center bg-emerald-50/70 text-emerald-950 border-l border-emerald-200" title="Régularité sur 4 pts (Max - Min)">Rég /4</th>
-              <th class="py-1.5 px-2 w-20 text-center bg-sky-600 text-white font-bold border-l border-sky-700">NOTE /20</th>
-              <th class="no-print py-1.5 px-1.5 w-10 text-center"></th>
-            </tr>
-          </thead>
-          <tbody id="student-tbody" class="divide-y divide-sky-100">
-            <!-- Rendu dynamique JS -->
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </main>
+<script>
+(function(){
+'use strict';
 
-  <!-- ================= MODALE DES BARÈMES NATIONAUX (PALIERS 0,5 PT) ================= -->
-  <div id="baremes-modal" class="hidden fixed inset-0 bg-slate-900/60 backdrop-blur-2xs z-50 flex items-center justify-center p-3">
-    <div class="bg-white rounded-lg shadow-xl w-full max-w-4xl max-h-[92vh] flex flex-col border border-sky-300 overflow-hidden">
-      <div class="bg-sky-600 text-white px-4 py-2 flex items-center justify-between">
-        <div class="flex items-center gap-2">
-          <span class="font-bold text-sm">RÉFÉRENTIELS BACCALAURÉAT — PALIERS 0,5 PT</span>
-          <span class="bg-sky-700 text-sky-100 text-xs px-2 py-0.5 rounded font-mono">Lycée Alain 2026</span>
-        </div>
-        <button onclick="closeBaremesModal()" class="text-white hover:text-sky-200 text-lg font-bold">&times;</button>
-      </div>
+/* ================= BARÈMES PAR PALIERS DE 0,5 PT =================
+   Format : [note, seuilMaxGarçons (s), seuilMaxFilles (s)] */
+const BAREME_C500 = [
+  [10.0,255,300],[9.5,260,306],[9.0,265,312],[8.5,270,318],[8.0,275,325],
+  [7.5,281,332],[7.0,287,340],[6.5,294,348],[6.0,301,357],[5.5,309,366],
+  [5.0,317,376],[4.5,326,386],[4.0,335,397],[3.5,345,409],[3.0,356,422],
+  [2.5,368,436],[2.0,381,451],[1.5,395,467],[1.0,410,485],[0.5,430,510]
+];
+const BAREME_C250 = [
+  [10.0,128,150],[9.5,131,153],[9.0,134,157],[8.5,137,161],[8.0,140,165],
+  [7.5,144,170],[7.0,148,175],[6.5,152,180],[6.0,156,186],[5.5,161,192],
+  [5.0,166,198],[4.5,171,204],[4.0,176,211],[3.5,182,218],[3.0,188,226],
+  [2.5,195,235],[2.0,203,245],[1.5,212,256],[1.0,222,268],[0.5,235,282]
+];
+const BAREME_M250 = [
+  [10.0,285,315],[9.5,292,323],[9.0,300,332],[8.5,308,341],[8.0,317,351],
+  [7.5,326,361],[7.0,336,372],[6.5,346,384],[6.0,357,396],[5.5,368,409],
+  [5.0,380,423],[4.5,393,438],[4.0,407,454],[3.5,422,471],[3.0,438,489],
+  [2.5,455,508],[2.0,473,528],[1.5,492,549],[1.0,512,571],[0.5,535,595]
+];
+const EV = {
+  C500:{label:'3×500 m',opt:'3×500',tab:'🏃 3×500 m',data:BAREME_C500},
+  C250:{label:'Course 3×250 m',opt:'C. 250',tab:'⚡ C. 250 m',data:BAREME_C250},
+  M250:{label:'Marche 3×250 m',opt:'M. 250',tab:'🚶 M. 250 m',data:BAREME_M250}
+};
+// Projet d'allure /6 : [points, écart max |Ann − C1| en s]
+const PROJ = [[6,1],[5,2],[4,3],[3,5],[2,7],[1,9]];
+// Régularité /4 : [points, écart max (Max − Min) en s]
+const REG  = [[4,2],[3,4],[2,6],[1,8]];
 
-      <div class="p-3 overflow-y-auto space-y-3 text-xs">
-        <!-- 1. PERFORMANCE /10 -->
-        <div class="border border-sky-200 rounded p-2.5 bg-sky-50/30">
-          <h3 class="font-bold text-sky-900 text-xs mb-1.5 flex items-center gap-1.5">
-            <span class="bg-sky-600 text-white w-4 h-4 rounded-full flex items-center justify-center text-[10px]">1</span>
-            PERFORMANCE CUMULÉE (3 RÉPÉTITIONS) — NOTE SUR 10 POINTS (PAR ÉCHELONS DE 0,5 PT)
-          </h3>
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-2 text-[11px]">
-            <!-- Course 500m -->
-            <div class="border border-sky-200 rounded bg-white p-2">
-              <div class="font-bold text-sky-800 border-b border-sky-200 pb-1 mb-1 flex justify-between">
-                <span>🏃 Course 3x500m (Standard)</span>
-              </div>
-              <div class="grid grid-cols-3 font-semibold text-slate-500 border-b border-slate-100 pb-0.5 mb-0.5">
-                <span>Note</span><span>Garçons</span><span>Filles</span>
-              </div>
-              <div class="h-44 overflow-y-auto space-y-0.5 font-mono text-[11px]" id="table-bareme-c500"></div>
-            </div>
+/* ================= OUTILS ================= */
+const $  = (s,r)=> (r||document).querySelector(s);
+const $$ = (s,r)=> Array.from((r||document).querySelectorAll(s));
+const esc = s => String(s==null?'':s).replace(/[&<>"']/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const norm = s => String(s||'').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'');
+const isNum = v => typeof v==='number' && !isNaN(v);
+const fn  = n => Number.isInteger(n) ? String(n) : String(n).replace('.',',');
+const fn1 = n => n.toFixed(1).replace('.',',');
 
-            <!-- Course 250m Adaptée -->
-            <div class="border border-emerald-200 rounded bg-white p-2">
-              <div class="font-bold text-emerald-800 border-b border-emerald-200 pb-1 mb-1 flex justify-between">
-                <span>⚡ Course 3x250m (Adaptée)</span>
-              </div>
-              <div class="grid grid-cols-3 font-semibold text-slate-500 border-b border-slate-100 pb-0.5 mb-0.5">
-                <span>Note</span><span>Garçons</span><span>Filles</span>
-              </div>
-              <div class="h-44 overflow-y-auto space-y-0.5 font-mono text-[11px]" id="table-bareme-c250"></div>
-            </div>
+function fmt(sec){
+  if(!isNum(sec)) return '';
+  sec = Math.round(sec);
+  if(sec<60) return sec+'"';
+  return Math.floor(sec/60)+"'"+String(sec%60).padStart(2,'0')+'"';
+}
+// "142" → 102 s ; "45" → 45 s ; "1'42" / "1:42" / "1.42" → 102 s ; invalide → NaN ; vide → null
+function parse(str){
+  str = String(str==null?'':str).trim().replace(/[”″“]/g,'"').replace(/[’′‘]/g,"'");
+  if(!str) return null;
+  let m;
+  if(/^\d+$/.test(str)){
+    if(str.length<=2) return Number(str);
+    const s = Number(str.slice(-2)), mi = Number(str.slice(0,-2));
+    return s>=60 ? NaN : mi*60+s;
+  }
+  if((m = str.match(/^(\d+)\s*['’:mM.]\s*(\d{1,2})\s*"?$/))){
+    const s = Number(m[2]); return s>=60 ? NaN : Number(m[1])*60+s;
+  }
+  if((m = str.match(/^(\d+)\s*"$/))) return Number(m[1]);
+  return NaN;
+}
 
-            <!-- Marche 250m Adaptée -->
-            <div class="border border-amber-200 rounded bg-white p-2">
-              <div class="font-bold text-amber-800 border-b border-amber-200 pb-1 mb-1 flex justify-between">
-                <span>🚶 Marche 3x250m (Adaptée)</span>
-              </div>
-              <div class="grid grid-cols-3 font-semibold text-slate-500 border-b border-slate-100 pb-0.5 mb-0.5">
-                <span>Note</span><span>Garçons</span><span>Filles</span>
-              </div>
-              <div class="h-44 overflow-y-auto space-y-0.5 font-mono text-[11px]" id="table-bareme-m250"></div>
-            </div>
-          </div>
-        </div>
+/* ================= CALCULS ================= */
+function cumul(s){ return isNum(s.t1)&&isNum(s.t2)&&isNum(s.t3) ? s.t1+s.t2+s.t3 : null; }
+function perfNote(s){
+  const c = cumul(s); if(c==null) return null;
+  const col = s.gender==='F' ? 2 : 1;
+  for(const row of EV[s.event].data){ if(c<=row[col]) return row[0]; }
+  return 0;
+}
+function projPts(e){ for(const p of PROJ){ if(e<=p[1]) return p[0]; } return 0; }
+function regPts(e){  for(const p of REG){  if(e<=p[1]) return p[0]; } return 0; }
+function projEcart(s){ return (isNum(s.ann1)&&isNum(s.t1)) ? Math.abs(s.ann1-s.t1) : null; }
+function regEcart(s){  return cumul(s)==null ? null : Math.max(s.t1,s.t2,s.t3)-Math.min(s.t1,s.t2,s.t3); }
+function projNote(s){ const e=projEcart(s); return e==null?null:projPts(e); }
+function regNote(s){  const e=regEcart(s);  return e==null?null:regPts(e); }
+function total(s){
+  const a=perfNote(s), b=projNote(s), c=regNote(s);
+  return (a==null||b==null||c==null) ? null : a+b+c;
+}
 
-        <!-- 2. PROJET & REGULARITE -->
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-2 text-xs">
-          <!-- Projet -->
-          <div class="border border-blue-200 bg-blue-50/40 rounded p-2">
-            <h3 class="font-bold text-blue-900 mb-1 flex items-center gap-1">
-              <span class="bg-blue-600 text-white w-4 h-4 rounded-full flex items-center justify-center text-[10px]">2</span>
-              PROJET D'ALLURE /6 (Écart Course 1)
-            </h3>
-            <p class="text-[11px] text-slate-600 mb-1.5">Différence absolue entre l'annonce et le réalisé sur la 1ère fraction (|Ann - C1|).</p>
-            <div class="grid grid-cols-6 text-center font-mono text-[11px] bg-white border border-blue-200 rounded p-1">
-              <div><b class="text-blue-700">6 pts</b><br>&le; 1s</div>
-              <div><b class="text-blue-700">5 pts</b><br>&le; 2s</div>
-              <div><b class="text-blue-700">4 pts</b><br>&le; 3s</div>
-              <div><b class="text-blue-700">3 pts</b><br>&le; 5s</div>
-              <div><b class="text-blue-700">2 pts</b><br>&le; 7s</div>
-              <div><b class="text-blue-700">1 pt</b><br>&le; 9s</div>
-            </div>
-          </div>
+/* ================= ÉTAT & STOCKAGE ================= */
+const KEY = 'ccf-alain-2026-v2';
+function defaults(){
+  return {
+    students:[
+      {id:1,name:'BERTRAND Lucas',gender:'G',event:'C500',serie:1,ann1:90,t1:89,t2:91,t3:90},
+      {id:2,name:'MOREAU Camille',gender:'F',event:'C500',serie:1,ann1:110,t1:112,t2:114,t3:113},
+      {id:3,name:'DUBOIS Thomas',gender:'G',event:'C500',serie:2,ann1:85,t1:84,t2:86,t3:null}
+    ],
+    series:[1,2], active:'ALL', filter:'ALL', nextId:4
+  };
+}
+function load(){
+  try{
+    const raw = localStorage.getItem(KEY);
+    if(raw){
+      const o = JSON.parse(raw);
+      if(o && Array.isArray(o.students) && Array.isArray(o.series) && o.series.length){
+        const d = Object.assign(defaults(), o);
+        if(d.active!=='ALL' && d.series.indexOf(d.active)<0) d.active='ALL';
+        return d;
+      }
+    }
+  }catch(e){}
+  return defaults();
+}
+let S = load();
+function save(){ try{ localStorage.setItem(KEY, JSON.stringify(S)); }catch(e){} }
+const byId = id => S.students.find(s=>s.id===id);
 
-          <!-- Régularité -->
-          <div class="border border-emerald-200 bg-emerald-50/40 rounded p-2">
-            <h3 class="font-bold text-emerald-900 mb-1 flex items-center gap-1">
-              <span class="bg-emerald-600 text-white w-4 h-4 rounded-full flex items-center justify-center text-[10px]">3</span>
-              RÉGULARITÉ /4 (Max - Min des 3 courses)
-            </h3>
-            <p class="text-[11px] text-slate-600 mb-1.5">Écart entre la répétition la plus rapide et la plus lente.</p>
-            <div class="grid grid-cols-5 text-center font-mono text-[11px] bg-white border border-emerald-200 rounded p-1">
-              <div><b class="text-emerald-700">4 pts</b><br>&le; 2s</div>
-              <div><b class="text-emerald-700">3 pts</b><br>&le; 4s</div>
-              <div><b class="text-emerald-700">2 pts</b><br>&le; 6s</div>
-              <div><b class="text-emerald-700">1 pt</b><br>&le; 8s</div>
-              <div><b class="text-slate-400">0 pt</b><br>&gt; 8s</div>
-            </div>
-          </div>
-        </div>
-      </div>
-      
-      <div class="bg-slate-100 px-4 py-2 border-t border-slate-200 flex justify-end">
-        <button onclick="closeBaremesModal()" class="bg-sky-600 hover:bg-sky-700 text-white px-3 py-1 rounded text-xs font-semibold">Fermer</button>
-      </div>
-    </div>
-  </div>
+function ensureSeries(n){
+  if(S.series.indexOf(n)<0){ S.series.push(n); S.series.sort((a,b)=>a-b); }
+}
+const inScope = s => S.active==='ALL' || s.serie===S.active;
+const scoped  = () => S.students.filter(inScope);
+function visible(){
+  const q = norm($('#q').value.trim());
+  return scoped().filter(s=>{
+    if(q && norm(s.name).indexOf(q)<0) return false;
+    const f = S.filter;
+    if(f==='ALL') return true;
+    if(f==='PENDING') return total(s)==null;
+    return s.event===f;
+  });
+}
 
-  <!-- ================= MODALE IMPORT ================= -->
-  <div id="import-modal" class="hidden fixed inset-0 bg-slate-900/60 backdrop-blur-2xs z-50 flex items-center justify-center p-3">
-    <div class="bg-white rounded-lg shadow-xl w-full max-w-lg flex flex-col border border-sky-300 overflow-hidden">
-      <div class="bg-sky-700 text-white px-4 py-2 flex items-center justify-between">
-        <span class="font-bold text-xs uppercase tracking-wider">Importation rapide Pronote / Excel</span>
-        <button onclick="closeImportModal()" class="text-white text-base">&times;</button>
-      </div>
-      <div class="p-3 text-xs space-y-2">
-        <p class="text-slate-600 leading-tight">Collez ci-dessous votre liste d'élèves (un par ligne). Format supporté : <br><code class="bg-slate-100 text-sky-800 px-1 py-0.5 rounded">DUPONT Jean [F/G] [C500/C250/M250]</code></p>
-        <textarea id="import-text" rows="8" placeholder="DUPONT Alice F C500&#10;MARTIN Lucas G C500&#10;BERNARD Emma F M250" class="w-full border border-sky-200 rounded p-2 font-mono text-xs focus:ring-1 focus:ring-sky-500"></textarea>
-      </div>
-      <div class="bg-slate-50 px-3 py-2 border-t border-slate-200 flex justify-end gap-2">
-        <button onclick="closeImportModal()" class="px-2.5 py-1 text-slate-600 hover:bg-slate-200 rounded text-xs">Annuler</button>
-        <button onclick="processImport()" class="bg-sky-600 text-white px-3 py-1 rounded text-xs font-semibold hover:bg-sky-700">Ajouter à la liste</button>
-      </div>
-    </div>
-  </div>
+let toastT;
+function toast(msg){
+  const t=$('#toast'); t.textContent=msg; t.classList.add('on');
+  clearTimeout(toastT); toastT=setTimeout(()=>t.classList.remove('on'),2200);
+}
 
-  <script>
-    // ================= DÉFINITION RIGOUREUSE DES BARÈMES PAR PALIERS 0,5 PT =================
-    // Format: [note, seuilMaxGarconSec, seuilMaxFilleSec]
-    const BAREME_C500 = [
-      [10.0, 255, 300], // G <= 4'15" | F <= 5'00"
-      [9.5,  260, 306],
-      [9.0,  265, 312],
-      [8.5,  270, 318],
-      [8.0,  275, 325],
-      [7.5,  281, 332],
-      [7.0,  287, 340],
-      [6.5,  294, 348],
-      [6.0,  301, 357],
-      [5.5,  309, 366],
-      [5.0,  317, 376],
-      [4.5,  326, 386],
-      [4.0,  335, 397],
-      [3.5,  345, 409],
-      [3.0,  356, 422],
-      [2.5,  368, 436],
-      [2.0,  381, 451],
-      [1.5,  395, 467],
-      [1.0,  410, 485],
-      [0.5,  430, 510]
-    ];
+/* ================= RENDU ================= */
+function renderTabs(){
+  const cnt = n => S.students.filter(s=>s.serie===n).length;
+  let h = `<button class="tab ${S.active==='ALL'?'on':''}" data-s="ALL">Toutes<small>${S.students.length}</small></button>`;
+  h += S.series.map(n=>`<button class="tab ${S.active===n?'on':''}" data-s="${n}">S${n}<small>${cnt(n)}</small></button>`).join('');
+  h += `<button class="tab add" data-s="+">+ Série</button>`;
+  if(S.active!=='ALL' && cnt(S.active)===0 && S.series.length>1) h += `<button class="tab del" data-s="-">Suppr. S${S.active}</button>`;
+  $('#tabs').innerHTML = h;
+  const act = $('#tabs .tab.on'); if(act && act.scrollIntoView) act.scrollIntoView({block:'nearest',inline:'nearest'});
+}
 
-    const BAREME_C250 = [
-      [10.0, 128, 150], // G <= 2'08" | F <= 2'30"
-      [9.5,  131, 153],
-      [9.0,  134, 157],
-      [8.5,  137, 161],
-      [8.0,  140, 165],
-      [7.5,  144, 170],
-      [7.0,  148, 175],
-      [6.5,  152, 180],
-      [6.0,  156, 186],
-      [5.5,  161, 192],
-      [5.0,  166, 198],
-      [4.5,  171, 204],
-      [4.0,  176, 211],
-      [3.5,  182, 218],
-      [3.0,  188, 226],
-      [2.5,  195, 235],
-      [2.0,  203, 245],
-      [1.5,  212, 256],
-      [1.0,  222, 268],
-      [0.5,  235, 282]
-    ];
+function renderFilters(){
+  const sc = scoped();
+  const c = {
+    ALL:sc.length,
+    C500:sc.filter(s=>s.event==='C500').length,
+    C250:sc.filter(s=>s.event==='C250').length,
+    M250:sc.filter(s=>s.event==='M250').length,
+    PENDING:sc.filter(s=>total(s)==null).length
+  };
+  const defs = [['ALL','Tous'],['C500','🏃 3×500 m'],['C250','⚡ C.250 m'],['M250','🚶 M.250 m'],['PENDING','⏳ À noter']];
+  $('#chips').innerHTML = defs.map(d=>`<button class="chip ${d[0]==='PENDING'?'pend':''} ${S.filter===d[0]?'on':''}" data-f="${d[0]}">${d[1]} (${c[d[0]]})</button>`).join('');
+  $('#fsel').innerHTML = defs.map(d=>`<option value="${d[0]}" ${S.filter===d[0]?'selected':''}>${d[1]} (${c[d[0]]})</option>`).join('');
+}
 
-    const BAREME_M250 = [
-      [10.0, 285, 315], // G <= 4'45" | F <= 5'15"
-      [9.5,  292, 323],
-      [9.0,  300, 332],
-      [8.5,  308, 341],
-      [8.0,  317, 351],
-      [7.5,  326, 361],
-      [7.0,  336, 372],
-      [6.5,  346, 384],
-      [6.0,  357, 396],
-      [5.5,  368, 409],
-      [5.0,  380, 423],
-      [4.5,  393, 438],
-      [4.0,  407, 454],
-      [3.5,  422, 471],
-      [3.0,  438, 489],
-      [2.5,  455, 508],
-      [2.0,  473, 528],
-      [1.5,  492, 549],
-      [1.0,  512, 571],
-      [0.5,  535, 595]
-    ];
+function renderStats(){
+  const sc = scoped();
+  const done = sc.map(total).filter(v=>v!=null);
+  $('#st-total').textContent = sc.length;
+  $('#st-done').textContent = done.length;
+  $('#st-moy').textContent = done.length ? fn1(done.reduce((a,b)=>a+b,0)/done.length) : '--';
+  $('#ph-serie').textContent = S.active==='ALL' ? 'Toutes les séries' : 'Série S'+S.active;
+}
 
-    // ================= LISTE INITIALE DES ÉLÈVES (FICTIFS) =================
-    let students = [
-      { id: 1, name: "BERTRAND Lucas", gender: "G", event: "C500", ann1: "1'30\"", t1: "1'29\"", t2: "1'31\"", t3: "1'30\"" },
-      { id: 2, name: "MOREAU Camille", gender: "F", event: "C500", ann1: "1'50\"", t1: "1'52\"", t2: "1'54\"", t3: "1'53\"" },
-      { id: 3, name: "DUBOIS Thomas", gender: "G", event: "C500", ann1: "1'25\"", t1: "1'24\"", t2: "1'26\"", t3: 
+function rowHTML(s,i){
+  const evOpts  = Object.keys(EV).map(k=>`<option value="${k}" ${s.event===k?'selected':''}>${EV[k].opt}</option>`).join('');
+  const serOpts = S.series.map(n=>`<option value="${n}" ${s.serie===n?'selected':''}>S${n}</option>`).join('');
+  const tm = (f,cls) => `<td><input class="in tm ${cls||''}" data-f="${f}" type="text" inputmode="numeric" enterkeyhint="next" autocomplete="off" placeholder="–" value="${esc(fmt(s[f]))}"></td>`;
+  return `<tr data-id="${s.id}" class="ev-${s.event}">
+    <td class="nm"><div class="nmw"><span class="idx">${i+1}</span><input class="in name" data-f="name" type="text" autocomplete="off" autocapitalize="characters" placeholder="NOM Prénom" value="${esc(s.name)}"></div></td>
+    <td><button class="gd ${s.gender}" data-act="gender" aria-label="Changer le sexe">${s.gender}</button></td>
+    <td><select class="sel ev" data-f="event">${evOpts}</select></td>
+    <td><select class="sel" data-f="serie">${serOpts}</select></td>
+    ${tm('ann1','ann')}${tm('t1')}${tm('t2')}${tm('t3')}
+    <td class="cm c-cumul" data-bm="perf"><span class="v"></span></td>
+    <td class="cm c-perf"  data-bm="perf"><span class="v"></span></td>
+    <td class="cm c-proj"  data-bm="proj"><span class="v"></span></td>
+    <td class="cm c-reg"   data-bm="reg"><span class="v"></span></td>
+    <td class="cm c-note"  data-bm="perf"><span class="v"></span></td>
+    <td class="no-print"><button class="del" data-act="del" aria-label="Supprimer">✕</button></td>
+  </tr>`;
+}
+
+function setCalc(tr,s){
+  const put = (cls,val) => {
+    const td = $('.'+cls,tr); if(!td) return;
+    td.classList.toggle('empty', val==null);
+    $('.v',td).textContent = val==null ? '–' : val;
+  };
+  const c = cumul(s), p = perfNote(s), j = projNote(s), r = regNote(s), t = total(s);
+  put('c-cumul', c==null?null:fmt(c));
+  put('c-perf',  p==null?null:fn(p));
+  put('c-proj',  j==null?null:fn(j));
+  put('c-reg',   r==null?null:fn(r));
+  put('c-note',  t==null?null:fn(t));
+}
+
+function renderTable(){
+  const list = visible();
+  const tb = $('#tb');
+  tb.innerHTML = list.length
+    ? list.map(rowHTML).join('')
+    : `<tr><td colspan="14" class="emptymsg">Aucun élève ici — touchez « + Élève » ou « Import ».</td></tr>`;
+  $$('tr[data-id]',tb).forEach(tr=>setCalc(tr,byId(Number(tr.dataset.id))));
+  renderStats();
+}
+function renderAll(){ renderTabs(); renderFilters(); renderTable(); }
+
+/* ================= ÉVÉNEMENTS DU TABLEAU ================= */
+const tb = $('#tb');
+
+function commitTime(el,s,f){
+  const raw = el.value, v = parse(raw);
+  if(v===null){ s[f]=null; el.classList.remove('bad'); el.value=''; return; }
+  if(isNaN(v)){ el.classList.add('bad'); return; }
+  s[f]=v; el.classList.remove('bad'); el.value=fmt(v);
+}
+
+tb.addEventListener('change', e=>{
+  const el=e.target, tr=el.closest('tr[data-id]'); if(!tr) return;
+  const f=el.dataset.f; if(!f) return;
+  const s=byId(Number(tr.dataset.id)); if(!s) return;
+  if(f==='name'){ s.name = el.value.trim(); }
+  else if(f==='event'){ s.event=el.value; tr.className='ev-'+s.event; }
+  else if(f==='serie'){
+    s.serie=Number(el.value); save();
+    if(S.active!=='ALL' && s.serie!==S.active){ toast((s.name||'Élève')+' → S'+s.serie); renderAll(); return; }
+    renderTabs();
+  }
+  else { commitTime(el,s,f); }
+  save(); setCalc(tr,s); renderStats(); renderFilters();
+});
+
+tb.addEventListener('keydown', e=>{
+  if(e.key!=='Enter') return;
+  const el=e.target; if(!el.matches('input.in')) return;
+  e.preventDefault();
+  el.dispatchEvent(new Event('change',{bubbles:true}));
+  const list=$$('input[data-f="'+el.dataset.f+'"]',tb), i=list.indexOf(el);
+  const nxt=list[e.shiftKey?i-1:i+1];
+  if(nxt){ nxt.focus(); if(nxt.select) nxt.select(); } else el.blur();
+});
+
+tb.addEventListener('focusin', e=>{
+  if(e.target.matches('.tm')){ const t=e.target; setTimeout(()=>{ try{t.select();}catch(_){} },0); }
+});
+
+tb.addEventListener('click', e=>{
+  const tr=e.target.closest('tr[data-id]'); if(!tr) return;
+  const s=byId(Number(tr.dataset.id)); if(!s) return;
+  const b=e.target.closest('[data-act]');
+  if(b){
+    if(b.dataset.act==='gender'){
+      s.gender = s.gender==='G'?'F':'G';
+      b.textContent=s.gender; b.className='gd '+s.gender;
+      save(); setCalc(tr,s); renderStats();
+    }else if(b.dataset.act==='del'){
+      if(confirm('Supprimer '+(s.name||'cet élève')+' ?')){
+        S.students=S.students.filter(x=>x.id!==s.id); save(); renderAll();
+      }
+    }
+    return;
+  }
+  const c=e.target.closest('[data-bm]'); if(c) openBareme(c.dataset.bm,s);
+});
+
+$('#grid thead').addEventListener('click', e=>{
+  const t=e.target.closest('[data-bm]'); if(t) openBareme(t.dataset.bm);
+});
+
+/* ================= SÉRIES & FILTRES ================= */
+$('#tabs').addEventListener('click', e=>{
+  const b=e.target.closest('[data-s]'); if(!b) return;
+  const v=b.dataset.s;
+  if(v==='ALL') S.active='ALL';
+  else if(v==='+'){ const n=Math.max.apply(null,S.series)+1; S.series.push(n); S.active=n; toast('Série S'+n+' créée'); }
+  else if(v==='-'){
+    const n=S.active;
+    if(n!=='ALL' && S.series.length>1 && !S.students.some(s=>s.serie===n)){ S.series=S.series.filter(x=>x!==n); S.active='ALL'; }
+  }
+  else S.active=Number(v);
+  save(); renderAll();
+});
+$('#chips').addEventListener('click', e=>{
+  const b=e.target.closest('[data-f]'); if(b) setFilter(b.dataset.f);
+});
+$('#fsel').addEventListener('change', e=>setFilter(e.target.value));
+function setFilter(f){ S.filter=f; save(); renderFilters(); renderTable(); }
+$('#q').addEventListener('input', renderTable);
+
+/* ================= AJOUT / IMPORT / EXPORT ================= */
+function defEvent(){ return EV[S.filter] ? S.filter : 'C500'; }
+function defSerie(){ return S.active==='ALL' ? S.series[0] : S.active; }
+
+$('#b-add').addEventListener('click', ()=>{
+  const s={id:S.nextId++,name:'',gender:'G',event:defEvent(),serie:defSerie(),ann1:null,t1:null,t2:null,t3:null};
+  S.students.push(s); $('#q').value=''; save(); renderAll();
+  const tr=$('tr[data-id="'+s.id+'"]'), inp=tr&&$('.name',tr);
+  if(inp){ if(tr.scrollIntoView) tr.scrollIntoView({block:'center'}); inp.focus(); }
+});
+
+function openImport(){ $('#imp').classList.remove('hidden'); $('#imp-ta').focus(); }
+function closeImport(){ $('#imp').classList.add('hidden'); }
+$('#b-imp').addEventListener('click', openImport);
+$('#imp-x').addEventListener('click', closeImport);
+$('#imp-cancel').addEventListener('click', closeImport);
+$('#imp').addEventListener('click', e=>{ if(e.target.id==='imp') closeImport(); });
+$('#imp-ok').addEventListener('click', ()=>{
+  const lines=$('#imp-ta').value.split(/\r?\n/).map(l=>l.trim()).filter(Boolean);
+  if(!lines.length){ closeImport(); return; }
+  if($('#imp-rep').checked) S.students=[];
+  let added=0;
+  lines.forEach(line=>{
+    let gender='G', ev=defEvent(), serie=defSerie(); const nameParts=[];
+    line.split(/[\t;]+|\s+/).filter(Boolean).forEach(p=>{
+      if(/^(F|G|M|H)$/i.test(p)) gender=/^f$/i.test(p)?'F':'G';
+      else if(/^(C500|C250|M250)$/i.test(p)) ev=p.toUpperCase();
+      else if(/^S\d+$/i.test(p)) serie=Number(p.slice(1));
+      else nameParts.push(p);
+    });
+    if(!nameParts.length) return;
+    ensureSeries(serie);
+    S.students.push({id:S.nextId++,name:nameParts.join(' '),gender:gender,event:ev,serie:serie,ann1:null,t1:null,t2:null,t3:null});
+    added++;
+  });
+  $('#imp-ta').value=''; $('#imp-rep').checked=false;
+  save(); closeImport(); renderAll(); toast(added+' élève'+(added>1?'s':'')+' ajouté'+(added>1?'s':''));
+});
+
+$('#b-exp').addEventListener('click', ()=>{
+  const rows=[['Série','Nom','Sexe','Épreuve','Annonce C1','C1','C2','C3','Cumul','Perf /10','Projet /6','Régularité /4','Note /20']];
+  const nv = v => v==null ? '' : fn(v);
+  scoped().forEach(s=>{
+    const c=cumul(s);
+    rows.push(['S'+s.serie,s.name,s.gender,EV[s.event].label,fmt(s.ann1),fmt(s.t1),fmt(s.t2),fmt(s.t3),c==null?'':fmt(c),nv(perfNote(s)),nv(projNote(s)),nv(regNote(s)),nv(total(s))]);
+  });
+  const csv='﻿'+rows.map(r=>r.map(c=>'"'+String(c).replace(/"/g,'""')+'"').join(';')).join('\r\n');
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv;charset=utf-8'}));
+  a.download='ccf-bac-'+(S.active==='ALL'?'toutes-series':'S'+S.active)+'.csv';
+  document.body.appendChild(a); a.click();
+  setTimeout(()=>{ URL.revokeObjectURL(a.href); a.remove(); },1000);
+});
+$('#b-prt').addEventListener('click', ()=>window.print());
+
+/* ================= BARÈMES (fenêtre contextuelle) ================= */
+let bmTab='C500', bmStu=null;
+const BM_TABS=[['C500',EV.C500.tab],['C250',EV.C250.tab],['M250',EV.M250.tab],['PROJ','🎯 Projet /6'],['REG','📈 Régularité /4']];
+
+function openBareme(kind,s){
+  bmStu = s||null;
+  const ev = s ? s.event : defEvent();
+  bmTab = kind==='perf' ? ev : kind==='proj' ? 'PROJ' : kind==='reg' ? 'REG' : kind;
+  $('#bm').classList.remove('hidden');
+  renderBareme();
+}
+function closeBareme(){ $('#bm').classList.add('hidden'); }
+$('#b-bm').addEventListener('click', ()=>openBareme('perf'));
+$('#bm-x').addEventListener('click', closeBareme);
+$('#bm').addEventListener('click', e=>{ if(e.target.id==='bm') closeBareme(); });
+$('#bm-tabs').addEventListener('click', e=>{
+  const b=e.target.closest('[data-t]'); if(b){ bmTab=b.dataset.t; renderBareme(); }
+});
+document.addEventListener('keydown', e=>{ if(e.key==='Escape'){ closeBareme(); closeImport(); } });
+
+function halfTable(rows,col,hiNote,withZero,last){
+  let h='<table class="bm-t"><thead><tr><th>Note</th><th>Garçons</th><th>Filles</th></tr></thead><tbody>';
+  rows.forEach(r=>{
+    h+=`<tr class="${hiNote===r[0]?'hl':''}"><td><b>${fn(r[0])}</b></td><td class="${col==='G'?'hg':''}">≤ ${fmt(r[1])}</td><td class="${col==='F'?'hg':''}">≤ ${fmt(r[2])}</td></tr>`;
+  });
+  if(withZero){
+    h+=`<tr class="${hiNote===0?'hl':''}"><td><b>0</b></td><td class="${col==='G'?'hg':''}">&gt; ${fmt(last[1])}</td><td class="${col==='F'?'hg':''}">&gt; ${fmt(last[2])}</td></tr>`;
+  }
+  return h+'</tbody></table>';
+}
+function scaleTable(list,hi,unit){
+  let h='<table class="bm-t one"><thead><tr><th>Points</th><th>Écart</th></tr></thead><tbody>';
+  list.forEach(p=>{ h+=`<tr class="${hi===p[0]?'hl':''}"><td><b>${p[0]} pt${p[0]>1?'s':''}</b></td><td>≤ ${p[1]} s</td></tr>`; });
+  const last=list[list.length-1][1];
+  h+=`<tr class="${hi===0?'hl':''}"><td><b>0 pt</b></td><td>&gt; ${last} s</td></tr>`;
+  return h+'</tbody></table>';
+}
+
+function renderBareme(){
+  $('#bm-tabs').innerHTML=BM_TABS.map(t=>`<button class="tab ${t[0]===bmTab?'on':''}" data-t="${t[0]}">${t[1]}</button>`).join('');
+  const s=bmStu; let h='';
+  const who = s ? esc(s.name||'Élève')+' · '+(s.gender==='G'?'Garçon':'Fille') : '';
+  if(EV[bmTab]){
+    const data=EV[bmTab].data, mine = s && s.event===bmTab;
+    const c = mine?cumul(s):null, note = mine?perfNote(s):null, col = mine?s.gender:null;
+    if(mine) h+=`<div class="ctx">${who} · ${c==null?'cumul incomplet (saisir C1, C2, C3)':'cumul '+fmt(c)+' → <b>'+fn(note)+' / 10</b>'}</div>`;
+    else if(s) h+=`<div class="ctx neutral">${who} court en ${EV[s.event].label} — ce n'est pas son barème.</div>`;
+    h+=`<p class="rule">Performance cumulée des 3 répétitions — ${EV[bmTab].label} — note /10 par paliers de 0,5 pt (temps cumulé ≤ seuil).</p>`;
+    h+='<div class="bm-grid">'+halfTable(data.slice(0,10),col,note)+halfTable(data.slice(10),col,note,true,data[data.length-1])+'</div>';
+  }else if(bmTab==='PROJ'){
+    const e = s?projEcart(s):null, p = e==null?null:projPts(e);
+    if(s) h+=`<div class="ctx">${who} · ${e==null?'saisir l\'annonce et C1':'annonce '+fmt(s.ann1)+' · C1 '+fmt(s.t1)+' · écart '+e+' s → <b>'+p+' / 6</b>'}</div>`;
+    h+='<p class="rule">Projet d\'allure /6 : différence absolue entre l\'annonce et le réalisé sur la 1ère fraction (|Ann − C1|).</p>'+scaleTable(PROJ,p);
+  }else{
+    const e = s?regEcart(s):null, p = e==null?null:regPts(e);
+    if(s) h+=`<div class="ctx">${who} · ${e==null?'saisir C1, C2, C3':'Max − Min = '+e+' s → <b>'+p+' / 4</b>'}</div>`;
+    h+='<p class="rule">Régularité /4 : écart entre la répétition la plus rapide et la plus lente (Max − Min des 3 courses).</p>'+scaleTable(REG,p);
+  }
+  const body=$('#bm-body'); body.innerHTML=h;
+  const hl=$('tr.hl',body); if(hl && hl.scrollIntoView) hl.scrollIntoView({block:'center'});
+}
+
+/* ================= DÉMARRAGE ================= */
+renderAll();
+})();
+</script>
+</body>
+</html>
