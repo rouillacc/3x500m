@@ -1,1183 +1,340 @@
-
 <!DOCTYPE html>
 <html lang="fr" class="h-full bg-sky-50/50">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lycée Alain 2026 - Évaluation Bac EPS CA1</title>
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        alain: {
-                            50: '#f0f9ff',
-                            100: '#e0f2fe',
-                            200: '#bae6fd',
-                            300: '#7dd3fc',
-                            400: '#38bdf8',
-                            500: '#0ea5e9',
-                            600: '#0284c7',
-                            700: '#0369a1',
-                            800: '#075985',
-                            900: '#0c4a6e',
-                            950: '#082f49'
-                        }
-                    }
-                }
-            }
-        }
-    </script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet">
-    <style>
-        body { font-family: 'Plus Jakarta Sans', sans-serif; }
-        .font-mono-num { font-family: 'JetBrains Mono', monospace; }
-        
-        /* Focus dynamique adapté au plein air */
-        input:focus, select:focus {
-            outline: 2px solid #0284c7 !important;
-            outline-offset: -1px;
-            background-color: #f0f9ff !important;
-        }
-
-        /* Impression propre format officiel Lycée Alain */
-        @media print {
-            body { background: white !important; color: black !important; font-size: 10px !important; }
-            .no-print { display: none !important; }
-            .print-only { display: block !important; }
-            .shadow-sm, .shadow-md, .shadow-lg, .shadow-xs { box-shadow: none !important; }
-            table { width: 100% !important; border-collapse: collapse !important; }
-            th, td { border: 1px solid #cbd5e1 !important; padding: 3px 4px !important; }
-            input, select { border: none !important; background: transparent !important; pointer-events: none; }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Lycée Alain 2026 - Évaluation CCF EPS Bac</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    /* Empêche le zoom intempestif sur mobile/tablette lors du focus */
+    input, select, button { font-size: 13px !important; touch-action: manipulation; }
+    .sticky-header th { position: sticky; top: 0; z-index: 20; }
+    /* Masquage des flèches d'incrémentation pour input type number */
+    input[type=number]::-webkit-inner-spin-button, 
+    input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
+    
+    @media print {
+      body { background: white !important; font-size: 11px; }
+      .no-print { display: none !important; }
+      .print-only { display: block !important; }
+      table { width: 100% !important; border-collapse: collapse; }
+      th, td { border: 1px solid #cbd5e1 !important; padding: 4px 6px !important; }
+      .badge-print { border: none !important; background: transparent !important; color: black !important; }
+    }
+    .print-only { display: none; }
+  </style>
 </head>
-<body class="h-full flex flex-col text-slate-800 bg-sky-50/40 antialiased select-none text-xs">
+<body class="h-full flex flex-col text-slate-800 antialiased font-sans select-none overflow-hidden">
 
-    <!-- En-tête : Lycée Alain 2026 - Charte Bleu Ciel & Blanc -->
-    <header class="bg-gradient-to-r from-alain-900 via-alain-800 to-sky-700 text-white shadow-md border-b-2 border-sky-400/40 sticky top-0 z-30 no-print">
-        <div class="w-full px-3 sm:px-5 h-14 flex items-center justify-between gap-2">
-            
-            <!-- Logo & Identité Lycée Alain 2026 -->
-            <div class="flex items-center space-x-2.5">
-                <div class="w-9 h-9 rounded-xl bg-white/10 backdrop-blur-md border border-white/25 flex items-center justify-center text-sky-200 shadow-inner">
-                    <!-- Icône SVG Coureur en foulée -->
-                    <svg class="w-5 h-5 text-white" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M13.5 5.5c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zM9.8 8.9L7 23h2.1l1.8-8 2.1 2v6h2v-7.5l-2.1-2 .6-3C14.8 12 16.8 13 19 13v-2c-1.9 0-3.5-1-4.3-2.4l-1-1.6c-.4-.6-1-1-1.7-1-.3 0-.5.1-.8.1L6 8.3V13h2V9.6l1.8-.7z"/>
-                    </svg>
-                </div>
-                <div class="flex flex-col">
-                    <div class="flex items-center gap-2">
-                        <span class="text-sm sm:text-base font-extrabold tracking-tight text-white drop-shadow-xs">LYCÉE ALAIN</span>
-                        <span class="px-1.5 py-0.2 rounded-md bg-sky-400/30 text-sky-200 border border-sky-300/40 text-[10px] font-bold tracking-wide">SESSION 2026</span>
-                    </div>
-                    <p class="text-[10px] sm:text-[11px] text-sky-100/90 font-medium tracking-normal flex items-center gap-1.5">
-                        <span>Baccalauréat EPS</span>
-                        <span class="text-sky-300">•</span>
-                        <span>CA1 Demi-Fond & Adapté</span>
-                    </p>
-                </div>
-                
-                <!-- Badges des 3 épreuves -->
-                <div class="hidden xl:flex items-center gap-1.5 pl-3 border-l border-white/15 text-[11px]">
-                    <span class="px-2 py-0.5 rounded-full bg-white/10 text-sky-100 border border-white/20 flex items-center gap-1">
-                        <svg class="w-3 h-3 text-sky-300" viewBox="0 0 24 24" fill="currentColor"><path d="M13.5 5.5c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zM9.8 8.9L7 23h2.1l1.8-8 2.1 2v6h2v-7.5l-2.1-2 .6-3C14.8 12 16.8 13 19 13v-2c-1.9 0-3.5-1-4.3-2.4l-1-1.6c-.4-.6-1-1-1.7-1-.3 0-.5.1-.8.1L6 8.3V13h2V9.6l1.8-.7z"/></svg>
-                        Course 3x500m
-                    </span>
-                    <span class="px-2 py-0.5 rounded-full bg-sky-400/20 text-sky-200 border border-sky-300/30 flex items-center gap-1">
-                        <svg class="w-3 h-3 text-sky-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
-                        Course 3x250m
-                    </span>
-                    <span class="px-2 py-0.5 rounded-full bg-sky-300/15 text-sky-100 border border-sky-200/25 flex items-center gap-1">
-                        <svg class="w-3 h-3 text-sky-300" viewBox="0 0 24 24" fill="currentColor"><path d="M13.5 4a1.5 1.5 0 100-3 1.5 1.5 0 000 3zm-2.4 4.5l-2.6 13h2.1l1.6-8 2.3 2.5v5.5h2v-6.9l-2.1-2.3.8-3.8c1.3 1.5 3 2.5 5 2.5v-2c-1.7 0-3.2-.9-4-2.1l-1-1.5c-.3-.5-.9-.8-1.5-.8-.3 0-.6.1-.9.2l-4.7 2v5.4h2V8.9l1-0.4z"/></svg>
-                        Marche 3x250m
-                    </span>
-                </div>
-            </div>
-
-            <!-- Boutons d'actions avec icônes stylées -->
-            <div class="flex items-center gap-1.5 sm:gap-2">
-                
-                <!-- Ajouter Élève -->
-                <button onclick="addRow()" class="px-2.5 py-1.5 bg-white text-alain-900 hover:bg-sky-50 rounded-lg text-xs font-bold flex items-center gap-1.5 shadow-sm transition active:scale-95">
-                    <svg class="w-3.5 h-3.5 text-alain-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 4v16m8-8H4"/></svg>
-                    <span>+ Élève</span>
-                </button>
-                
-                <!-- Importer -->
-                <button onclick="openImportModal()" class="px-2.5 py-1.5 bg-alain-900/60 hover:bg-alain-900/90 text-white rounded-lg text-xs font-semibold flex items-center gap-1.5 border border-sky-400/30 transition">
-                    <svg class="w-3.5 h-3.5 text-sky-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"/></svg>
-                    <span class="hidden sm:inline">Importer</span>
-                </button>
-
-                <!-- Export CSV -->
-                <button onclick="exportCSV()" class="px-2.5 py-1.5 bg-sky-500/80 hover:bg-sky-400 text-white rounded-lg text-xs font-semibold flex items-center gap-1.5 border border-sky-300/40 shadow-xs transition">
-                    <svg class="w-3.5 h-3.5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
-                    <span>CSV</span>
-                </button>
-
-                <!-- Impression Bordereau -->
-                <button onclick="window.print()" class="hidden md:flex px-2.5 py-1.5 bg-alain-900/60 hover:bg-alain-900/90 text-sky-100 rounded-lg text-xs font-semibold items-center gap-1.5 border border-sky-400/30 transition" title="Imprimer le bordereau officiel Lycée Alain">
-                    <svg class="w-3.5 h-3.5 text-sky-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"/></svg>
-                    <span>Imprimer</span>
-                </button>
-
-                <!-- Barèmes 0,5 pt -->
-                <button onclick="openBaremeModal()" class="px-2.5 py-1.5 bg-sky-200 hover:bg-white text-alain-900 rounded-lg text-xs font-bold flex items-center gap-1.5 shadow-sm transition">
-                    <svg class="w-3.5 h-3.5 text-alain-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
-                    <span>Barèmes (0,5 pt)</span>
-                </button>
-            </div>
+  <!-- ================= EN-TÊTE ULTRA-COMPACT TABLETTE PAYSAGE ================= -->
+  <header class="no-print bg-white border-b border-sky-200 px-3 py-1 flex items-center justify-between shadow-xs shrink-0 z-30">
+    <div class="flex items-center gap-2">
+      <div class="w-7 h-7 rounded-md bg-gradient-to-tr from-sky-600 to-sky-400 text-white flex items-center justify-center font-bold shadow-xs">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
+        </svg>
+      </div>
+      <div class="leading-tight">
+        <div class="flex items-center gap-1.5">
+          <span class="font-extrabold text-sm tracking-tight text-sky-950">LYCÉE ALAIN</span>
+          <span class="bg-sky-100 text-sky-700 text-[10px] font-bold px-1.5 py-0.2 rounded border border-sky-300">2026</span>
+          <span class="text-xs text-slate-400 font-medium hidden sm:inline">• CCF Bac Demi-Fond</span>
         </div>
-    </header>
-
-    <!-- Barre d'outils secondaire : Filtres, astuce de saisie & Moyenne classe -->
-    <div class="bg-white border-b border-sky-100 px-3 sm:px-5 py-2 no-print shadow-xs">
-        <div class="w-full flex flex-wrap items-center justify-between gap-2.5">
-            
-            <!-- Filtres de vue -->
-            <div class="flex items-center gap-1.5 flex-wrap">
-                <span class="text-[11px] font-bold text-slate-400 uppercase tracking-wider mr-1">Affichage :</span>
-                
-                <button onclick="setFilter('ALL')" id="filter-btn-ALL" class="filter-tab px-3 py-1 rounded-full font-bold bg-alain-800 text-white transition text-[11px] shadow-xs flex items-center gap-1">
-                    <span>Tous</span>
-                    <span id="count-all" class="px-1.5 py-0.2 text-[10px] rounded-full bg-white/20">0</span>
-                </button>
-
-                <button onclick="setFilter('COURSE_500')" id="filter-btn-COURSE_500" class="filter-tab px-3 py-1 rounded-full font-bold bg-sky-50 hover:bg-sky-100 text-alain-700 border border-sky-200 transition text-[11px] flex items-center gap-1">
-                    <svg class="w-3 h-3 text-alain-600" viewBox="0 0 24 24" fill="currentColor"><path d="M13.5 5.5c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zM9.8 8.9L7 23h2.1l1.8-8 2.1 2v6h2v-7.5l-2.1-2 .6-3C14.8 12 16.8 13 19 13v-2c-1.9 0-3.5-1-4.3-2.4l-1-1.6c-.4-.6-1-1-1.7-1-.3 0-.5.1-.8.1L6 8.3V13h2V9.6l1.8-.7z"/></svg>
-                    <span>3x500m</span>
-                    <span id="count-course500" class="px-1.5 py-0.2 text-[10px] rounded-full bg-sky-200/70 text-alain-800">0</span>
-                </button>
-
-                <button onclick="setFilter('COURSE_250')" id="filter-btn-COURSE_250" class="filter-tab px-3 py-1 rounded-full font-bold bg-sky-50 hover:bg-sky-100 text-sky-800 border border-sky-200 transition text-[11px] flex items-center gap-1">
-                    <svg class="w-3 h-3 text-sky-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
-                    <span>C. 250m</span>
-                    <span id="count-course250" class="px-1.5 py-0.2 text-[10px] rounded-full bg-sky-200/70 text-sky-900">0</span>
-                </button>
-
-                <button onclick="setFilter('MARCHE_250')" id="filter-btn-MARCHE_250" class="filter-tab px-3 py-1 rounded-full font-bold bg-sky-50 hover:bg-sky-100 text-teal-800 border border-teal-200 transition text-[11px] flex items-center gap-1">
-                    <svg class="w-3 h-3 text-teal-600" viewBox="0 0 24 24" fill="currentColor"><path d="M13.5 4a1.5 1.5 0 100-3 1.5 1.5 0 000 3zm-2.4 4.5l-2.6 13h2.1l1.6-8 2.3 2.5v5.5h2v-6.9l-2.1-2.3.8-3.8c1.3 1.5 3 2.5 5 2.5v-2c-1.7 0-3.2-.9-4-2.1l-1-1.5c-.3-.5-.9-.8-1.5-.8-.3 0-.6.1-.9.2l-4.7 2v5.4h2V8.9l1-0.4z"/></svg>
-                    <span>M. 250m</span>
-                    <span id="count-marche250" class="px-1.5 py-0.2 text-[10px] rounded-full bg-teal-200/70 text-teal-900">0</span>
-                </button>
-
-                <button onclick="setFilter('PENDING')" id="filter-btn-PENDING" class="filter-tab px-3 py-1 rounded-full font-bold bg-sky-50 hover:bg-sky-100 text-rose-700 border border-rose-200 transition text-[11px] flex items-center gap-1">
-                    <svg class="w-3 h-3 text-rose-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-                    <span>À noter</span>
-                    <span id="count-pending" class="px-1.5 py-0.2 text-[10px] rounded-full bg-rose-200/70 text-rose-800">0</span>
-                </button>
-
-                <!-- Recherche élève -->
-                <div class="relative ml-1">
-                    <input type="text" id="searchInput" oninput="renderTable()" placeholder="Rechercher élève..." class="w-28 sm:w-36 pl-7 pr-2 py-1 text-xs rounded-lg border border-sky-200 bg-sky-50/50 focus:bg-white focus:outline-none transition">
-                    <svg class="w-3.5 h-3.5 text-sky-500 absolute left-2 top-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
-                </div>
-            </div>
-
-            <!-- Aide saisie + Moyenne globale de la classe -->
-            <div class="flex items-center gap-2.5 text-xs ml-auto">
-                
-                <!-- Astuce Saisie directe -->
-                <div class="hidden lg:flex items-center gap-1.5 bg-sky-50 border border-sky-200 text-alain-900 px-2.5 py-1 rounded-lg text-[11px]">
-                    <span class="font-bold text-alain-700">Pavé numérique :</span>
-                    <span>taper</span>
-                    <code class="font-mono bg-white px-1.5 py-0.2 border border-sky-300 rounded font-bold text-alain-800">142</code>
-                    <span>$\rightarrow$</span>
-                    <span class="font-mono font-bold text-alain-900">1'42"</span>
-                    <span class="text-sky-300">|</span>
-                    <code class="font-mono bg-white px-1.5 py-0.2 border border-sky-300 rounded font-bold text-alain-800">48</code>
-                    <span>$\rightarrow$</span>
-                    <span class="font-mono font-bold text-alain-900">48"</span>
-                </div>
-
-                <!-- Moyenne -->
-                <div class="bg-gradient-to-r from-sky-50 to-sky-100 text-alain-900 border border-sky-300 font-bold px-3 py-1 rounded-lg text-xs flex items-center gap-1.5 shadow-2xs">
-                    <span class="text-alain-700 flex items-center gap-1">
-                        <svg class="w-3.5 h-3.5 text-sky-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
-                        Moyenne :
-                    </span>
-                    <span id="stat-moyenne-val" class="font-mono-num font-extrabold text-alain-900 text-sm">-- /20</span>
-                </div>
-
-                <button onclick="resetDemoData()" class="text-sky-700 hover:text-sky-900 text-[11px] underline font-medium">Exemples</button>
-                <button onclick="clearAllData()" class="text-rose-500 hover:text-rose-700 text-[11px] underline font-medium">Vider</button>
-            </div>
-        </div>
+      </div>
     </div>
 
-    <!-- En-tête uniquement visible à l'impression officiel -->
-    <div class="hidden print-only p-4 bg-white border-b-2 border-slate-900 mb-2">
-        <div class="flex justify-between items-center">
-            <div>
-                <h1 class="text-base font-extrabold uppercase tracking-tight text-slate-900">LYCÉE ALAIN — SESSION 2026</h1>
-                <p class="text-xs font-semibold text-slate-700">Bordereau Officiel de Notation CCF Baccalauréat EPS — Champ d'Apprentissage 1 (Demi-Fond)</p>
-            </div>
-            <div class="text-right text-[10px] text-slate-500">
-                <p>Épreuves : 3x500m Course | 3x250m Course Adaptée | 3x250m Marche Adaptée</p>
-                <p>Performance cumulée /10 (palier 0,5 pt) • Projet /6 (Annonce C1) • Régularité /4 (Max - Min)</p>
-            </div>
-        </div>
+    <!-- Stats rapides et actions compactes -->
+    <div class="flex items-center gap-2">
+      <div class="flex items-center gap-2 bg-sky-50 px-2 py-0.5 rounded border border-sky-200 text-xs text-sky-900 font-semibold">
+        <span>Élèves: <b id="stat-total" class="text-sky-700">0</b></span>
+        <span class="text-sky-300">|</span>
+        <span>Moy: <b id="stat-moy" class="text-sky-700">--</b>/20</span>
+        <span class="text-sky-300">|</span>
+        <span>Notés: <b id="stat-eval" class="text-emerald-600">0</b></span>
+      </div>
+
+      <div class="flex items-center gap-1">
+        <button onclick="addStudent()" class="bg-sky-600 hover:bg-sky-700 text-white px-2 py-1 rounded text-xs font-semibold flex items-center gap-1 transition shadow-xs">
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M12 4v16m8-8H4"/></svg>
+          <span>Élève</span>
+        </button>
+        <button onclick="openBaremesModal()" class="bg-white hover:bg-sky-50 text-sky-800 border border-sky-300 px-2 py-1 rounded text-xs font-medium flex items-center gap-1 transition">
+          <svg class="w-3.5 h-3.5 text-sky-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+          <span>Barèmes (0.5)</span>
+        </button>
+        <button onclick="openImportModal()" class="bg-white hover:bg-sky-50 text-slate-700 border border-slate-300 px-2 py-1 rounded text-xs font-medium flex items-center gap-1 transition">
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"/></svg>
+          <span class="hidden md:inline">Import</span>
+        </button>
+        <button onclick="exportCSV()" class="bg-white hover:bg-sky-50 text-slate-700 border border-slate-300 px-2 py-1 rounded text-xs font-medium flex items-center gap-1 transition">
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+          <span class="hidden md:inline">Export</span>
+        </button>
+        <button onclick="window.print()" class="bg-white hover:bg-sky-50 text-slate-700 border border-slate-300 px-2 py-1 rounded text-xs font-medium transition" title="Imprimer bordereau">
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ================= BARRE D'OUTILS ET FILTRES (LIGNE FINE) ================= -->
+  <div class="no-print bg-sky-100/60 border-b border-sky-200 px-3 py-1 flex items-center justify-between gap-2 shrink-0">
+    <div class="flex items-center gap-1 text-xs">
+      <span class="text-[11px] font-bold text-sky-900 uppercase tracking-wide mr-1 hidden sm:inline">Filtres:</span>
+      <button onclick="setFilter('ALL')" id="filter-ALL" class="filter-btn px-2 py-0.5 rounded text-xs font-semibold bg-sky-600 text-white shadow-2xs">Tous (<span id="count-all">0</span>)</button>
+      <button onclick="setFilter('C500')" id="filter-C500" class="filter-btn px-2 py-0.5 rounded text-xs font-medium text-sky-900 hover:bg-sky-200/70">🏃 3x500m (<span id="count-c500">0</span>)</button>
+      <button onclick="setFilter('C250')" id="filter-C250" class="filter-btn px-2 py-0.5 rounded text-xs font-medium text-sky-900 hover:bg-sky-200/70">⚡ C.250m (<span id="count-c250">0</span>)</button>
+      <button onclick="setFilter('M250')" id="filter-M250" class="filter-btn px-2 py-0.5 rounded text-xs font-medium text-sky-900 hover:bg-sky-200/70">🚶 M.250m (<span id="count-m250">0</span>)</button>
+      <button onclick="setFilter('PENDING')" id="filter-PENDING" class="filter-btn px-2 py-0.5 rounded text-xs font-medium text-amber-900 hover:bg-amber-100/80">⏳ À noter (<span id="count-pending">0</span>)</button>
     </div>
 
-    <!-- TABLEAU PRINCIPAL DE SAISIE LIVE (TOUTES COLONNES VISIBLES) -->
-    <main class="flex-1 overflow-auto p-2 sm:p-3">
-        <div class="w-full bg-white rounded-xl shadow-xs border border-sky-200 overflow-hidden">
-            <div class="w-full overflow-x-auto">
-                <table class="w-full border-collapse text-left text-xs table-fixed min-w-[780px] sm:min-w-0" id="mainEvaluationTable">
-                    
-                    <!-- Largeurs optimisées des colonnes -->
-                    <colgroup>
-                        <col class="w-7">               <!-- # -->
-                        <col class="w-36 sm:w-44">       <!-- Nom Prénom -->
-                        <col class="w-10">              <!-- S -->
-                        <col class="w-28 sm:w-32">       <!-- Épreuve (3 options) -->
-                        <col class="w-16 sm:w-20">       <!-- Ann. C1 -->
-                        <col class="w-16 sm:w-20">       <!-- C1 -->
-                        <col class="w-16 sm:w-20">       <!-- C2 -->
-                        <col class="w-16 sm:w-20">       <!-- C3 -->
-                        <col class="w-16 sm:w-20">       <!-- Cumul -->
-                        <col class="w-11 sm:w-14">       <!-- Perf /10 -->
-                        <col class="w-11 sm:w-14">       <!-- Projet /6 -->
-                        <col class="w-11 sm:w-14">       <!-- Régul /4 -->
-                        <col class="w-16 sm:w-20">       <!-- NOTE /20 -->
-                        <col class="w-7 no-print">      <!-- Suppr -->
-                    </colgroup>
-
-                    <!-- En-tête du tableau -->
-                    <thead>
-                        <tr class="bg-gradient-to-r from-alain-900 via-alain-800 to-sky-800 text-white border-b border-sky-300/40 text-[10px] sm:text-[11px] font-semibold tracking-tight uppercase select-none">
-                            <th class="py-2.5 px-1 text-center text-sky-200">#</th>
-                            <th class="py-2.5 px-2">Élève</th>
-                            <th class="py-2.5 px-0.5 text-center" title="Genre (Garçon / Fille)">S</th>
-                            <th class="py-2.5 px-1">Épreuve</th>
-                            
-                            <!-- Annonce C1 -->
-                            <th class="py-2.5 px-1 text-center bg-sky-950/80 text-sky-200 border-l border-sky-700/60" title="Temps annoncé uniquement sur la 1ère course">
-                                <span class="flex items-center justify-center gap-1">
-                                    <svg class="w-3 h-3 text-sky-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"/></svg>
-                                    Ann. C1
-                                </span>
-                            </th>
-                            
-                            <!-- 3 Réalisés C1, C2, C3 -->
-                            <th class="py-2.5 px-1 text-center bg-alain-950 text-white border-l border-sky-600/50" title="1er temps réalisé">
-                                <span class="flex items-center justify-center gap-0.5">
-                                    <svg class="w-3 h-3 text-sky-400" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm0 18c-4.4 0-8-3.6-8-8s3.6-8 8-8 8 3.6 8 8-3.6 8-8 8zm.5-13H11v6l5.2 3.1.8-1.3-4.5-2.7V7z"/></svg>
-                                    C1
-                                </span>
-                            </th>
-                            <th class="py-2.5 px-1 text-center bg-alain-950 text-white" title="2e temps réalisé">
-                                <span class="flex items-center justify-center gap-0.5">
-                                    <svg class="w-3 h-3 text-sky-400" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm0 18c-4.4 0-8-3.6-8-8s3.6-8 8-8 8 3.6 8 8-3.6 8-8 8zm.5-13H11v6l5.2 3.1.8-1.3-4.5-2.7V7z"/></svg>
-                                    C2
-                                </span>
-                            </th>
-                            <th class="py-2.5 px-1 text-center bg-alain-950 text-white" title="3e temps réalisé">
-                                <span class="flex items-center justify-center gap-0.5">
-                                    <svg class="w-3 h-3 text-sky-400" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm0 18c-4.4 0-8-3.6-8-8s3.6-8 8-8 8 3.6 8 8-3.6 8-8 8zm.5-13H11v6l5.2 3.1.8-1.3-4.5-2.7V7z"/></svg>
-                                    C3
-                                </span>
-                            </th>
-                            
-                            <!-- Totaux & Notes -->
-                            <th class="py-2.5 px-1 text-center bg-sky-900 text-sky-100 border-l border-sky-700/60">
-                                <span class="flex items-center justify-center gap-1">
-                                    <svg class="w-3 h-3 text-sky-300" viewBox="0 0 24 24" fill="currentColor"><path d="M14.4 6L14 4H5v17h2v-7h5.6l.4 2h7V6h-5.6z"/></svg>
-                                    Cumul
-                                </span>
-                            </th>
-                            <th class="py-2.5 px-0.5 text-center bg-sky-900/90 text-sky-200" title="Performance cumulée /10 (paliers 0,5 pt)">Perf<br><span class="text-[9px] font-normal text-sky-300">/10</span></th>
-                            <th class="py-2.5 px-0.5 text-center bg-sky-900/90 text-sky-200" title="Projet d'allure sur la 1ère course /6">Projet<br><span class="text-[9px] font-normal text-sky-300">/6</span></th>
-                            <th class="py-2.5 px-0.5 text-center bg-sky-900/90 text-sky-200" title="Régularité (Max - Min) /4">Régul<br><span class="text-[9px] font-normal text-sky-300">/4</span></th>
-                            <th class="py-2.5 px-1 text-center bg-alain-950 text-white font-extrabold text-[11px] border-l border-sky-800">NOTE /20</th>
-                            <th class="py-2.5 px-0.5 text-center no-print"></th>
-                        </tr>
-                    </thead>
-
-                    <!-- Lignes injectées par le script JS -->
-                    <tbody id="tableBody" class="divide-y divide-sky-100 font-medium bg-white">
-                    </tbody>
-                </table>
-            </div>
-
-            <!-- Message si aucune donnée -->
-            <div id="noDataMessage" class="hidden p-8 text-center text-slate-500 bg-sky-50/20">
-                <svg class="w-8 h-8 text-sky-300 mx-auto mb-2" viewBox="0 0 24 24" fill="currentColor"><path d="M13.5 5.5c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zM9.8 8.9L7 23h2.1l1.8-8 2.1 2v6h2v-7.5l-2.1-2 .6-3C14.8 12 16.8 13 19 13v-2c-1.9 0-3.5-1-4.3-2.4l-1-1.6c-.4-.6-1-1-1.7-1-.3 0-.5.1-.8.1L6 8.3V13h2V9.6l1.8-.7z"/></svg>
-                <p class="text-xs font-semibold text-slate-600">Aucun élève affiché pour ce filtre.</p>
-                <p class="text-[11px] text-slate-400 mt-1">Ajoutez un élève ou chargez les exemples.</p>
-            </div>
-        </div>
-    </main>
-
-    <!-- Notification Toast -->
-    <div id="toast" class="hidden fixed bottom-4 right-4 z-50 px-3 py-2 rounded-xl bg-alain-900 text-white text-xs font-semibold shadow-xl border border-sky-400/40 flex items-center gap-2 transition">
-        <svg class="w-4 h-4 text-sky-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
-        <span id="toastMsg">Sauvegardé</span>
+    <div class="flex items-center gap-2">
+      <div class="text-[11px] text-sky-800 bg-white/70 px-2 py-0.5 rounded border border-sky-200 hidden lg:flex items-center gap-1 font-mono">
+        <span>Saisie express: <b>142</b> ➔ 1'42" • <b>45</b> ➔ 45" • <b>Entrée</b> ➔ suivant</span>
+      </div>
+      <div class="relative w-44">
+        <input type="text" id="search-input" oninput="renderTable()" placeholder="Rechercher élève..." class="w-full bg-white border border-sky-300 rounded px-2 py-0.5 pl-6 text-xs focus:ring-1 focus:ring-sky-500 focus:outline-hidden">
+        <svg class="w-3 h-3 text-sky-500 absolute left-2 top-1.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+      </div>
     </div>
+  </div>
 
-    <!-- MODALE : Barèmes Officiels CCF Lycée Alain 2026 (Paliers 0,5 pt) -->
-    <div id="modalBareme" class="fixed inset-0 z-50 hidden overflow-y-auto bg-alain-950/70 backdrop-blur-xs flex items-center justify-center p-3 sm:p-4 no-print">
-        <div class="bg-white rounded-2xl max-w-5xl w-full shadow-2xl border border-sky-200 overflow-hidden max-h-[92vh] flex flex-col">
-            
-            <div class="px-5 py-3.5 bg-gradient-to-r from-alain-900 to-sky-800 text-white flex justify-between items-center">
-                <div class="flex items-center gap-2.5">
-                    <div class="w-7 h-7 rounded-lg bg-sky-400/20 border border-sky-300/30 flex items-center justify-center text-sky-200">
-                        <svg class="w-4 h-4 text-sky-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
-                    </div>
-                    <div>
-                        <h3 class="text-sm font-extrabold tracking-tight">Barèmes CCF Baccalauréat EPS — Paliers de 0,5 point</h3>
-                        <p class="text-[10px] text-sky-200">Lycée Alain 2026 • Performance /10, Projet /6, Régularité /4</p>
-                    </div>
-                </div>
-                <button onclick="closeBaremeModal()" class="w-7 h-7 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition">✕</button>
-            </div>
-            
-            <div class="p-4 sm:p-5 overflow-y-auto space-y-4 text-xs text-slate-700 bg-sky-50/20">
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
-                    <div class="p-3 bg-white border border-sky-200 rounded-xl shadow-2xs">
-                        <span class="font-extrabold text-alain-800 block text-xs flex items-center gap-1.5 mb-1">
-                            <svg class="w-3.5 h-3.5 text-sky-600" viewBox="0 0 24 24" fill="currentColor"><path d="M14.4 6L14 4H5v17h2v-7h5.6l.4 2h7V6h-5.6z"/></svg>
-                            1. Performance (/10 pts)
-                        </span>
-                        <p class="text-slate-600 text-[11px] leading-relaxed">Temps cumulé sur les 3 répétitions, gradué rigoureusement par <b>paliers nets de 0,5 pt</b> (de 10,0 à 0,5 pt) selon la modalité et le sexe.</p>
-                    </div>
-
-                    <div class="p-3 bg-white border border-sky-200 rounded-xl shadow-2xs">
-                        <span class="font-extrabold text-alain-800 block text-xs flex items-center gap-1.5 mb-1">
-                            <svg class="w-3.5 h-3.5 text-sky-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"/></svg>
-                            2. Projet Course 1 (/6 pts)
-                        </span>
-                        <p class="text-slate-600 text-[11px] leading-relaxed">Écart entre Annonce et Course 1 :<br>
-                        <b>≤ 1s</b> : 6 pts | <b>≤ 2s</b> : 5 pts | <b>≤ 3s</b> : 4 pts<br>
-                        <b>≤ 5s</b> : 3 pts | <b>≤ 7s</b> : 2 pts | <b>≤ 9s</b> : 1 pt | <b>&gt; 9s</b> : 0 pt.</p>
-                    </div>
-
-                    <div class="p-3 bg-white border border-sky-200 rounded-xl shadow-2xs">
-                        <span class="font-extrabold text-alain-800 block text-xs flex items-center gap-1.5 mb-1">
-                            <svg class="w-3.5 h-3.5 text-sky-600" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm0 18c-4.4 0-8-3.6-8-8s3.6-8 8-8 8 3.6 8 8-3.6 8-8 8zm.5-13H11v6l5.2 3.1.8-1.3-4.5-2.7V7z"/></svg>
-                            3. Régularité (/4 pts)
-                        </span>
-                        <p class="text-slate-600 text-[11px] leading-relaxed">Écart entre la répétition la plus rapide et la plus lente ($T_{\max} - T_{\min}$) :<br>
-                        <b>≤ 2s</b> : 4 pts | <b>≤ 4s</b> : 3 pts | <b>≤ 7s</b> : 2 pts | <b>≤ 10s</b> : 1 pt.</p>
-                    </div>
-                </div>
-
-                <!-- 3 Grilles complètes à 0,5 pt -->
-                <div>
-                    <h4 class="font-extrabold text-alain-900 mb-2.5 text-[11px] uppercase tracking-wider flex items-center justify-between">
-                        <span>Paliers de performance cumulée (Temps maximum pour chaque note)</span>
-                        <span class="text-sky-700 font-semibold text-[10px] bg-sky-100 px-2 py-0.5 rounded-full">Interpolation discrète 0,5 pt</span>
-                    </h4>
-                    
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-3 font-mono-num text-[11px]">
-                        
-                        <!-- 1. Course 3x500m -->
-                        <div class="bg-white border border-sky-200 rounded-xl overflow-hidden shadow-2xs flex flex-col">
-                            <div class="bg-alain-700 text-white font-extrabold px-3 py-1.5 text-[11px] uppercase tracking-wide text-center flex items-center justify-center gap-1.5">
-                                <svg class="w-3.5 h-3.5 text-sky-300" viewBox="0 0 24 24" fill="currentColor"><path d="M13.5 5.5c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zM9.8 8.9L7 23h2.1l1.8-8 2.1 2v6h2v-7.5l-2.1-2 .6-3C14.8 12 16.8 13 19 13v-2c-1.9 0-3.5-1-4.3-2.4l-1-1.6c-.4-.6-1-1-1.7-1-.3 0-.5.1-.8.1L6 8.3V13h2V9.6l1.8-.7z"/></svg>
-                                Course 3 x 500m
-                            </div>
-                            <div class="max-h-72 overflow-y-auto">
-                                <table class="w-full text-center divide-y divide-sky-100">
-                                    <thead class="bg-sky-50 font-bold text-alain-900 sticky top-0 shadow-2xs">
-                                        <tr><th class="py-1 px-1">Note</th><th class="py-1 px-1">Garçons</th><th class="py-1 px-1">Filles</th></tr>
-                                    </thead>
-                                    <tbody id="baremeTable-500" class="divide-y divide-sky-50 text-[10.5px]"></tbody>
-                                </table>
-                            </div>
-                        </div>
-
-                        <!-- 2. Course 3x250m -->
-                        <div class="bg-white border border-sky-200 rounded-xl overflow-hidden shadow-2xs flex flex-col">
-                            <div class="bg-sky-600 text-white font-extrabold px-3 py-1.5 text-[11px] uppercase tracking-wide text-center flex items-center justify-center gap-1.5">
-                                <svg class="w-3.5 h-3.5 text-sky-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
-                                Course 3 x 250m (Adaptée)
-                            </div>
-                            <div class="max-h-72 overflow-y-auto">
-                                <table class="w-full text-center divide-y divide-sky-100">
-                                    <thead class="bg-sky-50 font-bold text-sky-950 sticky top-0 shadow-2xs">
-                                        <tr><th class="py-1 px-1">Note</th><th class="py-1 px-1">Garçons</th><th class="py-1 px-1">Filles</th></tr>
-                                    </thead>
-                                    <tbody id="baremeTable-c250" class="divide-y divide-sky-50 text-[10.5px]"></tbody>
-                                </table>
-                            </div>
-                        </div>
-
-                        <!-- 3. Marche 3x250m -->
-                        <div class="bg-white border border-sky-200 rounded-xl overflow-hidden shadow-2xs flex flex-col">
-                            <div class="bg-teal-700 text-white font-extrabold px-3 py-1.5 text-[11px] uppercase tracking-wide text-center flex items-center justify-center gap-1.5">
-                                <svg class="w-3.5 h-3.5 text-teal-300" viewBox="0 0 24 24" fill="currentColor"><path d="M13.5 4a1.5 1.5 0 100-3 1.5 1.5 0 000 3zm-2.4 4.5l-2.6 13h2.1l1.6-8 2.3 2.5v5.5h2v-6.9l-2.1-2.3.8-3.8c1.3 1.5 3 2.5 5 2.5v-2c-1.7 0-3.2-.9-4-2.1l-1-1.5c-.3-.5-.9-.8-1.5-.8-.3 0-.6.1-.9.2l-4.7 2v5.4h2V8.9l1-0.4z"/></svg>
-                                Marche 3 x 250m (Adaptée)
-                            </div>
-                            <div class="max-h-72 overflow-y-auto">
-                                <table class="w-full text-center divide-y divide-sky-100">
-                                    <thead class="bg-teal-50 font-bold text-teal-950 sticky top-0 shadow-2xs">
-                                        <tr><th class="py-1 px-1">Note</th><th class="py-1 px-1">Garçons</th><th class="py-1 px-1">Filles</th></tr>
-                                    </thead>
-                                    <tbody id="baremeTable-m250" class="divide-y divide-sky-50 text-[10.5px]"></tbody>
-                                </table>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-            
-            <div class="px-5 py-3 bg-white border-t border-sky-100 flex justify-end">
-                <button onclick="closeBaremeModal()" class="px-4 py-1.5 bg-alain-800 hover:bg-alain-900 text-white font-bold text-xs rounded-lg transition shadow-xs">Fermer</button>
-            </div>
-        </div>
+  <!-- BORDEREAU OFFICIEL EN CAS D'IMPRESSION -->
+  <div class="print-only p-4 mb-2">
+    <div class="flex justify-between items-center border-b-2 border-slate-800 pb-2 mb-2">
+      <div>
+        <h1 class="text-xl font-bold">LYCÉE ALAIN — SESSION BACCALAURÉAT 2026</h1>
+        <p class="text-sm">Bordereau d'évaluation CCF • Champ d'Apprentissage 1 (3x500m / 3x250m)</p>
+      </div>
+      <div class="text-right text-xs">
+        <p>Date d'épreuve : ____________________</p>
+        <p>Examinateur : _______________________</p>
+      </div>
     </div>
+  </div>
 
-    <!-- MODALE : Import Express Classe -->
-    <div id="modalImport" class="fixed inset-0 z-50 hidden overflow-y-auto bg-alain-950/70 backdrop-blur-xs flex items-center justify-center p-3 no-print">
-        <div class="bg-white rounded-2xl max-w-md w-full shadow-2xl border border-sky-200 overflow-hidden">
-            <div class="px-5 py-3.5 bg-gradient-to-r from-alain-900 to-sky-800 text-white flex justify-between items-center">
-                <h3 class="text-xs font-extrabold flex items-center gap-2">
-                    <svg class="w-4 h-4 text-sky-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"/></svg>
-                    <span>Lycée Alain 2026 — Import de classe</span>
-                </h3>
-                <button onclick="closeImportModal()" class="w-6 h-6 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center">✕</button>
-            </div>
-            
-            <div class="p-4 space-y-2.5 text-xs bg-sky-50/20">
-                <p class="text-slate-600 font-medium">
-                    Collez votre liste d'élèves depuis Pronote ou Excel (une ligne par élève) :
-                </p>
-                <div class="p-2.5 bg-white border border-sky-200 rounded-lg text-slate-500 text-[11px] font-mono leading-relaxed">
-                    <code>DUPONT Thomas G</code><br>
-                    <code>MARTIN Julie F C250</code><br>
-                    <code>PETIT Sarah Marche</code>
-                </div>
-                <textarea id="importTextarea" rows="6" placeholder="DUPONT Lucas G&#10;BERNARD Emma F&#10;MOREAU Alexandre C250&#10;PETIT Sarah Marche" class="w-full p-2.5 border border-sky-200 rounded-xl text-xs font-mono focus:ring-2 focus:ring-sky-400 focus:outline-none bg-white"></textarea>
-            </div>
-
-            <div class="px-4 py-3 bg-white border-t border-sky-100 flex justify-end gap-2">
-                <button onclick="closeImportModal()" class="px-3 py-1.5 border border-slate-300 rounded-lg text-xs font-semibold text-slate-600 hover:bg-slate-100">Annuler</button>
-                <button onclick="processImport()" class="px-4 py-1.5 bg-alain-700 hover:bg-alain-800 text-white font-bold text-xs rounded-lg shadow-xs">Ajouter les élèves</button>
-            </div>
-        </div>
+  <!-- ================= TABLEAU PRINCIPAL DE SAISIE ================= -->
+  <main class="flex-1 overflow-auto bg-white p-2">
+    <div class="min-w-[980px] h-full flex flex-col border border-sky-200 rounded-md shadow-2xs bg-white overflow-hidden">
+      <div class="flex-1 overflow-auto">
+        <table class="w-full border-collapse text-left text-xs">
+          <thead class="sticky-header bg-gradient-to-b from-sky-100 to-sky-50 border-b border-sky-300 text-sky-950 font-semibold select-none shadow-xs">
+            <tr>
+              <th class="py-1.5 px-2 w-10 text-center">#</th>
+              <th class="py-1.5 px-2 w-48">Nom & Prénom</th>
+              <th class="py-1.5 px-1.5 w-16 text-center">Sexe</th>
+              <th class="py-1.5 px-2 w-32">Épreuve</th>
+              <th class="py-1.5 px-2 w-24 text-center bg-sky-200/50 border-l border-r border-sky-300 text-sky-900" title="Temps annoncé pour la 1ère fraction">
+                🎯 Ann. C1
+              </th>
+              <th class="py-1.5 px-2 w-24 text-center">⏱️ C1</th>
+              <th class="py-1.5 px-2 w-24 text-center">⏱️ C2</th>
+              <th class="py-1.5 px-2 w-24 text-center">⏱️ C3</th>
+              <th class="py-1.5 px-2 w-24 text-center bg-slate-100/70 border-l border-slate-300 font-mono">🏁 Cumul</th>
+              <th class="py-1.5 px-1.5 w-16 text-center bg-amber-50/70 text-amber-950 border-l border-amber-200" title="Performance sur 10 pts (palier 0.5)">Perf /10</th>
+              <th class="py-1.5 px-1.5 w-16 text-center bg-blue-50/70 text-blue-950 border-l border-blue-200" title="Projet d'allure sur 6 pts (écart C1)">Proj /6</th>
+              <th class="py-1.5 px-1.5 w-16 text-center bg-emerald-50/70 text-emerald-950 border-l border-emerald-200" title="Régularité sur 4 pts (Max - Min)">Rég /4</th>
+              <th class="py-1.5 px-2 w-20 text-center bg-sky-600 text-white font-bold border-l border-sky-700">NOTE /20</th>
+              <th class="no-print py-1.5 px-1.5 w-10 text-center"></th>
+            </tr>
+          </thead>
+          <tbody id="student-tbody" class="divide-y divide-sky-100">
+            <!-- Rendu dynamique JS -->
+          </tbody>
+        </table>
+      </div>
     </div>
-
-    <!-- Script logique intégrale -->
-    <script>
-        /**
-         * Barèmes officiels CCF Baccalauréat EPS - Lycée Alain 2026
-         * Paliers stricts de 0,5 point (de 10,0 à 0,5 pt)
-         * t = temps cumulé maximal (en secondes) pour décrocher la note
-         */
-        const BAREMES_HALF_PTS = {
-            COURSE_500_GARCON: [
-                { pts: 10.0, t: 255 }, // 4'15"
-                { pts: 9.5,  t: 262 }, // 4'22"
-                { pts: 9.0,  t: 270 }, // 4'30"
-                { pts: 8.5,  t: 277 }, // 4'37"
-                { pts: 8.0,  t: 285 }, // 4'45"
-                { pts: 7.5,  t: 292 }, // 4'52"
-                { pts: 7.0,  t: 300 }, // 5'00"
-                { pts: 6.5,  t: 307 }, // 5'07"
-                { pts: 6.0,  t: 315 }, // 5'15"
-                { pts: 5.5,  t: 323 }, // 5'23"
-                { pts: 5.0,  t: 332 }, // 5'32"
-                { pts: 4.5,  t: 341 }, // 5'41"
-                { pts: 4.0,  t: 350 }, // 5'50"
-                { pts: 3.5,  t: 359 }, // 5'59"
-                { pts: 3.0,  t: 368 }, // 6'08"
-                { pts: 2.5,  t: 376 }, // 6'16"
-                { pts: 2.0,  t: 385 }, // 6'25"
-                { pts: 1.5,  t: 395 }, // 6'35"
-                { pts: 1.0,  t: 405 }, // 6'45"
-                { pts: 0.5,  t: 425 }  // 7'05"
-            ],
-            COURSE_500_FILLE: [
-                { pts: 10.0, t: 300 }, // 5'00"
-                { pts: 9.5,  t: 308 }, // 5'08"
-                { pts: 9.0,  t: 316 }, // 5'16"
-                { pts: 8.5,  t: 324 }, // 5'24"
-                { pts: 8.0,  t: 332 }, // 5'32"
-                { pts: 7.5,  t: 340 }, // 5'40"
-                { pts: 7.0,  t: 348 }, // 5'48"
-                { pts: 6.5,  t: 356 }, // 5'56"
-                { pts: 6.0,  t: 364 }, // 6'04"
-                { pts: 5.5,  t: 373 }, // 6'13"
-                { pts: 5.0,  t: 382 }, // 6'22"
-                { pts: 4.5,  t: 391 }, // 6'31"
-                { pts: 4.0,  t: 400 }, // 6'40"
-                { pts: 3.5,  t: 410 }, // 6'50"
-                { pts: 3.0,  t: 420 }, // 7'00"
-                { pts: 2.5,  t: 430 }, // 7'10"
-                { pts: 2.0,  t: 440 }, // 7'20"
-                { pts: 1.5,  t: 452 }, // 7'32"
-                { pts: 1.0,  t: 465 }, // 7'45"
-                { pts: 0.5,  t: 485 }  // 8'05"
-            ],
-            COURSE_250_GARCON: [
-                { pts: 10.0, t: 128 }, // 2'08"
-                { pts: 9.5,  t: 131 }, // 2'11"
-                { pts: 9.0,  t: 135 }, // 2'15"
-                { pts: 8.5,  t: 138 }, // 2'18"
-                { pts: 8.0,  t: 142 }, // 2'22"
-                { pts: 7.5,  t: 146 }, // 2'26"
-                { pts: 7.0,  t: 150 }, // 2'30"
-                { pts: 6.5,  t: 154 }, // 2'34"
-                { pts: 6.0,  t: 158 }, // 2'38"
-                { pts: 5.5,  t: 162 }, // 2'42"
-                { pts: 5.0,  t: 167 }, // 2'47"
-                { pts: 4.5,  t: 171 }, // 2'51"
-                { pts: 4.0,  t: 176 }, // 2'56"
-                { pts: 3.5,  t: 181 }, // 3'01"
-                { pts: 3.0,  t: 185 }, // 3'05"
-                { pts: 2.5,  t: 190 }, // 3'10"
-                { pts: 2.0,  t: 195 }, // 3'15"
-                { pts: 1.5,  t: 202 }, // 3'22"
-                { pts: 1.0,  t: 210 }, // 3'30"
-                { pts: 0.5,  t: 225 }  // 3'45"
-            ],
-            COURSE_250_FILLE: [
-                { pts: 10.0, t: 150 }, // 2'30"
-                { pts: 9.5,  t: 154 }, // 2'34"
-                { pts: 9.0,  t: 159 }, // 2'39"
-                { pts: 8.5,  t: 163 }, // 2'43"
-                { pts: 8.0,  t: 168 }, // 2'48"
-                { pts: 7.5,  t: 173 }, // 2'53"
-                { pts: 7.0,  t: 178 }, // 2'58"
-                { pts: 6.5,  t: 183 }, // 3'03"
-                { pts: 6.0,  t: 188 }, // 3'08"
-                { pts: 5.5,  t: 193 }, // 3'13"
-                { pts: 5.0,  t: 199 }, // 3'19"
-                { pts: 4.5,  t: 204 }, // 3'24"
-                { pts: 4.0,  t: 210 }, // 3'30"
-                { pts: 3.5,  t: 215 }, // 3'35"
-                { pts: 3.0,  t: 221 }, // 3'41"
-                { pts: 2.5,  t: 226 }, // 3'46"
-                { pts: 2.0,  t: 232 }, // 3'52"
-                { pts: 1.5,  t: 241 }, // 4'01"
-                { pts: 1.0,  t: 250 }, // 4'10"
-                { pts: 0.5,  t: 265 }  // 4'25"
-            ],
-            MARCHE_250_GARCON: [
-                { pts: 10.0, t: 285 }, // 4'45"
-                { pts: 9.5,  t: 292 }, // 4'52"
-                { pts: 9.0,  t: 300 }, // 5'00"
-                { pts: 8.5,  t: 307 }, // 5'07"
-                { pts: 8.0,  t: 315 }, // 5'15"
-                { pts: 7.5,  t: 322 }, // 5'22"
-                { pts: 7.0,  t: 330 }, // 5'30"
-                { pts: 6.5,  t: 337 }, // 5'37"
-                { pts: 6.0,  t: 345 }, // 5'45"
-                { pts: 5.5,  t: 355 }, // 5'55"
-                { pts: 5.0,  t: 365 }, // 6'05"
-                { pts: 4.5,  t: 375 }, // 6'15"
-                { pts: 4.0,  t: 385 }, // 6'25"
-                { pts: 3.5,  t: 395 }, // 6'35"
-                { pts: 3.0,  t: 405 }, // 6'45"
-                { pts: 2.5,  t: 415 }, // 6'55"
-                { pts: 2.0,  t: 425 }, // 7'05"
-                { pts: 1.5,  t: 437 }, // 7'17"
-                { pts: 1.0,  t: 450 }, // 7'30"
-                { pts: 0.5,  t: 470 }  // 7'50"
-            ],
-            MARCHE_250_FILLE: [
-                { pts: 10.0, t: 315 }, // 5'15"
-                { pts: 9.5,  t: 322 }, // 5'22"
-                { pts: 9.0,  t: 330 }, // 5'30"
-                { pts: 8.5,  t: 337 }, // 5'37"
-                { pts: 8.0,  t: 345 }, // 5'45"
-                { pts: 7.5,  t: 353 }, // 5'53"
-                { pts: 7.0,  t: 362 }, // 6'02"
-                { pts: 6.5,  t: 371 }, // 6'11"
-                { pts: 6.0,  t: 380 }, // 6'20"
-                { pts: 5.5,  t: 391 }, // 6'31"
-                { pts: 5.0,  t: 402 }, // 6'42"
-                { pts: 4.5,  t: 413 }, // 6'53"
-                { pts: 4.0,  t: 425 }, // 7'05"
-                { pts: 3.5,  t: 436 }, // 7'16"
-                { pts: 3.0,  t: 447 }, // 7'27"
-                { pts: 2.5,  t: 458 }, // 7'38"
-                { pts: 2.0,  t: 470 }, // 7'50"
-                { pts: 1.5,  t: 482 }, // 8'02"
-                { pts: 1.0,  t: 495 }, // 8'15"
-                { pts: 0.5,  t: 520 }  // 8'40"
-            ]
-        };
-
-        // Données d'élèves réalistes pour le Lycée Alain
-        const DEMO_DATA = [
-            { id: '1', nom: 'BERNARD Alexandre', sexe: 'G', modalite: 'COURSE_500', ar1: "1'28\"", r1: "1'27\"", r2: "1'29\"", r3: "1'28\"" },
-            { id: '2', nom: 'MOREAU Camille', sexe: 'F', modalite: 'COURSE_500', ar1: "1'45\"", r1: "1'44\"", r2: "1'46\"", r3: "1'45\"" },
-            { id: '3', nom: 'DUBOIS Thomas', sexe: 'G', modalite: 'COURSE_500', ar1: "1'38\"", r1: "1'32\"", r2: "1'44\"", r3: "1'52\"" },
-            { id: '4', nom: 'FAURE Antoine', sexe: 'G', modalite: 'COURSE_250', ar1: "42\"", r1: "43\"", r2: "42\"", r3: "44\"" },
-            { id: '5', nom: 'GIRARD Clara', sexe: 'F', modalite: 'COURSE_250', ar1: "52\"", r1: "51\"", r2: "53\"", r3: "52\"" },
-            { id: '6', nom: 'LEROY Inès', sexe: 'F', modalite: 'MARCHE_250', ar1: "1'50\"", r1: "1'50\"", r2: "1'51\"", r3: "1'49\"" },
-            { id: '7', nom: 'ROUX Mathis', sexe: 'G', modalite: 'MARCHE_250', ar1: "1'42\"", r1: "1'41\"", r2: "1'43\"", r3: "1'42\"" },
-            { id: '8', nom: 'PETIT Sarah', sexe: 'F', modalite: 'COURSE_250', ar1: "58\"", r1: "1'02\"", r2: "1'08\"", r3: "1'10\"" }
-        ];
-
-        let students = [];
-        let currentFilter = 'ALL';
-
-        window.addEventListener('DOMContentLoaded', () => {
-            const saved = localStorage.getItem('eps_lycee_alain_2026');
-            if (saved) {
-                try {
-                    students = JSON.parse(saved);
-                } catch(e) {
-                    students = JSON.parse(JSON.stringify(DEMO_DATA));
-                }
-            } else {
-                students = JSON.parse(JSON.stringify(DEMO_DATA));
-            }
-            buildBaremeModalTables();
-            renderTable();
-        });
-
-        function saveToStorage() {
-            localStorage.setItem('eps_lycee_alain_2026', JSON.stringify(students));
-            showToast("Données sauvegardées");
-        }
-
-        /**
-         * Parsing haute flexibilité :
-         * 142 -> 1'42", 205 -> 2'05", 48 -> 48", ou "1:42" / "1'42"
-         */
-        function parseToSeconds(val) {
-            if (!val && val !== 0) return 0;
-            let clean = String(val).replace(/["s]/g, '').trim();
-            if (!clean) return 0;
-
-            if (clean.includes(':') || clean.includes("'")) {
-                const parts = clean.split(/[:']/);
-                const mins = parseFloat(parts[0]) || 0;
-                const secs = parseFloat(parts[1]) || 0;
-                return Math.round((mins * 60 + secs) * 10) / 10;
-            }
-
-            if (/^\d+$/.test(clean)) {
-                if (clean.length === 3) {
-                    const mins = parseInt(clean.substring(0, 1), 10);
-                    const secs = parseInt(clean.substring(1), 10);
-                    if (secs < 60) return (mins * 60) + secs;
-                } else if (clean.length === 4) {
-                    const mins = parseInt(clean.substring(0, 2), 10);
-                    const secs = parseInt(clean.substring(2), 10);
-                    if (secs < 60) return (mins * 60) + secs;
-                }
-                const num = parseFloat(clean);
-                return isNaN(num) ? 0 : num;
-            }
-
-            const num = parseFloat(clean);
-            return isNaN(num) ? 0 : Math.round(num * 10) / 10;
-        }
-
-        function formatDisplay(seconds) {
-            if (!seconds || seconds <= 0 || isNaN(seconds)) return "";
-            const m = Math.floor(seconds / 60);
-            const s = Math.round(seconds % 60);
-            if (m === 0) return `${s}"`;
-            return `${m}'${s.toString().padStart(2, '0')}"`;
-        }
-
-        function getDiscreteScore(cumulSec, table) {
-            for (let i = 0; i < table.length; i++) {
-                if (cumulSec <= table[i].t) {
-                    return table[i].pts;
-                }
-            }
-            return 0.5;
-        }
-
-        /**
-         * Calcul de la note globale sur 20 points
-         */
-        function calculateStudent(s) {
-            const ar1 = parseToSeconds(s.ar1);
-            const r1 = parseToSeconds(s.r1);
-            const r2 = parseToSeconds(s.r2);
-            const r3 = parseToSeconds(s.r3);
-
-            const hasAllRuns = (r1 > 0 && r2 > 0 && r3 > 0);
-            const totalSec = r1 + r2 + r3;
-
-            // 1. Performance /10 (palier 0,5 pt)
-            let notePerf = 0;
-            if (hasAllRuns) {
-                let table;
-                if (s.modalite === 'COURSE_250') {
-                    table = (s.sexe === 'F') ? BAREMES_HALF_PTS.COURSE_250_FILLE : BAREMES_HALF_PTS.COURSE_250_GARCON;
-                } else if (s.modalite === 'MARCHE_250') {
-                    table = (s.sexe === 'F') ? BAREMES_HALF_PTS.MARCHE_250_FILLE : BAREMES_HALF_PTS.MARCHE_250_GARCON;
-                } else {
-                    table = (s.sexe === 'F') ? BAREMES_HALF_PTS.COURSE_500_FILLE : BAREMES_HALF_PTS.COURSE_500_GARCON;
-                }
-                notePerf = getDiscreteScore(totalSec, table);
-            }
-
-            // 2. Projet d'allure /6 (sur la 1ère course C1)
-            let noteProjet = 0;
-            if (r1 > 0 && ar1 > 0) {
-                const ecart = Math.abs(r1 - ar1);
-                if (ecart <= 1.0) noteProjet = 6.0;
-                else if (ecart <= 2.0) noteProjet = 5.0;
-                else if (ecart <= 3.0) noteProjet = 4.0;
-                else if (ecart <= 5.0) noteProjet = 3.0;
-                else if (ecart <= 7.0) noteProjet = 2.0;
-                else if (ecart <= 9.0) noteProjet = 1.0;
-                else noteProjet = 0.0;
-            }
-
-            // 3. Régularité /4 (Max - Min)
-            let noteRegul = 0;
-            if (hasAllRuns) {
-                const ecartRegul = Math.max(r1, r2, r3) - Math.min(r1, r2, r3);
-                if (ecartRegul <= 2.0) noteRegul = 4.0;
-                else if (ecartRegul <= 4.0) noteRegul = 3.0;
-                else if (ecartRegul <= 7.0) noteRegul = 2.0;
-                else if (ecartRegul <= 10.0) noteRegul = 1.0;
-                else noteRegul = 0.0;
-            }
-
-            const noteTotale = Math.min(20, Math.round((notePerf + noteProjet + noteRegul) * 10) / 10);
-
-            return {
-                hasAllRuns,
-                totalSec,
-                notePerf: Math.round(notePerf * 10) / 10,
-                noteProjet: Math.round(noteProjet * 10) / 10,
-                noteRegul: Math.round(noteRegul * 10) / 10,
-                noteTotale
-            };
-        }
-
-        function buildBaremeModalTables() {
-            function populate(tbodyId, tableG, tableF) {
-                const tbody = document.getElementById(tbodyId);
-                if (!tbody) return;
-                tbody.innerHTML = '';
-                for (let i = 0; i < tableG.length; i++) {
-                    const g = tableG[i];
-                    const f = tableF[i];
-                    const tr = document.createElement('tr');
-                    if (g.pts === 10.0) tr.className = "bg-sky-100/70 font-bold text-alain-900";
-                    else if (g.pts === 5.0) tr.className = "bg-sky-50 font-semibold";
-                    tr.innerHTML = `
-                        <td class="py-1 px-1 font-bold text-alain-800">${g.pts.toFixed(1)}</td>
-                        <td class="py-1 px-1">≤ ${formatDisplay(g.t)}</td>
-                        <td class="py-1 px-1">≤ ${formatDisplay(f.t)}</td>
-                    `;
-                    tbody.appendChild(tr);
-                }
-            }
-
-            populate('baremeTable-500', BAREMES_HALF_PTS.COURSE_500_GARCON, BAREMES_HALF_PTS.COURSE_500_FILLE);
-            populate('baremeTable-c250', BAREMES_HALF_PTS.COURSE_250_GARCON, BAREMES_HALF_PTS.COURSE_250_FILLE);
-            populate('baremeTable-m250', BAREMES_HALF_PTS.MARCHE_250_GARCON, BAREMES_HALF_PTS.MARCHE_250_FILLE);
-        }
-
-        function renderTable() {
-            const tbody = document.getElementById('tableBody');
-            const search = document.getElementById('searchInput').value.toLowerCase().trim();
-            const noDataMsg = document.getElementById('noDataMessage');
-
-            tbody.innerHTML = '';
-
-            let cAll = students.length;
-            let cCourse500 = 0;
-            let cCourse250 = 0;
-            let cMarche250 = 0;
-            let cPending = 0;
-
-            let sumNotes = 0;
-            let countComplete = 0;
-
-            students.forEach((s) => {
-                if (s.modalite === 'COURSE_250') cCourse250++;
-                else if (s.modalite === 'MARCHE_250') cMarche250++;
-                else cCourse500++;
-
-                const isComplete = (parseToSeconds(s.r1) > 0 && parseToSeconds(s.r2) > 0 && parseToSeconds(s.r3) > 0 && parseToSeconds(s.ar1) > 0);
-                if (!isComplete) cPending++;
-            });
-
-            document.getElementById('count-all').innerText = cAll;
-            document.getElementById('count-course500').innerText = cCourse500;
-            document.getElementById('count-course250').innerText = cCourse250;
-            document.getElementById('count-marche250').innerText = cMarche250;
-            document.getElementById('count-pending').innerText = cPending;
-
-            const visibleStudents = students.filter(s => {
-                const matchesSearch = s.nom.toLowerCase().includes(search);
-                if (!matchesSearch) return false;
-
-                const isComplete = (parseToSeconds(s.r1) > 0 && parseToSeconds(s.r2) > 0 && parseToSeconds(s.r3) > 0 && parseToSeconds(s.ar1) > 0);
-                if (currentFilter === 'COURSE_500') return (s.modalite === 'COURSE_500' || !s.modalite);
-                if (currentFilter === 'COURSE_250') return s.modalite === 'COURSE_250';
-                if (currentFilter === 'MARCHE_250') return s.modalite === 'MARCHE_250';
-                if (currentFilter === 'PENDING') return !isComplete;
-                return true;
-            });
-
-            if (visibleStudents.length === 0) {
-                noDataMsg.classList.remove('hidden');
-            } else {
-                noDataMsg.classList.add('hidden');
-            }
-
-            visibleStudents.forEach((student, index) => {
-                const calc = calculateStudent(student);
-                if (calc.hasAllRuns) {
-                    sumNotes += calc.noteTotale;
-                    countComplete++;
-                }
-
-                // Badge couleur Note
-                let noteClass = "bg-slate-100 text-slate-400";
-                if (calc.hasAllRuns) {
-                    if (calc.noteTotale >= 16) noteClass = "bg-sky-100 text-sky-950 border border-sky-400 font-extrabold shadow-2xs";
-                    else if (calc.noteTotale >= 12) noteClass = "bg-emerald-50 text-emerald-900 border border-emerald-300 font-bold";
-                    else if (calc.noteTotale >= 10) noteClass = "bg-blue-50 text-blue-900 border border-blue-300 font-bold";
-                    else if (calc.noteTotale >= 8) noteClass = "bg-amber-50 text-amber-900 border border-amber-300 font-bold";
-                    else noteClass = "bg-rose-50 text-rose-900 border border-rose-300 font-bold";
-                }
-
-                // Style épreuve
-                let modaliteStyle = "text-alain-700 bg-sky-50/80 font-semibold";
-                if (student.modalite === 'COURSE_250') modaliteStyle = "text-sky-900 bg-sky-100/70 font-bold";
-                else if (student.modalite === 'MARCHE_250') modaliteStyle = "text-teal-900 bg-teal-50 font-bold";
-
-                const tr = document.createElement('tr');
-                tr.className = "hover:bg-sky-50/50 transition border-b border-sky-100";
-                tr.id = `row-${student.id}`;
-
-                tr.innerHTML = `
-                    <td class="py-1 px-1 text-center text-sky-400 font-mono text-[10px]">${index + 1}</td>
-                    
-                    <td class="py-1 px-1">
-                        <input type="text" value="${escapeHtml(student.nom)}" 
-                            data-id="${student.id}" data-col="nom"
-                            onchange="updateField('${student.id}', 'nom', this.value)"
-                            placeholder="NOM Prénom" 
-                            class="w-full px-2 py-1 rounded-md border border-transparent hover:border-sky-300 font-semibold text-slate-900 uppercase focus:bg-white text-[11px] truncate">
-                    </td>
-
-                    <td class="py-1 px-0.5 text-center">
-                        <select onchange="updateField('${student.id}', 'sexe', this.value)" 
-                            data-id="${student.id}" data-col="sexe"
-                            class="w-full py-1 text-center rounded-md border border-transparent hover:border-sky-300 font-bold text-[11px] ${student.sexe === 'F' ? 'text-pink-600 bg-pink-50' : 'text-sky-700 bg-sky-50'}">
-                            <option value="G" ${student.sexe === 'G' ? 'selected' : ''}>G</option>
-                            <option value="F" ${student.sexe === 'F' ? 'selected' : ''}>F</option>
-                        </select>
-                    </td>
-
-                    <td class="py-1 px-1">
-                        <select onchange="updateField('${student.id}', 'modalite', this.value)" 
-                            data-id="${student.id}" data-col="modalite"
-                            class="w-full py-1 px-1 rounded-md border border-transparent hover:border-sky-300 text-[10px] sm:text-[11px] ${modaliteStyle}">
-                            <option value="COURSE_500" ${student.modalite === 'COURSE_500' ? 'selected' : ''}>🏃 Course 3x500m</option>
-                            <option value="COURSE_250" ${student.modalite === 'COURSE_250' ? 'selected' : ''}>⚡ Course 3x250m</option>
-                            <option value="MARCHE_250" ${student.modalite === 'MARCHE_250' ? 'selected' : ''}>🚶 Marche 3x250m</option>
-                        </select>
-                    </td>
-
-                    <td class="py-1 px-1 bg-sky-50/40 border-l border-sky-100">
-                        <input type="text" value="${student.ar1 || ''}" 
-                            data-id="${student.id}" data-col="ar1"
-                            onblur="onTimeBlur(this, '${student.id}', 'ar1')"
-                            onkeydown="handleKeyNav(event, this)"
-                            placeholder="ex 142" 
-                            class="w-full text-center font-mono-num px-1 py-1 rounded-md border border-sky-200 hover:border-sky-400 text-sky-950 font-bold focus:bg-white text-xs">
-                    </td>
-
-                    <td class="py-1 px-1 bg-sky-50/20 border-l border-sky-100">
-                        <input type="text" value="${student.r1 || ''}" 
-                            data-id="${student.id}" data-col="r1"
-                            onblur="onTimeBlur(this, '${student.id}', 'r1')"
-                            onkeydown="handleKeyNav(event, this)"
-                            placeholder="ex 142" 
-                            class="w-full text-center font-mono-num px-1 py-1 rounded-md border border-sky-200 hover:border-sky-400 text-alain-900 font-extrabold text-xs focus:bg-white shadow-2xs">
-                    </td>
-
-                    <td class="py-1 px-1 bg-sky-50/20">
-                        <input type="text" value="${student.r2 || ''}" 
-                            data-id="${student.id}" data-col="r2"
-                            onblur="onTimeBlur(this, '${student.id}', 'r2')"
-                            onkeydown="handleKeyNav(event, this)"
-                            placeholder="ex 145" 
-                            class="w-full text-center font-mono-num px-1 py-1 rounded-md border border-sky-200 hover:border-sky-400 text-alain-900 font-extrabold text-xs focus:bg-white shadow-2xs">
-                    </td>
-
-                    <td class="py-1 px-1 bg-sky-50/20">
-                        <input type="text" value="${student.r3 || ''}" 
-                            data-id="${student.id}" data-col="r3"
-                            onblur="onTimeBlur(this, '${student.id}', 'r3')"
-                            onkeydown="handleKeyNav(event, this)"
-                            placeholder="ex 144" 
-                            class="w-full text-center font-mono-num px-1 py-1 rounded-md border border-sky-200 hover:border-sky-400 text-alain-900 font-extrabold text-xs focus:bg-white shadow-2xs">
-                    </td>
-
-                    <td class="py-1 px-1 text-center font-mono-num font-bold text-slate-800 border-l border-sky-100 bg-sky-50/30 text-[11px]">
-                        ${calc.hasAllRuns ? formatDisplay(calc.totalSec) : '<span class="text-sky-300">-</span>'}
-                    </td>
-
-                    <td class="py-1 px-0.5 text-center font-mono-num font-bold text-alain-800 bg-sky-50/15 text-[11px]">
-                        ${calc.hasAllRuns ? calc.notePerf.toFixed(1) : '<span class="text-sky-300">-</span>'}
-                    </td>
-
-                    <td class="py-1 px-0.5 text-center font-mono-num font-bold text-sky-800 bg-sky-50/15 text-[11px]">
-                        ${(parseToSeconds(student.r1) > 0 && parseToSeconds(student.ar1) > 0) ? calc.noteProjet.toFixed(1) : '<span class="text-sky-300">-</span>'}
-                    </td>
-
-                    <td class="py-1 px-0.5 text-center font-mono-num font-bold text-teal-800 bg-sky-50/15 text-[11px]">
-                        ${calc.hasAllRuns ? calc.noteRegul.toFixed(1) : '<span class="text-sky-300">-</span>'}
-                    </td>
-
-                    <td class="py-1 px-1 text-center bg-sky-50/40 border-l border-sky-100">
-                        <div class="px-1.5 py-0.5 rounded-md font-mono-num text-xs ${noteClass}">
-                            ${calc.hasAllRuns ? calc.noteTotale.toFixed(1) : '--'}
-                        </div>
-                    </td>
-
-                    <td class="py-1 px-0.5 text-center no-print">
-                        <button onclick="deleteStudent('${student.id}')" title="Supprimer la ligne" class="p-0.5 text-sky-300 hover:text-rose-600 transition">
-                            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg>
-                        </button>
-                    </td>
-                `;
-                tbody.appendChild(tr);
-            });
-
-            const moyVal = countComplete > 0 ? (sumNotes / countComplete).toFixed(1) + '/20' : '-- /20';
-            document.getElementById('stat-moyenne-val').innerText = moyVal;
-        }
-
-        function handleKeyNav(e, inputEl) {
-            if (e.key === 'Enter' || e.key === 'ArrowDown') {
-                e.preventDefault();
-                inputEl.blur();
-                moveFocusVertical(inputEl, 1);
-            } else if (e.key === 'ArrowUp') {
-                e.preventDefault();
-                inputEl.blur();
-                moveFocusVertical(inputEl, -1);
-            }
-        }
-
-        function moveFocusVertical(currentInput, direction) {
-            const col = currentInput.getAttribute('data-col');
-            const allInputsInCol = Array.from(document.querySelectorAll(`input[data-col="${col}"]`));
-            const currentIndex = allInputsInCol.indexOf(currentInput);
-
-            if (currentIndex !== -1) {
-                const targetIndex = currentIndex + direction;
-                if (targetIndex >= 0 && targetIndex < allInputsInCol.length) {
-                    allInputsInCol[targetIndex].focus();
-                    allInputsInCol[targetIndex].select();
-                }
-            }
-        }
-
-        function onTimeBlur(inputEl, id, field) {
-            const raw = inputEl.value.trim();
-            const s = students.find(item => item.id === id);
-            if (!s) return;
-
-            if (raw === "") {
-                s[field] = "";
-            } else {
-                const sec = parseToSeconds(raw);
-                s[field] = sec > 0 ? formatDisplay(sec) : raw;
-                inputEl.value = s[field];
-            }
-
-            saveToStorage();
-            renderTable();
-        }
-
-        function updateField(id, field, val) {
-            const s = students.find(item => item.id === id);
-            if (s) {
-                s[field] = val;
-                saveToStorage();
-                renderTable();
-            }
-        }
-
-        function addRow() {
-            const newId = Date.now().toString();
-            students.push({
-                id: newId,
-                nom: '',
-                sexe: 'G',
-                modalite: 'COURSE_500',
-                ar1: '',
-                r1: '', r2: '', r3: ''
-            });
-            saveToStorage();
-            renderTable();
-
-            setTimeout(() => {
-                const newRow = document.getElementById(`row-${newId}`);
-                if (newRow) {
-                    const nameInput = newRow.querySelector('input[data-col="nom"]');
-                    if (nameInput) {
-                        nameInput.focus();
-                        newRow.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-                    }
-                }
-            }, 50);
-        }
-
-        function deleteStudent(id) {
-            const s = students.find(i => i.id === id);
-            const name = s ? (s.nom || "cet élève") : "cet élève";
-            if (confirm(`Supprimer ${name} ?`)) {
-                students = students.filter(item => item.id !== id);
-                saveToStorage();
-                renderTable();
-            }
-        }
-
-        function setFilter(type) {
-            currentFilter = type;
-            document.querySelectorAll('.filter-tab').forEach(btn => {
-                btn.className = "filter-tab px-3 py-1 rounded-full font-bold bg-sky-50 hover:bg-sky-100 text-alain-700 border border-sky-200 transition text-[11px] flex items-center gap-1";
-            });
-            const activeBtn = document.getElementById(`filter-btn-${type}`);
-            if (activeBtn) {
-                activeBtn.className = "filter-tab px-3 py-1 rounded-full font-bold bg-alain-800 text-white transition text-[11px] shadow-xs flex items-center gap-1";
-            }
-            renderTable();
-        }
-
-        function clearAllData() {
-            if (confirm("Supprimer tous les élèves et chronos enregistrés ?")) {
-                students = [];
-                saveToStorage();
-                renderTable();
-            }
-        }
-
-        function resetDemoData() {
-            if (confirm("Recharger les élèves exemples du Lycée Alain ?")) {
-                students = JSON.parse(JSON.stringify(DEMO_DATA));
-                saveToStorage();
-                renderTable();
-                showToast("Données d'exemples chargées");
-            }
-        }
-
-        function openImportModal() {
-            document.getElementById('importTextarea').value = "";
-            document.getElementById('modalImport').classList.remove('hidden');
-        }
-        function closeImportModal() {
-            document.getElementById('modalImport').classList.add('hidden');
-        }
-
-        function processImport() {
-            const rawText = document.getElementById('importTextarea').value;
-            const lines = rawText.split('\n');
-            let addedCount = 0;
-
-            lines.forEach((line, idx) => {
-                const cleaned = line.trim();
-                if (!cleaned) return;
-
-                let sexe = 'G';
-                let modalite = 'COURSE_500';
-                let nom = cleaned;
-
-                if (/\b(F|FILLE|FEMME)\b/i.test(cleaned)) sexe = 'F';
-                
-                if (/\b(MARCHE|M250|M\.250)\b/i.test(cleaned)) {
-                    modalite = 'MARCHE_250';
-                } else if (/\b(C250|C\.250|250M?|ADAPTE)\b/i.test(cleaned)) {
-                    modalite = 'COURSE_250';
-                } else {
-                    modalite = 'COURSE_500';
-                }
-
-                nom = nom.replace(/[\(;,\)]/g, ' ')
-                         .replace(/\b(F|G|FILLE|GARCON|COURSE|MARCHE|3x500|3x250|C250|M250|ADAPTE)\b/gi, '')
-                         .replace(/\s+/g, ' ')
-                         .trim();
-
-                if (nom.length > 0) {
-                    students.push({
-                        id: (Date.now() + idx).toString(),
-                        nom: nom.toUpperCase(),
-                        sexe: sexe,
-                        modalite: modalite,
-                        ar1: '',
-                        r1: '', r2: '', r3: ''
-                    });
-                    addedCount++;
-                }
-            });
-
-            closeImportModal();
-            saveToStorage();
-            renderTable();
-            showToast(`${addedCount} élève(s) importé(s)`);
-        }
-
-        function exportCSV() {
-            let csv = "Lycee;Annee;Nom;Sexe;Epreuve;Annonce_C1;Realise_C1;Realise_C2;Realise_C3;Cumul;Perf_10;Projet_6;Regul_4;Note_Finale_20\n";
-            students.forEach(s => {
-                const c = calculateStudent(s);
-                let labelEp = "Course 3x500m";
-                if (s.modalite === 'COURSE_250') labelEp = "Course 3x250m";
-                if (s.modalite === 'MARCHE_250') labelEp = "Marche 3x250m";
-
-                csv += `"Lycée Alain";"2026";"${s.nom}";"${s.sexe}";"${labelEp}";"${s.ar1}";"${s.r1}";"${s.r2}";"${s.r3}";"${c.hasAllRuns ? formatDisplay(c.totalSec) : ''}";"${c.hasAllRuns ? c.notePerf.toFixed(1) : ''}";"${c.hasAllRuns ? c.noteProjet.toFixed(1) : ''}";"${c.hasAllRuns ? c.noteRegul.toFixed(1) : ''}";"${c.hasAllRuns ? c.noteTotale.toFixed(1) : ''}"\n`;
-            });
-
-            const blob = new Blob(["\uFEFF" + csv], { type: 'text/csv;charset=utf-8;' });
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = `notes_bac_eps_lycee_alain_2026_${new Date().toISOString().slice(0, 10)}.csv`;
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-            URL.revokeObjectURL(url);
-            showToast("CSV exporté avec succès");
-        }
-
-        function openBaremeModal() {
-            document.getElementById('modalBareme').classList.remove('hidden');
-        }
-        function closeBaremeModal() {
-            document.getElementById('modalBareme').classList.add('hidden');
-        }
-
-        function showToast(msg) {
-            const toast = document.getElementById('toast');
-            document.getElementById('toastMsg').innerText = msg;
-            toast.classList.remove('hidden');
-            setTimeout(() => {
-                toast.classList.add('hidden');
-            }, 1800);
-        }
-
-        function escapeHtml(str) {
-            if (!str) return '';
-            return str.replace(/[&<>"']/g, function(m) {
-                return {
-                    '&': '&amp;',
-                    '<': '&lt;',
-                    '>': '&gt;',
-                    '"': '&quot;',
-                    "'": '&#039;'
-                }[m];
-            });
-        }
-    </script>
-</body>
-</html>
-```
+  </main>
+
+  <!-- ================= MODALE DES BARÈMES NATIONAUX (PALIERS 0,5 PT) ================= -->
+  <div id="baremes-modal" class="hidden fixed inset-0 bg-slate-900/60 backdrop-blur-2xs z-50 flex items-center justify-center p-3">
+    <div class="bg-white rounded-lg shadow-xl w-full max-w-4xl max-h-[92vh] flex flex-col border border-sky-300 overflow-hidden">
+      <div class="bg-sky-600 text-white px-4 py-2 flex items-center justify-between">
+        <div class="flex items-center gap-2">
+          <span class="font-bold text-sm">RÉFÉRENTIELS BACCALAURÉAT — PALIERS 0,5 PT</span>
+          <span class="bg-sky-700 text-sky-100 text-xs px-2 py-0.5 rounded font-mono">Lycée Alain 2026</span>
+        </div>
+        <button onclick="closeBaremesModal()" class="text-white hover:text-sky-200 text-lg font-bold">&times;</button>
+      </div>
+
+      <div class="p-3 overflow-y-auto space-y-3 text-xs">
+        <!-- 1. PERFORMANCE /10 -->
+        <div class="border border-sky-200 rounded p-2.5 bg-sky-50/30">
+          <h3 class="font-bold text-sky-900 text-xs mb-1.5 flex items-center gap-1.5">
+            <span class="bg-sky-600 text-white w-4 h-4 rounded-full flex items-center justify-center text-[10px]">1</span>
+            PERFORMANCE CUMULÉE (3 RÉPÉTITIONS) — NOTE SUR 10 POINTS (PAR ÉCHELONS DE 0,5 PT)
+          </h3>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-2 text-[11px]">
+            <!-- Course 500m -->
+            <div class="border border-sky-200 rounded bg-white p-2">
+              <div class="font-bold text-sky-800 border-b border-sky-200 pb-1 mb-1 flex justify-between">
+                <span>🏃 Course 3x500m (Standard)</span>
+              </div>
+              <div class="grid grid-cols-3 font-semibold text-slate-500 border-b border-slate-100 pb-0.5 mb-0.5">
+                <span>Note</span><span>Garçons</span><span>Filles</span>
+              </div>
+              <div class="h-44 overflow-y-auto space-y-0.5 font-mono text-[11px]" id="table-bareme-c500"></div>
+            </div>
+
+            <!-- Course 250m Adaptée -->
+            <div class="border border-emerald-200 rounded bg-white p-2">
+              <div class="font-bold text-emerald-800 border-b border-emerald-200 pb-1 mb-1 flex justify-between">
+                <span>⚡ Course 3x250m (Adaptée)</span>
+              </div>
+              <div class="grid grid-cols-3 font-semibold text-slate-500 border-b border-slate-100 pb-0.5 mb-0.5">
+                <span>Note</span><span>Garçons</span><span>Filles</span>
+              </div>
+              <div class="h-44 overflow-y-auto space-y-0.5 font-mono text-[11px]" id="table-bareme-c250"></div>
+            </div>
+
+            <!-- Marche 250m Adaptée -->
+            <div class="border border-amber-200 rounded bg-white p-2">
+              <div class="font-bold text-amber-800 border-b border-amber-200 pb-1 mb-1 flex justify-between">
+                <span>🚶 Marche 3x250m (Adaptée)</span>
+              </div>
+              <div class="grid grid-cols-3 font-semibold text-slate-500 border-b border-slate-100 pb-0.5 mb-0.5">
+                <span>Note</span><span>Garçons</span><span>Filles</span>
+              </div>
+              <div class="h-44 overflow-y-auto space-y-0.5 font-mono text-[11px]" id="table-bareme-m250"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2. PROJET & REGULARITE -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-2 text-xs">
+          <!-- Projet -->
+          <div class="border border-blue-200 bg-blue-50/40 rounded p-2">
+            <h3 class="font-bold text-blue-900 mb-1 flex items-center gap-1">
+              <span class="bg-blue-600 text-white w-4 h-4 rounded-full flex items-center justify-center text-[10px]">2</span>
+              PROJET D'ALLURE /6 (Écart Course 1)
+            </h3>
+            <p class="text-[11px] text-slate-600 mb-1.5">Différence absolue entre l'annonce et le réalisé sur la 1ère fraction (|Ann - C1|).</p>
+            <div class="grid grid-cols-6 text-center font-mono text-[11px] bg-white border border-blue-200 rounded p-1">
+              <div><b class="text-blue-700">6 pts</b><br>&le; 1s</div>
+              <div><b class="text-blue-700">5 pts</b><br>&le; 2s</div>
+              <div><b class="text-blue-700">4 pts</b><br>&le; 3s</div>
+              <div><b class="text-blue-700">3 pts</b><br>&le; 5s</div>
+              <div><b class="text-blue-700">2 pts</b><br>&le; 7s</div>
+              <div><b class="text-blue-700">1 pt</b><br>&le; 9s</div>
+            </div>
+          </div>
+
+          <!-- Régularité -->
+          <div class="border border-emerald-200 bg-emerald-50/40 rounded p-2">
+            <h3 class="font-bold text-emerald-900 mb-1 flex items-center gap-1">
+              <span class="bg-emerald-600 text-white w-4 h-4 rounded-full flex items-center justify-center text-[10px]">3</span>
+              RÉGULARITÉ /4 (Max - Min des 3 courses)
+            </h3>
+            <p class="text-[11px] text-slate-600 mb-1.5">Écart entre la répétition la plus rapide et la plus lente.</p>
+            <div class="grid grid-cols-5 text-center font-mono text-[11px] bg-white border border-emerald-200 rounded p-1">
+              <div><b class="text-emerald-700">4 pts</b><br>&le; 2s</div>
+              <div><b class="text-emerald-700">3 pts</b><br>&le; 4s</div>
+              <div><b class="text-emerald-700">2 pts</b><br>&le; 6s</div>
+              <div><b class="text-emerald-700">1 pt</b><br>&le; 8s</div>
+              <div><b class="text-slate-400">0 pt</b><br>&gt; 8s</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="bg-slate-100 px-4 py-2 border-t border-slate-200 flex justify-end">
+        <button onclick="closeBaremesModal()" class="bg-sky-600 hover:bg-sky-700 text-white px-3 py-1 rounded text-xs font-semibold">Fermer</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= MODALE IMPORT ================= -->
+  <div id="import-modal" class="hidden fixed inset-0 bg-slate-900/60 backdrop-blur-2xs z-50 flex items-center justify-center p-3">
+    <div class="bg-white rounded-lg shadow-xl w-full max-w-lg flex flex-col border border-sky-300 overflow-hidden">
+      <div class="bg-sky-700 text-white px-4 py-2 flex items-center justify-between">
+        <span class="font-bold text-xs uppercase tracking-wider">Importation rapide Pronote / Excel</span>
+        <button onclick="closeImportModal()" class="text-white text-base">&times;</button>
+      </div>
+      <div class="p-3 text-xs space-y-2">
+        <p class="text-slate-600 leading-tight">Collez ci-dessous votre liste d'élèves (un par ligne). Format supporté : <br><code class="bg-slate-100 text-sky-800 px-1 py-0.5 rounded">DUPONT Jean [F/G] [C500/C250/M250]</code></p>
+        <textarea id="import-text" rows="8" placeholder="DUPONT Alice F C500&#10;MARTIN Lucas G C500&#10;BERNARD Emma F M250" class="w-full border border-sky-200 rounded p-2 font-mono text-xs focus:ring-1 focus:ring-sky-500"></textarea>
+      </div>
+      <div class="bg-slate-50 px-3 py-2 border-t border-slate-200 flex justify-end gap-2">
+        <button onclick="closeImportModal()" class="px-2.5 py-1 text-slate-600 hover:bg-slate-200 rounded text-xs">Annuler</button>
+        <button onclick="processImport()" class="bg-sky-600 text-white px-3 py-1 rounded text-xs font-semibold hover:bg-sky-700">Ajouter à la liste</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // ================= DÉFINITION RIGOUREUSE DES BARÈMES PAR PALIERS 0,5 PT =================
+    // Format: [note, seuilMaxGarconSec, seuilMaxFilleSec]
+    const BAREME_C500 = [
+      [10.0, 255, 300], // G <= 4'15" | F <= 5'00"
+      [9.5,  260, 306],
+      [9.0,  265, 312],
+      [8.5,  270, 318],
+      [8.0,  275, 325],
+      [7.5,  281, 332],
+      [7.0,  287, 340],
+      [6.5,  294, 348],
+      [6.0,  301, 357],
+      [5.5,  309, 366],
+      [5.0,  317, 376],
+      [4.5,  326, 386],
+      [4.0,  335, 397],
+      [3.5,  345, 409],
+      [3.0,  356, 422],
+      [2.5,  368, 436],
+      [2.0,  381, 451],
+      [1.5,  395, 467],
+      [1.0,  410, 485],
+      [0.5,  430, 510]
+    ];
+
+    const BAREME_C250 = [
+      [10.0, 128, 150], // G <= 2'08" | F <= 2'30"
+      [9.5,  131, 153],
+      [9.0,  134, 157],
+      [8.5,  137, 161],
+      [8.0,  140, 165],
+      [7.5,  144, 170],
+      [7.0,  148, 175],
+      [6.5,  152, 180],
+      [6.0,  156, 186],
+      [5.5,  161, 192],
+      [5.0,  166, 198],
+      [4.5,  171, 204],
+      [4.0,  176, 211],
+      [3.5,  182, 218],
+      [3.0,  188, 226],
+      [2.5,  195, 235],
+      [2.0,  203, 245],
+      [1.5,  212, 256],
+      [1.0,  222, 268],
+      [0.5,  235, 282]
+    ];
+
+    const BAREME_M250 = [
+      [10.0, 285, 315], // G <= 4'45" | F <= 5'15"
+      [9.5,  292, 323],
+      [9.0,  300, 332],
+      [8.5,  308, 341],
+      [8.0,  317, 351],
+      [7.5,  326, 361],
+      [7.0,  336, 372],
+      [6.5,  346, 384],
+      [6.0,  357, 396],
+      [5.5,  368, 409],
+      [5.0,  380, 423],
+      [4.5,  393, 438],
+      [4.0,  407, 454],
+      [3.5,  422, 471],
+      [3.0,  438, 489],
+      [2.5,  455, 508],
+      [2.0,  473, 528],
+      [1.5,  492, 549],
+      [1.0,  512, 571],
+      [0.5,  535, 595]
+    ];
+
+    // ================= LISTE INITIALE DES ÉLÈVES (FICTIFS) =================
+    let students = [
+      { id: 1, name: "BERTRAND Lucas", gender: "G", event: "C500", ann1: "1'30\"", t1: "1'29\"", t2: "1'31\"", t3: "1'30\"" },
+      { id: 2, name: "MOREAU Camille", gender: "F", event: "C500", ann1: "1'50\"", t1: "1'52\"", t2: "1'54\"", t3: "1'53\"" },
+      { id: 3, name: "DUBOIS Thomas", gender: "G", event: "C500", ann1: "1'25\"", t1: "1'24\"", t2: "1'26\"", t3: 
