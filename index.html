@@ -1,10 +1,10 @@
-```html
+
 <!DOCTYPE html>
-<html lang="fr" class="h-full bg-slate-100">
+<html lang="fr" class="h-full bg-sky-50/50">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Grille d'Évaluation Bac EPS - 3x500m & 3x250m</title>
+    <title>Lycée Alain 2026 - Évaluation Bac EPS CA1</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -12,12 +12,18 @@
             theme: {
                 extend: {
                     colors: {
-                        eps: {
-                            50: '#f0f7ff',
-                            100: '#e0effe',
-                            600: '#1d4ed8',
-                            700: '#1e40af',
-                            900: '#0f172a'
+                        alain: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            200: '#bae6fd',
+                            300: '#7dd3fc',
+                            400: '#38bdf8',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            700: '#0369a1',
+                            800: '#075985',
+                            900: '#0c4a6e',
+                            950: '#082f49'
                         }
                     }
                 }
@@ -26,119 +32,201 @@
     </script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Inter', sans-serif; }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
         .font-mono-num { font-family: 'JetBrains Mono', monospace; }
         
-        /* Optimisation tablette & visibilité piste */
+        /* Focus dynamique adapté au plein air */
         input:focus, select:focus {
-            outline: 2px solid #2563eb !important;
+            outline: 2px solid #0284c7 !important;
             outline-offset: -1px;
-            background-color: #eff6ff !important;
+            background-color: #f0f9ff !important;
         }
 
-        /* Impression du bordereau officiel */
+        /* Impression propre format officiel Lycée Alain */
         @media print {
-            body { background: white !important; color: black !important; }
+            body { background: white !important; color: black !important; font-size: 10px !important; }
             .no-print { display: none !important; }
             .print-only { display: block !important; }
-            .shadow-sm, .shadow-md, .shadow-lg { box-shadow: none !important; }
-            table { font-size: 10px !important; border-collapse: collapse !important; width: 100% !important; }
-            th, td { border: 1px solid #94a3b8 !important; padding: 2px 3px !important; }
+            .shadow-sm, .shadow-md, .shadow-lg, .shadow-xs { box-shadow: none !important; }
+            table { width: 100% !important; border-collapse: collapse !important; }
+            th, td { border: 1px solid #cbd5e1 !important; padding: 3px 4px !important; }
             input, select { border: none !important; background: transparent !important; pointer-events: none; }
         }
     </style>
 </head>
-<body class="h-full flex flex-col text-slate-900 bg-slate-100 antialiased select-none text-xs">
+<body class="h-full flex flex-col text-slate-800 bg-sky-50/40 antialiased select-none text-xs">
 
-    <!-- En-tête compact terrain -->
-    <header class="bg-slate-950 text-white shadow-md border-b border-slate-800 sticky top-0 z-30 no-print">
-        <div class="w-full px-3 sm:px-5 h-12 flex items-center justify-between gap-2">
+    <!-- En-tête : Lycée Alain 2026 - Charte Bleu Ciel & Blanc -->
+    <header class="bg-gradient-to-r from-alain-900 via-alain-800 to-sky-700 text-white shadow-md border-b-2 border-sky-400/40 sticky top-0 z-30 no-print">
+        <div class="w-full px-3 sm:px-5 h-14 flex items-center justify-between gap-2">
             
-            <div class="flex items-center space-x-2">
-                <div class="w-7 h-7 rounded-lg bg-blue-600 flex items-center justify-center font-extrabold text-white text-sm shadow">
-                    ⏱️
+            <!-- Logo & Identité Lycée Alain 2026 -->
+            <div class="flex items-center space-x-2.5">
+                <div class="w-9 h-9 rounded-xl bg-white/10 backdrop-blur-md border border-white/25 flex items-center justify-center text-sky-200 shadow-inner">
+                    <!-- Icône SVG Coureur en foulée -->
+                    <svg class="w-5 h-5 text-white" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M13.5 5.5c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zM9.8 8.9L7 23h2.1l1.8-8 2.1 2v6h2v-7.5l-2.1-2 .6-3C14.8 12 16.8 13 19 13v-2c-1.9 0-3.5-1-4.3-2.4l-1-1.6c-.4-.6-1-1-1.7-1-.3 0-.5.1-.8.1L6 8.3V13h2V9.6l1.8-.7z"/>
+                    </svg>
                 </div>
-                <div>
-                    <h1 class="text-xs sm:text-sm font-extrabold tracking-tight text-white flex items-center gap-1.5">
-                        EPS Bac CA1 <span class="hidden md:inline font-normal text-slate-400">| Saisie Directe CCF</span>
-                    </h1>
+                <div class="flex flex-col">
+                    <div class="flex items-center gap-2">
+                        <span class="text-sm sm:text-base font-extrabold tracking-tight text-white drop-shadow-xs">LYCÉE ALAIN</span>
+                        <span class="px-1.5 py-0.2 rounded-md bg-sky-400/30 text-sky-200 border border-sky-300/40 text-[10px] font-bold tracking-wide">SESSION 2026</span>
+                    </div>
+                    <p class="text-[10px] sm:text-[11px] text-sky-100/90 font-medium tracking-normal flex items-center gap-1.5">
+                        <span>Baccalauréat EPS</span>
+                        <span class="text-sky-300">•</span>
+                        <span>CA1 Demi-Fond & Adapté</span>
+                    </p>
                 </div>
-                <div class="hidden xl:flex items-center gap-1.5 pl-2.5 border-l border-slate-800 text-[11px]">
-                    <span class="px-1.5 py-0.5 rounded bg-blue-950 border border-blue-800 text-blue-300 font-medium">🏃 Course 3x500m</span>
-                    <span class="px-1.5 py-0.5 rounded bg-emerald-950 border border-emerald-800 text-emerald-300 font-medium">⚡ Course 3x250m</span>
-                    <span class="px-1.5 py-0.5 rounded bg-amber-950 border border-amber-800 text-amber-300 font-medium">🚶 Marche 3x250m</span>
+                
+                <!-- Badges des 3 épreuves -->
+                <div class="hidden xl:flex items-center gap-1.5 pl-3 border-l border-white/15 text-[11px]">
+                    <span class="px-2 py-0.5 rounded-full bg-white/10 text-sky-100 border border-white/20 flex items-center gap-1">
+                        <svg class="w-3 h-3 text-sky-300" viewBox="0 0 24 24" fill="currentColor"><path d="M13.5 5.5c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zM9.8 8.9L7 23h2.1l1.8-8 2.1 2v6h2v-7.5l-2.1-2 .6-3C14.8 12 16.8 13 19 13v-2c-1.9 0-3.5-1-4.3-2.4l-1-1.6c-.4-.6-1-1-1.7-1-.3 0-.5.1-.8.1L6 8.3V13h2V9.6l1.8-.7z"/></svg>
+                        Course 3x500m
+                    </span>
+                    <span class="px-2 py-0.5 rounded-full bg-sky-400/20 text-sky-200 border border-sky-300/30 flex items-center gap-1">
+                        <svg class="w-3 h-3 text-sky-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+                        Course 3x250m
+                    </span>
+                    <span class="px-2 py-0.5 rounded-full bg-sky-300/15 text-sky-100 border border-sky-200/25 flex items-center gap-1">
+                        <svg class="w-3 h-3 text-sky-300" viewBox="0 0 24 24" fill="currentColor"><path d="M13.5 4a1.5 1.5 0 100-3 1.5 1.5 0 000 3zm-2.4 4.5l-2.6 13h2.1l1.6-8 2.3 2.5v5.5h2v-6.9l-2.1-2.3.8-3.8c1.3 1.5 3 2.5 5 2.5v-2c-1.7 0-3.2-.9-4-2.1l-1-1.5c-.3-.5-.9-.8-1.5-.8-.3 0-.6.1-.9.2l-4.7 2v5.4h2V8.9l1-0.4z"/></svg>
+                        Marche 3x250m
+                    </span>
                 </div>
             </div>
 
-            <!-- Actions Rapides -->
-            <div class="flex items-center gap-1 sm:gap-2">
-                <button onclick="addRow()" class="px-2.5 py-1 bg-blue-600 hover:bg-blue-500 text-white rounded-md text-xs font-semibold flex items-center gap-1 shadow-sm transition active:scale-95">
-                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 4v16m8-8H4"/></svg>
+            <!-- Boutons d'actions avec icônes stylées -->
+            <div class="flex items-center gap-1.5 sm:gap-2">
+                
+                <!-- Ajouter Élève -->
+                <button onclick="addRow()" class="px-2.5 py-1.5 bg-white text-alain-900 hover:bg-sky-50 rounded-lg text-xs font-bold flex items-center gap-1.5 shadow-sm transition active:scale-95">
+                    <svg class="w-3.5 h-3.5 text-alain-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 4v16m8-8H4"/></svg>
                     <span>+ Élève</span>
                 </button>
-                <button onclick="openImportModal()" class="px-2 py-1 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded-md text-xs font-semibold flex items-center gap-1 transition">
-                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"/></svg>
+                
+                <!-- Importer -->
+                <button onclick="openImportModal()" class="px-2.5 py-1.5 bg-alain-900/60 hover:bg-alain-900/90 text-white rounded-lg text-xs font-semibold flex items-center gap-1.5 border border-sky-400/30 transition">
+                    <svg class="w-3.5 h-3.5 text-sky-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"/></svg>
                     <span class="hidden sm:inline">Importer</span>
                 </button>
-                <button onclick="exportCSV()" class="px-2 py-1 bg-emerald-600 hover:bg-emerald-500 text-white rounded-md text-xs font-semibold flex items-center gap-1 shadow-sm transition">
-                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+
+                <!-- Export CSV -->
+                <button onclick="exportCSV()" class="px-2.5 py-1.5 bg-sky-500/80 hover:bg-sky-400 text-white rounded-lg text-xs font-semibold flex items-center gap-1.5 border border-sky-300/40 shadow-xs transition">
+                    <svg class="w-3.5 h-3.5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
                     <span>CSV</span>
                 </button>
-                <button onclick="window.print()" class="hidden md:flex px-2 py-1 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded-md text-xs font-semibold items-center gap-1 transition" title="Imprimer le bordereau">
-                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"/></svg>
+
+                <!-- Impression Bordereau -->
+                <button onclick="window.print()" class="hidden md:flex px-2.5 py-1.5 bg-alain-900/60 hover:bg-alain-900/90 text-sky-100 rounded-lg text-xs font-semibold items-center gap-1.5 border border-sky-400/30 transition" title="Imprimer le bordereau officiel Lycée Alain">
+                    <svg class="w-3.5 h-3.5 text-sky-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"/></svg>
                     <span>Imprimer</span>
                 </button>
-                <button onclick="openBaremeModal()" class="px-2 py-1 bg-slate-800 hover:bg-slate-700 text-amber-300 rounded-md text-xs font-semibold flex items-center gap-1 transition">
+
+                <!-- Barèmes 0,5 pt -->
+                <button onclick="openBaremeModal()" class="px-2.5 py-1.5 bg-sky-200 hover:bg-white text-alain-900 rounded-lg text-xs font-bold flex items-center gap-1.5 shadow-sm transition">
+                    <svg class="w-3.5 h-3.5 text-alain-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
                     <span>Barèmes (0,5 pt)</span>
                 </button>
             </div>
         </div>
     </header>
 
-    <!-- Zone supérieure : Filtres, stats & aide de saisie -->
-    <div class="bg-white border-b border-slate-200 px-3 py-1.5 no-print shadow-xs">
-        <div class="w-full flex flex-wrap items-center justify-between gap-2">
+    <!-- Barre d'outils secondaire : Filtres, astuce de saisie & Moyenne classe -->
+    <div class="bg-white border-b border-sky-100 px-3 sm:px-5 py-2 no-print shadow-xs">
+        <div class="w-full flex flex-wrap items-center justify-between gap-2.5">
             
-            <!-- Filtres de vue avec les 3 modalités -->
-            <div class="flex items-center gap-1 flex-wrap">
-                <button onclick="setFilter('ALL')" id="filter-btn-ALL" class="filter-tab px-2.5 py-0.5 rounded-full font-semibold bg-slate-900 text-white transition text-[11px]">Tous (<span id="count-all">0</span>)</button>
-                <button onclick="setFilter('COURSE_500')" id="filter-btn-COURSE_500" class="filter-tab px-2.5 py-0.5 rounded-full font-semibold bg-slate-100 hover:bg-slate-200 text-slate-700 transition text-[11px]">🏃 3x500m (<span id="count-course500">0</span>)</button>
-                <button onclick="setFilter('COURSE_250')" id="filter-btn-COURSE_250" class="filter-tab px-2.5 py-0.5 rounded-full font-semibold bg-slate-100 hover:bg-slate-200 text-emerald-700 transition text-[11px]">⚡ C. 250m (<span id="count-course250">0</span>)</button>
-                <button onclick="setFilter('MARCHE_250')" id="filter-btn-MARCHE_250" class="filter-tab px-2.5 py-0.5 rounded-full font-semibold bg-slate-100 hover:bg-slate-200 text-amber-700 transition text-[11px]">🚶 M. 250m (<span id="count-marche250">0</span>)</button>
-                <button onclick="setFilter('PENDING')" id="filter-btn-PENDING" class="filter-tab px-2.5 py-0.5 rounded-full font-semibold bg-slate-100 hover:bg-slate-200 text-rose-700 transition text-[11px]">⏳ À noter (<span id="count-pending">0</span>)</button>
+            <!-- Filtres de vue -->
+            <div class="flex items-center gap-1.5 flex-wrap">
+                <span class="text-[11px] font-bold text-slate-400 uppercase tracking-wider mr-1">Affichage :</span>
                 
+                <button onclick="setFilter('ALL')" id="filter-btn-ALL" class="filter-tab px-3 py-1 rounded-full font-bold bg-alain-800 text-white transition text-[11px] shadow-xs flex items-center gap-1">
+                    <span>Tous</span>
+                    <span id="count-all" class="px-1.5 py-0.2 text-[10px] rounded-full bg-white/20">0</span>
+                </button>
+
+                <button onclick="setFilter('COURSE_500')" id="filter-btn-COURSE_500" class="filter-tab px-3 py-1 rounded-full font-bold bg-sky-50 hover:bg-sky-100 text-alain-700 border border-sky-200 transition text-[11px] flex items-center gap-1">
+                    <svg class="w-3 h-3 text-alain-600" viewBox="0 0 24 24" fill="currentColor"><path d="M13.5 5.5c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zM9.8 8.9L7 23h2.1l1.8-8 2.1 2v6h2v-7.5l-2.1-2 .6-3C14.8 12 16.8 13 19 13v-2c-1.9 0-3.5-1-4.3-2.4l-1-1.6c-.4-.6-1-1-1.7-1-.3 0-.5.1-.8.1L6 8.3V13h2V9.6l1.8-.7z"/></svg>
+                    <span>3x500m</span>
+                    <span id="count-course500" class="px-1.5 py-0.2 text-[10px] rounded-full bg-sky-200/70 text-alain-800">0</span>
+                </button>
+
+                <button onclick="setFilter('COURSE_250')" id="filter-btn-COURSE_250" class="filter-tab px-3 py-1 rounded-full font-bold bg-sky-50 hover:bg-sky-100 text-sky-800 border border-sky-200 transition text-[11px] flex items-center gap-1">
+                    <svg class="w-3 h-3 text-sky-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+                    <span>C. 250m</span>
+                    <span id="count-course250" class="px-1.5 py-0.2 text-[10px] rounded-full bg-sky-200/70 text-sky-900">0</span>
+                </button>
+
+                <button onclick="setFilter('MARCHE_250')" id="filter-btn-MARCHE_250" class="filter-tab px-3 py-1 rounded-full font-bold bg-sky-50 hover:bg-sky-100 text-teal-800 border border-teal-200 transition text-[11px] flex items-center gap-1">
+                    <svg class="w-3 h-3 text-teal-600" viewBox="0 0 24 24" fill="currentColor"><path d="M13.5 4a1.5 1.5 0 100-3 1.5 1.5 0 000 3zm-2.4 4.5l-2.6 13h2.1l1.6-8 2.3 2.5v5.5h2v-6.9l-2.1-2.3.8-3.8c1.3 1.5 3 2.5 5 2.5v-2c-1.7 0-3.2-.9-4-2.1l-1-1.5c-.3-.5-.9-.8-1.5-.8-.3 0-.6.1-.9.2l-4.7 2v5.4h2V8.9l1-0.4z"/></svg>
+                    <span>M. 250m</span>
+                    <span id="count-marche250" class="px-1.5 py-0.2 text-[10px] rounded-full bg-teal-200/70 text-teal-900">0</span>
+                </button>
+
+                <button onclick="setFilter('PENDING')" id="filter-btn-PENDING" class="filter-tab px-3 py-1 rounded-full font-bold bg-sky-50 hover:bg-sky-100 text-rose-700 border border-rose-200 transition text-[11px] flex items-center gap-1">
+                    <svg class="w-3 h-3 text-rose-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                    <span>À noter</span>
+                    <span id="count-pending" class="px-1.5 py-0.2 text-[10px] rounded-full bg-rose-200/70 text-rose-800">0</span>
+                </button>
+
+                <!-- Recherche élève -->
                 <div class="relative ml-1">
-                    <input type="text" id="searchInput" oninput="renderTable()" placeholder="Rechercher..." class="w-24 sm:w-32 pl-6 pr-1.5 py-0.5 text-xs rounded border border-slate-300 focus:outline-none">
-                    <svg class="w-3 h-3 text-slate-400 absolute left-1.5 top-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+                    <input type="text" id="searchInput" oninput="renderTable()" placeholder="Rechercher élève..." class="w-28 sm:w-36 pl-7 pr-2 py-1 text-xs rounded-lg border border-sky-200 bg-sky-50/50 focus:bg-white focus:outline-none transition">
+                    <svg class="w-3.5 h-3.5 text-sky-500 absolute left-2 top-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
                 </div>
             </div>
 
-            <!-- Indicateurs & astuce de saisie -->
-            <div class="flex items-center gap-2 text-xs ml-auto">
-                <div class="hidden lg:inline-flex items-center gap-1 bg-amber-50 border border-amber-200 text-amber-900 px-2 py-0.5 rounded text-[11px]">
-                    <span class="font-bold">Saisie :</span> taper <code class="font-mono bg-white px-1 border rounded font-bold text-blue-700">142</code> $\rightarrow$ <span class="font-mono font-bold">1'42"</span> | <code class="font-mono bg-white px-1 border rounded font-bold text-blue-700">48</code> $\rightarrow$ <span class="font-mono font-bold">48"</span>
+            <!-- Aide saisie + Moyenne globale de la classe -->
+            <div class="flex items-center gap-2.5 text-xs ml-auto">
+                
+                <!-- Astuce Saisie directe -->
+                <div class="hidden lg:flex items-center gap-1.5 bg-sky-50 border border-sky-200 text-alain-900 px-2.5 py-1 rounded-lg text-[11px]">
+                    <span class="font-bold text-alain-700">Pavé numérique :</span>
+                    <span>taper</span>
+                    <code class="font-mono bg-white px-1.5 py-0.2 border border-sky-300 rounded font-bold text-alain-800">142</code>
+                    <span>$\rightarrow$</span>
+                    <span class="font-mono font-bold text-alain-900">1'42"</span>
+                    <span class="text-sky-300">|</span>
+                    <code class="font-mono bg-white px-1.5 py-0.2 border border-sky-300 rounded font-bold text-alain-800">48</code>
+                    <span>$\rightarrow$</span>
+                    <span class="font-mono font-bold text-alain-900">48"</span>
                 </div>
-                <div class="bg-blue-50 text-blue-900 border border-blue-200 font-bold px-2 py-0.5 rounded text-[11px] flex items-center gap-1.5">
-                    <span>Moyenne :</span>
-                    <span id="stat-moyenne-val" class="font-mono-num text-blue-700">-- /20</span>
+
+                <!-- Moyenne -->
+                <div class="bg-gradient-to-r from-sky-50 to-sky-100 text-alain-900 border border-sky-300 font-bold px-3 py-1 rounded-lg text-xs flex items-center gap-1.5 shadow-2xs">
+                    <span class="text-alain-700 flex items-center gap-1">
+                        <svg class="w-3.5 h-3.5 text-sky-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+                        Moyenne :
+                    </span>
+                    <span id="stat-moyenne-val" class="font-mono-num font-extrabold text-alain-900 text-sm">-- /20</span>
                 </div>
-                <button onclick="resetDemoData()" class="text-slate-400 hover:text-slate-700 text-[11px] underline" title="Charger exemples">Exemples</button>
-                <button onclick="clearAllData()" class="text-rose-500 hover:text-rose-700 text-[11px] underline" title="Tout effacer">Vider</button>
+
+                <button onclick="resetDemoData()" class="text-sky-700 hover:text-sky-900 text-[11px] underline font-medium">Exemples</button>
+                <button onclick="clearAllData()" class="text-rose-500 hover:text-rose-700 text-[11px] underline font-medium">Vider</button>
             </div>
         </div>
     </div>
 
-    <!-- En-tête uniquement visible à l'impression -->
-    <div class="hidden print-only p-3">
-        <h2 class="text-base font-bold text-center">Bordereau CCF Baccalauréat EPS - CA1 Demi-Fond / Épreuve Adaptée</h2>
-        <p class="text-center text-[10px] text-slate-600">3x500m Course | 3x250m Course Adaptée | 3x250m Marche Adaptée — Perf /10 (Cumul 3 courses au palier de 0,5 pt), Projet /6 (Écart Annonce C1), Régularité /4 (Max - Min)</p>
+    <!-- En-tête uniquement visible à l'impression officiel -->
+    <div class="hidden print-only p-4 bg-white border-b-2 border-slate-900 mb-2">
+        <div class="flex justify-between items-center">
+            <div>
+                <h1 class="text-base font-extrabold uppercase tracking-tight text-slate-900">LYCÉE ALAIN — SESSION 2026</h1>
+                <p class="text-xs font-semibold text-slate-700">Bordereau Officiel de Notation CCF Baccalauréat EPS — Champ d'Apprentissage 1 (Demi-Fond)</p>
+            </div>
+            <div class="text-right text-[10px] text-slate-500">
+                <p>Épreuves : 3x500m Course | 3x250m Course Adaptée | 3x250m Marche Adaptée</p>
+                <p>Performance cumulée /10 (palier 0,5 pt) • Projet /6 (Annonce C1) • Régularité /4 (Max - Min)</p>
+            </div>
+        </div>
     </div>
 
-    <!-- ZONE TABLE DE SAISIE LIVE (COMPACTE POUR VOIR TOUT D'UN SEUL COUP) -->
-    <main class="flex-1 overflow-auto p-1.5 sm:p-2.5">
-        <div class="w-full bg-white rounded-lg shadow-xs border border-slate-300 overflow-hidden">
+    <!-- TABLEAU PRINCIPAL DE SAISIE LIVE (TOUTES COLONNES VISIBLES) -->
+    <main class="flex-1 overflow-auto p-2 sm:p-3">
+        <div class="w-full bg-white rounded-xl shadow-xs border border-sky-200 overflow-hidden">
             <div class="w-full overflow-x-auto">
                 <table class="w-full border-collapse text-left text-xs table-fixed min-w-[780px] sm:min-w-0" id="mainEvaluationTable">
                     
@@ -146,12 +234,12 @@
                     <colgroup>
                         <col class="w-7">               <!-- # -->
                         <col class="w-36 sm:w-44">       <!-- Nom Prénom -->
-                        <col class="w-10">              <!-- Sexe -->
-                        <col class="w-28 sm:w-32">       <!-- Épreuve (3 modalités) -->
-                        <col class="w-16 sm:w-20">       <!-- Annonce C1 -->
-                        <col class="w-16 sm:w-20">       <!-- Réalisé C1 -->
-                        <col class="w-16 sm:w-20">       <!-- Réalisé C2 -->
-                        <col class="w-16 sm:w-20">       <!-- Réalisé C3 -->
+                        <col class="w-10">              <!-- S -->
+                        <col class="w-28 sm:w-32">       <!-- Épreuve (3 options) -->
+                        <col class="w-16 sm:w-20">       <!-- Ann. C1 -->
+                        <col class="w-16 sm:w-20">       <!-- C1 -->
+                        <col class="w-16 sm:w-20">       <!-- C2 -->
+                        <col class="w-16 sm:w-20">       <!-- C3 -->
                         <col class="w-16 sm:w-20">       <!-- Cumul -->
                         <col class="w-11 sm:w-14">       <!-- Perf /10 -->
                         <col class="w-11 sm:w-14">       <!-- Projet /6 -->
@@ -160,134 +248,178 @@
                         <col class="w-7 no-print">      <!-- Suppr -->
                     </colgroup>
 
-                    <!-- En-tête de colonnes -->
+                    <!-- En-tête du tableau -->
                     <thead>
-                        <tr class="bg-slate-900 text-slate-200 border-b border-slate-800 text-[10px] sm:text-[11px] font-semibold tracking-tight uppercase select-none">
-                            <th class="py-2 px-1 text-center">#</th>
-                            <th class="py-2 px-2">Élève</th>
-                            <th class="py-2 px-0.5 text-center">S</th>
-                            <th class="py-2 px-1">Épreuve</th>
+                        <tr class="bg-gradient-to-r from-alain-900 via-alain-800 to-sky-800 text-white border-b border-sky-300/40 text-[10px] sm:text-[11px] font-semibold tracking-tight uppercase select-none">
+                            <th class="py-2.5 px-1 text-center text-sky-200">#</th>
+                            <th class="py-2.5 px-2">Élève</th>
+                            <th class="py-2.5 px-0.5 text-center" title="Genre (Garçon / Fille)">S</th>
+                            <th class="py-2.5 px-1">Épreuve</th>
                             
-                            <!-- Annonce unique pour la 1ère course -->
-                            <th class="py-2 px-1 text-center bg-indigo-950 text-indigo-200 border-l border-indigo-900/60" title="Temps annoncé uniquement pour la 1ère répétition">
-                                Ann. C1
+                            <!-- Annonce C1 -->
+                            <th class="py-2.5 px-1 text-center bg-sky-950/80 text-sky-200 border-l border-sky-700/60" title="Temps annoncé uniquement sur la 1ère course">
+                                <span class="flex items-center justify-center gap-1">
+                                    <svg class="w-3 h-3 text-sky-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"/></svg>
+                                    Ann. C1
+                                </span>
                             </th>
                             
-                            <!-- 3 Réalisés (Chronos de course) -->
-                            <th class="py-2 px-1 text-center bg-blue-950 text-blue-200 border-l border-blue-900/60" title="1er temps réalisé">⏱️ C1</th>
-                            <th class="py-2 px-1 text-center bg-blue-950 text-blue-200" title="2e temps réalisé">⏱️ C2</th>
-                            <th class="py-2 px-1 text-center bg-blue-950 text-blue-200" title="3e temps réalisé">⏱️ C3</th>
+                            <!-- 3 Réalisés C1, C2, C3 -->
+                            <th class="py-2.5 px-1 text-center bg-alain-950 text-white border-l border-sky-600/50" title="1er temps réalisé">
+                                <span class="flex items-center justify-center gap-0.5">
+                                    <svg class="w-3 h-3 text-sky-400" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm0 18c-4.4 0-8-3.6-8-8s3.6-8 8-8 8 3.6 8 8-3.6 8-8 8zm.5-13H11v6l5.2 3.1.8-1.3-4.5-2.7V7z"/></svg>
+                                    C1
+                                </span>
+                            </th>
+                            <th class="py-2.5 px-1 text-center bg-alain-950 text-white" title="2e temps réalisé">
+                                <span class="flex items-center justify-center gap-0.5">
+                                    <svg class="w-3 h-3 text-sky-400" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm0 18c-4.4 0-8-3.6-8-8s3.6-8 8-8 8 3.6 8 8-3.6 8-8 8zm.5-13H11v6l5.2 3.1.8-1.3-4.5-2.7V7z"/></svg>
+                                    C2
+                                </span>
+                            </th>
+                            <th class="py-2.5 px-1 text-center bg-alain-950 text-white" title="3e temps réalisé">
+                                <span class="flex items-center justify-center gap-0.5">
+                                    <svg class="w-3 h-3 text-sky-400" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm0 18c-4.4 0-8-3.6-8-8s3.6-8 8-8 8 3.6 8 8-3.6 8-8 8zm.5-13H11v6l5.2 3.1.8-1.3-4.5-2.7V7z"/></svg>
+                                    C3
+                                </span>
+                            </th>
                             
                             <!-- Totaux & Notes -->
-                            <th class="py-2 px-1 text-center bg-slate-900 text-slate-200 border-l border-slate-800">Cumul</th>
-                            <th class="py-2 px-0.5 text-center bg-slate-800 text-blue-300" title="Performance cumulée /10">Perf<br><span class="text-[9px] font-normal">/10</span></th>
-                            <th class="py-2 px-0.5 text-center bg-slate-800 text-indigo-300" title="Projet d'allure sur la 1ère course /6">Projet<br><span class="text-[9px] font-normal">/6</span></th>
-                            <th class="py-2 px-0.5 text-center bg-slate-800 text-amber-300" title="Régularité d'allure (Max - Min) /4">Régul<br><span class="text-[9px] font-normal">/4</span></th>
-                            <th class="py-2 px-1 text-center bg-slate-950 text-white font-bold text-[11px]">NOTE /20</th>
-                            <th class="py-2 px-0.5 text-center no-print"></th>
+                            <th class="py-2.5 px-1 text-center bg-sky-900 text-sky-100 border-l border-sky-700/60">
+                                <span class="flex items-center justify-center gap-1">
+                                    <svg class="w-3 h-3 text-sky-300" viewBox="0 0 24 24" fill="currentColor"><path d="M14.4 6L14 4H5v17h2v-7h5.6l.4 2h7V6h-5.6z"/></svg>
+                                    Cumul
+                                </span>
+                            </th>
+                            <th class="py-2.5 px-0.5 text-center bg-sky-900/90 text-sky-200" title="Performance cumulée /10 (paliers 0,5 pt)">Perf<br><span class="text-[9px] font-normal text-sky-300">/10</span></th>
+                            <th class="py-2.5 px-0.5 text-center bg-sky-900/90 text-sky-200" title="Projet d'allure sur la 1ère course /6">Projet<br><span class="text-[9px] font-normal text-sky-300">/6</span></th>
+                            <th class="py-2.5 px-0.5 text-center bg-sky-900/90 text-sky-200" title="Régularité (Max - Min) /4">Régul<br><span class="text-[9px] font-normal text-sky-300">/4</span></th>
+                            <th class="py-2.5 px-1 text-center bg-alain-950 text-white font-extrabold text-[11px] border-l border-sky-800">NOTE /20</th>
+                            <th class="py-2.5 px-0.5 text-center no-print"></th>
                         </tr>
                     </thead>
 
-                    <!-- Lignes des élèves -->
-                    <tbody id="tableBody" class="divide-y divide-slate-200 font-medium">
-                        <!-- Injection dynamique JS -->
+                    <!-- Lignes injectées par le script JS -->
+                    <tbody id="tableBody" class="divide-y divide-sky-100 font-medium bg-white">
                     </tbody>
                 </table>
             </div>
 
-            <!-- Message vide -->
-            <div id="noDataMessage" class="hidden p-6 text-center text-slate-500">
-                <p class="text-xs">Aucun élève trouvé. Cliquez sur <button onclick="addRow()" class="text-blue-600 font-semibold underline">Ajouter un élève</button> ou sur <button onclick="resetDemoData()" class="text-blue-600 font-semibold underline">Charger les exemples</button>.</p>
+            <!-- Message si aucune donnée -->
+            <div id="noDataMessage" class="hidden p-8 text-center text-slate-500 bg-sky-50/20">
+                <svg class="w-8 h-8 text-sky-300 mx-auto mb-2" viewBox="0 0 24 24" fill="currentColor"><path d="M13.5 5.5c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zM9.8 8.9L7 23h2.1l1.8-8 2.1 2v6h2v-7.5l-2.1-2 .6-3C14.8 12 16.8 13 19 13v-2c-1.9 0-3.5-1-4.3-2.4l-1-1.6c-.4-.6-1-1-1.7-1-.3 0-.5.1-.8.1L6 8.3V13h2V9.6l1.8-.7z"/></svg>
+                <p class="text-xs font-semibold text-slate-600">Aucun élève affiché pour ce filtre.</p>
+                <p class="text-[11px] text-slate-400 mt-1">Ajoutez un élève ou chargez les exemples.</p>
             </div>
         </div>
     </main>
 
-    <!-- Notification toast -->
-    <div id="toast" class="hidden fixed bottom-3 right-3 z-50 px-2.5 py-1.5 rounded-lg bg-slate-900 text-white text-xs font-semibold shadow-lg border border-slate-700 flex items-center gap-2">
-        <span class="text-emerald-400">✓</span>
+    <!-- Notification Toast -->
+    <div id="toast" class="hidden fixed bottom-4 right-4 z-50 px-3 py-2 rounded-xl bg-alain-900 text-white text-xs font-semibold shadow-xl border border-sky-400/40 flex items-center gap-2 transition">
+        <svg class="w-4 h-4 text-sky-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
         <span id="toastMsg">Sauvegardé</span>
     </div>
 
-    <!-- MODALE : Barèmes Officiels CCF -->
-    <div id="modalBareme" class="fixed inset-0 z-50 hidden overflow-y-auto bg-slate-950/70 backdrop-blur-xs flex items-center justify-center p-3 no-print">
-        <div class="bg-white rounded-2xl max-w-5xl w-full shadow-2xl border border-slate-300 overflow-hidden max-h-[92vh] flex flex-col">
-            <div class="px-4 py-3 bg-slate-900 text-white flex justify-between items-center">
-                <div class="flex items-center gap-2">
-                    <span class="text-base">📋</span>
-                    <h3 class="text-sm font-bold">Barèmes Nationaux CCF Baccalauréat EPS - Paliers de 0,5 point</h3>
+    <!-- MODALE : Barèmes Officiels CCF Lycée Alain 2026 (Paliers 0,5 pt) -->
+    <div id="modalBareme" class="fixed inset-0 z-50 hidden overflow-y-auto bg-alain-950/70 backdrop-blur-xs flex items-center justify-center p-3 sm:p-4 no-print">
+        <div class="bg-white rounded-2xl max-w-5xl w-full shadow-2xl border border-sky-200 overflow-hidden max-h-[92vh] flex flex-col">
+            
+            <div class="px-5 py-3.5 bg-gradient-to-r from-alain-900 to-sky-800 text-white flex justify-between items-center">
+                <div class="flex items-center gap-2.5">
+                    <div class="w-7 h-7 rounded-lg bg-sky-400/20 border border-sky-300/30 flex items-center justify-center text-sky-200">
+                        <svg class="w-4 h-4 text-sky-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+                    </div>
+                    <div>
+                        <h3 class="text-sm font-extrabold tracking-tight">Barèmes CCF Baccalauréat EPS — Paliers de 0,5 point</h3>
+                        <p class="text-[10px] text-sky-200">Lycée Alain 2026 • Performance /10, Projet /6, Régularité /4</p>
+                    </div>
                 </div>
-                <button onclick="closeBaremeModal()" class="text-slate-400 hover:text-white text-lg p-1">✕</button>
+                <button onclick="closeBaremeModal()" class="w-7 h-7 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition">✕</button>
             </div>
             
-            <div class="p-4 sm:p-5 overflow-y-auto space-y-4 text-xs text-slate-700">
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-2.5">
-                    <div class="p-2.5 bg-blue-50 border border-blue-200 rounded-lg">
-                        <span class="font-bold text-blue-900 block text-xs">1. Performance (/10 pts)</span>
-                        <p class="text-blue-800 text-[11px] mt-0.5">Temps cumulé sur les 3 répétitions, gradué rigoureusement par <b>paliers de 0,5 pt</b> (de 10 à 0,5) selon l'épreuve et le sexe.</p>
+            <div class="p-4 sm:p-5 overflow-y-auto space-y-4 text-xs text-slate-700 bg-sky-50/20">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+                    <div class="p-3 bg-white border border-sky-200 rounded-xl shadow-2xs">
+                        <span class="font-extrabold text-alain-800 block text-xs flex items-center gap-1.5 mb-1">
+                            <svg class="w-3.5 h-3.5 text-sky-600" viewBox="0 0 24 24" fill="currentColor"><path d="M14.4 6L14 4H5v17h2v-7h5.6l.4 2h7V6h-5.6z"/></svg>
+                            1. Performance (/10 pts)
+                        </span>
+                        <p class="text-slate-600 text-[11px] leading-relaxed">Temps cumulé sur les 3 répétitions, gradué rigoureusement par <b>paliers nets de 0,5 pt</b> (de 10,0 à 0,5 pt) selon la modalité et le sexe.</p>
                     </div>
-                    <div class="p-2.5 bg-indigo-50 border border-indigo-200 rounded-lg">
-                        <span class="font-bold text-indigo-900 block text-xs">2. Projet Course 1 (/6 pts)</span>
-                        <p class="text-indigo-800 text-[11px] mt-0.5">Écart entre Annonce et Course 1 :<br>
-                        ≤ 1s : 6 pts | ≤ 2s : 5 pts | ≤ 3s : 4 pts<br>
-                        ≤ 5s : 3 pts | ≤ 7s : 2 pts | ≤ 9s : 1 pt | &gt; 9s : 0 pt.</p>
+
+                    <div class="p-3 bg-white border border-sky-200 rounded-xl shadow-2xs">
+                        <span class="font-extrabold text-alain-800 block text-xs flex items-center gap-1.5 mb-1">
+                            <svg class="w-3.5 h-3.5 text-sky-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"/></svg>
+                            2. Projet Course 1 (/6 pts)
+                        </span>
+                        <p class="text-slate-600 text-[11px] leading-relaxed">Écart entre Annonce et Course 1 :<br>
+                        <b>≤ 1s</b> : 6 pts | <b>≤ 2s</b> : 5 pts | <b>≤ 3s</b> : 4 pts<br>
+                        <b>≤ 5s</b> : 3 pts | <b>≤ 7s</b> : 2 pts | <b>≤ 9s</b> : 1 pt | <b>&gt; 9s</b> : 0 pt.</p>
                     </div>
-                    <div class="p-2.5 bg-amber-50 border border-amber-200 rounded-lg">
-                        <span class="font-bold text-amber-900 block text-xs">3. Régularité (/4 pts)</span>
-                        <p class="text-amber-800 text-[11px] mt-0.5">Écart entre répétition la plus rapide et la plus lente (Max - Min) :<br>
-                        ≤ 2s : 4 pts | ≤ 4s : 3 pts | ≤ 7s : 2 pts | ≤ 10s : 1 pt.</p>
+
+                    <div class="p-3 bg-white border border-sky-200 rounded-xl shadow-2xs">
+                        <span class="font-extrabold text-alain-800 block text-xs flex items-center gap-1.5 mb-1">
+                            <svg class="w-3.5 h-3.5 text-sky-600" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm0 18c-4.4 0-8-3.6-8-8s3.6-8 8-8 8 3.6 8 8-3.6 8-8 8zm.5-13H11v6l5.2 3.1.8-1.3-4.5-2.7V7z"/></svg>
+                            3. Régularité (/4 pts)
+                        </span>
+                        <p class="text-slate-600 text-[11px] leading-relaxed">Écart entre la répétition la plus rapide et la plus lente ($T_{\max} - T_{\min}$) :<br>
+                        <b>≤ 2s</b> : 4 pts | <b>≤ 4s</b> : 3 pts | <b>≤ 7s</b> : 2 pts | <b>≤ 10s</b> : 1 pt.</p>
                     </div>
                 </div>
 
-                <!-- Grilles cumulées sur les 3 épreuves à 0,5 pt près -->
+                <!-- 3 Grilles complètes à 0,5 pt -->
                 <div>
-                    <h4 class="font-bold text-slate-900 mb-2 text-[11px] uppercase tracking-wider flex items-center justify-between">
-                        <span>Grilles de performance cumulée (Paliers de 0,5 pt)</span>
-                        <span class="text-slate-500 font-normal text-[10px]">Temps maximum pour obtenir la note</span>
+                    <h4 class="font-extrabold text-alain-900 mb-2.5 text-[11px] uppercase tracking-wider flex items-center justify-between">
+                        <span>Paliers de performance cumulée (Temps maximum pour chaque note)</span>
+                        <span class="text-sky-700 font-semibold text-[10px] bg-sky-100 px-2 py-0.5 rounded-full">Interpolation discrète 0,5 pt</span>
                     </h4>
                     
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-3 font-mono-num text-[11px]">
                         
                         <!-- 1. Course 3x500m -->
-                        <div class="border border-slate-300 rounded-lg overflow-hidden shadow-xs flex flex-col">
-                            <div class="bg-blue-600 text-white font-bold px-2 py-1 text-[11px] uppercase tracking-wide text-center">
-                                🏃 Course 3 x 500m
+                        <div class="bg-white border border-sky-200 rounded-xl overflow-hidden shadow-2xs flex flex-col">
+                            <div class="bg-alain-700 text-white font-extrabold px-3 py-1.5 text-[11px] uppercase tracking-wide text-center flex items-center justify-center gap-1.5">
+                                <svg class="w-3.5 h-3.5 text-sky-300" viewBox="0 0 24 24" fill="currentColor"><path d="M13.5 5.5c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zM9.8 8.9L7 23h2.1l1.8-8 2.1 2v6h2v-7.5l-2.1-2 .6-3C14.8 12 16.8 13 19 13v-2c-1.9 0-3.5-1-4.3-2.4l-1-1.6c-.4-.6-1-1-1.7-1-.3 0-.5.1-.8.1L6 8.3V13h2V9.6l1.8-.7z"/></svg>
+                                Course 3 x 500m
                             </div>
-                            <div class="max-h-80 overflow-y-auto">
-                                <table class="w-full text-center divide-y divide-slate-200">
-                                    <thead class="bg-slate-100 font-bold text-slate-700 sticky top-0 shadow-xs">
+                            <div class="max-h-72 overflow-y-auto">
+                                <table class="w-full text-center divide-y divide-sky-100">
+                                    <thead class="bg-sky-50 font-bold text-alain-900 sticky top-0 shadow-2xs">
                                         <tr><th class="py-1 px-1">Note</th><th class="py-1 px-1">Garçons</th><th class="py-1 px-1">Filles</th></tr>
                                     </thead>
-                                    <tbody id="baremeTable-500" class="divide-y divide-slate-100 text-[10.5px]"></tbody>
+                                    <tbody id="baremeTable-500" class="divide-y divide-sky-50 text-[10.5px]"></tbody>
                                 </table>
                             </div>
                         </div>
 
-                        <!-- 2. Course 3x250m (Adaptée) -->
-                        <div class="border border-emerald-300 rounded-lg overflow-hidden shadow-xs flex flex-col">
-                            <div class="bg-emerald-600 text-white font-bold px-2 py-1 text-[11px] uppercase tracking-wide text-center">
-                                ⚡ Course 3 x 250m (Adaptée)
+                        <!-- 2. Course 3x250m -->
+                        <div class="bg-white border border-sky-200 rounded-xl overflow-hidden shadow-2xs flex flex-col">
+                            <div class="bg-sky-600 text-white font-extrabold px-3 py-1.5 text-[11px] uppercase tracking-wide text-center flex items-center justify-center gap-1.5">
+                                <svg class="w-3.5 h-3.5 text-sky-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+                                Course 3 x 250m (Adaptée)
                             </div>
-                            <div class="max-h-80 overflow-y-auto">
-                                <table class="w-full text-center divide-y divide-slate-200">
-                                    <thead class="bg-emerald-50 font-bold text-emerald-950 sticky top-0 shadow-xs">
+                            <div class="max-h-72 overflow-y-auto">
+                                <table class="w-full text-center divide-y divide-sky-100">
+                                    <thead class="bg-sky-50 font-bold text-sky-950 sticky top-0 shadow-2xs">
                                         <tr><th class="py-1 px-1">Note</th><th class="py-1 px-1">Garçons</th><th class="py-1 px-1">Filles</th></tr>
                                     </thead>
-                                    <tbody id="baremeTable-c250" class="divide-y divide-slate-100 text-[10.5px]"></tbody>
+                                    <tbody id="baremeTable-c250" class="divide-y divide-sky-50 text-[10.5px]"></tbody>
                                 </table>
                             </div>
                         </div>
 
-                        <!-- 3. Marche 3x250m (Adaptée) -->
-                        <div class="border border-amber-300 rounded-lg overflow-hidden shadow-xs flex flex-col">
-                            <div class="bg-amber-600 text-white font-bold px-2 py-1 text-[11px] uppercase tracking-wide text-center">
-                                🚶 Marche 3 x 250m (Adaptée)
+                        <!-- 3. Marche 3x250m -->
+                        <div class="bg-white border border-sky-200 rounded-xl overflow-hidden shadow-2xs flex flex-col">
+                            <div class="bg-teal-700 text-white font-extrabold px-3 py-1.5 text-[11px] uppercase tracking-wide text-center flex items-center justify-center gap-1.5">
+                                <svg class="w-3.5 h-3.5 text-teal-300" viewBox="0 0 24 24" fill="currentColor"><path d="M13.5 4a1.5 1.5 0 100-3 1.5 1.5 0 000 3zm-2.4 4.5l-2.6 13h2.1l1.6-8 2.3 2.5v5.5h2v-6.9l-2.1-2.3.8-3.8c1.3 1.5 3 2.5 5 2.5v-2c-1.7 0-3.2-.9-4-2.1l-1-1.5c-.3-.5-.9-.8-1.5-.8-.3 0-.6.1-.9.2l-4.7 2v5.4h2V8.9l1-0.4z"/></svg>
+                                Marche 3 x 250m (Adaptée)
                             </div>
-                            <div class="max-h-80 overflow-y-auto">
-                                <table class="w-full text-center divide-y divide-slate-200">
-                                    <thead class="bg-amber-50 font-bold text-amber-950 sticky top-0 shadow-xs">
+                            <div class="max-h-72 overflow-y-auto">
+                                <table class="w-full text-center divide-y divide-sky-100">
+                                    <thead class="bg-teal-50 font-bold text-teal-950 sticky top-0 shadow-2xs">
                                         <tr><th class="py-1 px-1">Note</th><th class="py-1 px-1">Garçons</th><th class="py-1 px-1">Filles</th></tr>
                                     </thead>
-                                    <tbody id="baremeTable-m250" class="divide-y divide-slate-100 text-[10.5px]"></tbody>
+                                    <tbody id="baremeTable-m250" class="divide-y divide-sky-50 text-[10.5px]"></tbody>
                                 </table>
                             </div>
                         </div>
@@ -296,37 +428,38 @@
                 </div>
             </div>
             
-            <div class="px-4 py-2.5 bg-slate-100 border-t border-slate-200 flex justify-end">
-                <button onclick="closeBaremeModal()" class="px-3 py-1 bg-slate-900 hover:bg-slate-800 text-white font-semibold text-xs rounded-lg">Fermer</button>
+            <div class="px-5 py-3 bg-white border-t border-sky-100 flex justify-end">
+                <button onclick="closeBaremeModal()" class="px-4 py-1.5 bg-alain-800 hover:bg-alain-900 text-white font-bold text-xs rounded-lg transition shadow-xs">Fermer</button>
             </div>
         </div>
     </div>
 
-    <!-- MODALE : Import Express de Classe -->
-    <div id="modalImport" class="fixed inset-0 z-50 hidden overflow-y-auto bg-slate-950/70 backdrop-blur-xs flex items-center justify-center p-3 no-print">
-        <div class="bg-white rounded-2xl max-w-md w-full shadow-2xl border border-slate-300 overflow-hidden">
-            <div class="px-4 py-3 bg-slate-900 text-white flex justify-between items-center">
-                <h3 class="text-xs font-bold flex items-center gap-1.5">
-                    <span>📋</span> Importer une classe (Pronote / Excel)
+    <!-- MODALE : Import Express Classe -->
+    <div id="modalImport" class="fixed inset-0 z-50 hidden overflow-y-auto bg-alain-950/70 backdrop-blur-xs flex items-center justify-center p-3 no-print">
+        <div class="bg-white rounded-2xl max-w-md w-full shadow-2xl border border-sky-200 overflow-hidden">
+            <div class="px-5 py-3.5 bg-gradient-to-r from-alain-900 to-sky-800 text-white flex justify-between items-center">
+                <h3 class="text-xs font-extrabold flex items-center gap-2">
+                    <svg class="w-4 h-4 text-sky-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"/></svg>
+                    <span>Lycée Alain 2026 — Import de classe</span>
                 </h3>
-                <button onclick="closeImportModal()" class="text-slate-400 hover:text-white text-base">✕</button>
+                <button onclick="closeImportModal()" class="w-6 h-6 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center">✕</button>
             </div>
             
-            <div class="p-4 space-y-2 text-xs">
-                <p class="text-slate-600">
-                    Collez la liste de vos élèves (un par ligne) :
+            <div class="p-4 space-y-2.5 text-xs bg-sky-50/20">
+                <p class="text-slate-600 font-medium">
+                    Collez votre liste d'élèves depuis Pronote ou Excel (une ligne par élève) :
                 </p>
-                <div class="p-2 bg-slate-50 border border-slate-200 rounded text-slate-500 text-[11px]">
+                <div class="p-2.5 bg-white border border-sky-200 rounded-lg text-slate-500 text-[11px] font-mono leading-relaxed">
                     <code>DUPONT Thomas G</code><br>
                     <code>MARTIN Julie F C250</code><br>
                     <code>PETIT Sarah Marche</code>
                 </div>
-                <textarea id="importTextarea" rows="6" placeholder="DUPONT Lucas&#10;BERNARD Emma F&#10;MOREAU Alexandre C250&#10;PETIT Sarah Marche" class="w-full p-2 border border-slate-300 rounded text-xs font-mono focus:ring-1 focus:ring-blue-500 focus:outline-none"></textarea>
+                <textarea id="importTextarea" rows="6" placeholder="DUPONT Lucas G&#10;BERNARD Emma F&#10;MOREAU Alexandre C250&#10;PETIT Sarah Marche" class="w-full p-2.5 border border-sky-200 rounded-xl text-xs font-mono focus:ring-2 focus:ring-sky-400 focus:outline-none bg-white"></textarea>
             </div>
 
-            <div class="px-4 py-2.5 bg-slate-100 border-t border-slate-200 flex justify-end gap-2">
-                <button onclick="closeImportModal()" class="px-2.5 py-1 border rounded text-xs font-semibold text-slate-600 hover:bg-slate-200">Annuler</button>
-                <button onclick="processImport()" class="px-3 py-1 bg-blue-600 hover:bg-blue-500 text-white font-semibold text-xs rounded shadow-xs">Ajouter</button>
+            <div class="px-4 py-3 bg-white border-t border-sky-100 flex justify-end gap-2">
+                <button onclick="closeImportModal()" class="px-3 py-1.5 border border-slate-300 rounded-lg text-xs font-semibold text-slate-600 hover:bg-slate-100">Annuler</button>
+                <button onclick="processImport()" class="px-4 py-1.5 bg-alain-700 hover:bg-alain-800 text-white font-bold text-xs rounded-lg shadow-xs">Ajouter les élèves</button>
             </div>
         </div>
     </div>
@@ -334,9 +467,9 @@
     <!-- Script logique intégrale -->
     <script>
         /**
-         * Barèmes nationaux CCF Baccalauréat CA1
-         * Définition exhaustive au palier de 0,5 point (de 10.0 à 0.5)
-         * Valeurs t = temps cumulé maximal (en secondes) pour obtenir la note
+         * Barèmes officiels CCF Baccalauréat EPS - Lycée Alain 2026
+         * Paliers stricts de 0,5 point (de 10,0 à 0,5 pt)
+         * t = temps cumulé maximal (en secondes) pour décrocher la note
          */
         const BAREMES_HALF_PTS = {
             COURSE_500_GARCON: [
@@ -473,7 +606,7 @@
             ]
         };
 
-        // Données d'exemples réalistes avec les 3 épreuves
+        // Données d'élèves réalistes pour le Lycée Alain
         const DEMO_DATA = [
             { id: '1', nom: 'BERNARD Alexandre', sexe: 'G', modalite: 'COURSE_500', ar1: "1'28\"", r1: "1'27\"", r2: "1'29\"", r3: "1'28\"" },
             { id: '2', nom: 'MOREAU Camille', sexe: 'F', modalite: 'COURSE_500', ar1: "1'45\"", r1: "1'44\"", r2: "1'46\"", r3: "1'45\"" },
@@ -488,16 +621,11 @@
         let students = [];
         let currentFilter = 'ALL';
 
-        // Initialisation avec compatibilité des anciennes versions
         window.addEventListener('DOMContentLoaded', () => {
-            const saved = localStorage.getItem('eps_bac_grid_v5');
+            const saved = localStorage.getItem('eps_lycee_alain_2026');
             if (saved) {
                 try {
                     students = JSON.parse(saved);
-                    students.forEach(s => {
-                        if (s.modalite === 'COURSE') s.modalite = 'COURSE_500';
-                        if (s.modalite === 'MARCHE') s.modalite = 'MARCHE_250';
-                    });
                 } catch(e) {
                     students = JSON.parse(JSON.stringify(DEMO_DATA));
                 }
@@ -509,24 +637,19 @@
         });
 
         function saveToStorage() {
-            localStorage.setItem('eps_bac_grid_v5', JSON.stringify(students));
-            showToast("Sauvegardé");
+            localStorage.setItem('eps_lycee_alain_2026', JSON.stringify(students));
+            showToast("Données sauvegardées");
         }
 
         /**
-         * Parsing intelligent :
-         * 1) "142"  -> 1 min 42 s -> 102 sec
-         * 2) "205"  -> 2 min 05 s -> 125 sec
-         * 3) "45"   -> 45 sec
-         * 4) "1:42" ou "1'42" -> 102 sec
-         * 5) "42""  -> 42 sec
+         * Parsing haute flexibilité :
+         * 142 -> 1'42", 205 -> 2'05", 48 -> 48", ou "1:42" / "1'42"
          */
         function parseToSeconds(val) {
             if (!val && val !== 0) return 0;
             let clean = String(val).replace(/["s]/g, '').trim();
             if (!clean) return 0;
 
-            // Présence de séparateur (1:42 ou 1'42)
             if (clean.includes(':') || clean.includes("'")) {
                 const parts = clean.split(/[:']/);
                 const mins = parseFloat(parts[0]) || 0;
@@ -534,25 +657,16 @@
                 return Math.round((mins * 60 + secs) * 10) / 10;
             }
 
-            // Chiffres purs sans ponctuation
             if (/^\d+$/.test(clean)) {
-                // Ex: "142" -> 1'42", "205" -> 2'05"
                 if (clean.length === 3) {
                     const mins = parseInt(clean.substring(0, 1), 10);
                     const secs = parseInt(clean.substring(1), 10);
-                    if (secs < 60) {
-                        return (mins * 60) + secs;
-                    }
-                } 
-                // Ex: "1015" -> 10'15"
-                else if (clean.length === 4) {
+                    if (secs < 60) return (mins * 60) + secs;
+                } else if (clean.length === 4) {
                     const mins = parseInt(clean.substring(0, 2), 10);
                     const secs = parseInt(clean.substring(2), 10);
-                    if (secs < 60) {
-                        return (mins * 60) + secs;
-                    }
+                    if (secs < 60) return (mins * 60) + secs;
                 }
-                // Ex: "42", "55", "85" -> secondes directes
                 const num = parseFloat(clean);
                 return isNaN(num) ? 0 : num;
             }
@@ -565,29 +679,21 @@
             if (!seconds || seconds <= 0 || isNaN(seconds)) return "";
             const m = Math.floor(seconds / 60);
             const s = Math.round(seconds % 60);
-            if (m === 0) {
-                return `${s}"`;
-            }
+            if (m === 0) return `${s}"`;
             return `${m}'${s.toString().padStart(2, '0')}"`;
         }
 
-        /**
-         * Attribution par paliers stricts de 0,5 pt (au barème CCF Bac)
-         */
         function getDiscreteScore(cumulSec, table) {
             for (let i = 0; i < table.length; i++) {
                 if (cumulSec <= table[i].t) {
                     return table[i].pts;
                 }
             }
-            return 0.5; // Temps au-delà du dernier palier
+            return 0.5;
         }
 
         /**
-         * Calcul de la note Baccalauréat
-         * - Perf /10 (Cumul 3 courses selon barème à 0,5 pt près)
-         * - Projet /6 (Écart Annonce C1 vs Course 1)
-         * - Régularité /4 (Max - Min sur les 3 répétitions)
+         * Calcul de la note globale sur 20 points
          */
         function calculateStudent(s) {
             const ar1 = parseToSeconds(s.ar1);
@@ -598,7 +704,7 @@
             const hasAllRuns = (r1 > 0 && r2 > 0 && r3 > 0);
             const totalSec = r1 + r2 + r3;
 
-            // 1. Performance /10 (Cumul 3x par paliers stricts de 0.5 pt)
+            // 1. Performance /10 (palier 0,5 pt)
             let notePerf = 0;
             if (hasAllRuns) {
                 let table;
@@ -612,7 +718,7 @@
                 notePerf = getDiscreteScore(totalSec, table);
             }
 
-            // 2. Projet d'Allure /6 (sur la 1ère course C1)
+            // 2. Projet d'allure /6 (sur la 1ère course C1)
             let noteProjet = 0;
             if (r1 > 0 && ar1 > 0) {
                 const ecart = Math.abs(r1 - ar1);
@@ -648,9 +754,6 @@
             };
         }
 
-        /**
-         * Génération dynamique des tables complètes à 0,5 pt dans la modale
-         */
         function buildBaremeModalTables() {
             function populate(tbodyId, tableG, tableF) {
                 const tbody = document.getElementById(tbodyId);
@@ -660,10 +763,10 @@
                     const g = tableG[i];
                     const f = tableF[i];
                     const tr = document.createElement('tr');
-                    if (g.pts === 10.0) tr.className = "bg-blue-50/70 font-bold text-blue-900";
-                    else if (g.pts === 5.0) tr.className = "bg-slate-100 font-semibold";
+                    if (g.pts === 10.0) tr.className = "bg-sky-100/70 font-bold text-alain-900";
+                    else if (g.pts === 5.0) tr.className = "bg-sky-50 font-semibold";
                     tr.innerHTML = `
-                        <td class="py-1 px-1 font-bold text-slate-800">${g.pts.toFixed(1)}</td>
+                        <td class="py-1 px-1 font-bold text-alain-800">${g.pts.toFixed(1)}</td>
                         <td class="py-1 px-1">≤ ${formatDisplay(g.t)}</td>
                         <td class="py-1 px-1">≤ ${formatDisplay(f.t)}</td>
                     `;
@@ -676,9 +779,6 @@
             populate('baremeTable-m250', BAREMES_HALF_PTS.MARCHE_250_GARCON, BAREMES_HALF_PTS.MARCHE_250_FILLE);
         }
 
-        /**
-         * Rendu de la grille optimisée pleine page
-         */
         function renderTable() {
             const tbody = document.getElementById('tableBody');
             const search = document.getElementById('searchInput').value.toLowerCase().trim();
@@ -710,15 +810,14 @@
             document.getElementById('count-marche250').innerText = cMarche250;
             document.getElementById('count-pending').innerText = cPending;
 
-            // Filtrage
             const visibleStudents = students.filter(s => {
                 const matchesSearch = s.nom.toLowerCase().includes(search);
                 if (!matchesSearch) return false;
 
                 const isComplete = (parseToSeconds(s.r1) > 0 && parseToSeconds(s.r2) > 0 && parseToSeconds(s.r3) > 0 && parseToSeconds(s.ar1) > 0);
-                if (currentFilter === 'COURSE_500') return (s.modalite === 'COURSE_500' || !s.modalite || s.modalite === 'COURSE');
+                if (currentFilter === 'COURSE_500') return (s.modalite === 'COURSE_500' || !s.modalite);
                 if (currentFilter === 'COURSE_250') return s.modalite === 'COURSE_250';
-                if (currentFilter === 'MARCHE_250') return (s.modalite === 'MARCHE_250' || s.modalite === 'MARCHE');
+                if (currentFilter === 'MARCHE_250') return s.modalite === 'MARCHE_250';
                 if (currentFilter === 'PENDING') return !isComplete;
                 return true;
             });
@@ -739,148 +838,127 @@
                 // Badge couleur Note
                 let noteClass = "bg-slate-100 text-slate-400";
                 if (calc.hasAllRuns) {
-                    if (calc.noteTotale >= 16) noteClass = "bg-purple-100 text-purple-900 border border-purple-300";
-                    else if (calc.noteTotale >= 12) noteClass = "bg-emerald-100 text-emerald-900 border border-emerald-300";
-                    else if (calc.noteTotale >= 10) noteClass = "bg-blue-100 text-blue-900 border border-blue-300";
-                    else if (calc.noteTotale >= 8) noteClass = "bg-amber-100 text-amber-900 border border-amber-300";
-                    else noteClass = "bg-rose-100 text-rose-900 border border-rose-300";
+                    if (calc.noteTotale >= 16) noteClass = "bg-sky-100 text-sky-950 border border-sky-400 font-extrabold shadow-2xs";
+                    else if (calc.noteTotale >= 12) noteClass = "bg-emerald-50 text-emerald-900 border border-emerald-300 font-bold";
+                    else if (calc.noteTotale >= 10) noteClass = "bg-blue-50 text-blue-900 border border-blue-300 font-bold";
+                    else if (calc.noteTotale >= 8) noteClass = "bg-amber-50 text-amber-900 border border-amber-300 font-bold";
+                    else noteClass = "bg-rose-50 text-rose-900 border border-rose-300 font-bold";
                 }
 
-                // Style badge modalité
-                let modaliteStyle = "text-blue-700 bg-blue-50/70";
-                if (student.modalite === 'COURSE_250') {
-                    modaliteStyle = "text-emerald-800 bg-emerald-50/80 font-bold";
-                } else if (student.modalite === 'MARCHE_250') {
-                    modaliteStyle = "text-amber-800 bg-amber-50/80 font-bold";
-                }
+                // Style épreuve
+                let modaliteStyle = "text-alain-700 bg-sky-50/80 font-semibold";
+                if (student.modalite === 'COURSE_250') modaliteStyle = "text-sky-900 bg-sky-100/70 font-bold";
+                else if (student.modalite === 'MARCHE_250') modaliteStyle = "text-teal-900 bg-teal-50 font-bold";
 
                 const tr = document.createElement('tr');
-                tr.className = "hover:bg-slate-50 transition border-b border-slate-200";
+                tr.className = "hover:bg-sky-50/50 transition border-b border-sky-100";
                 tr.id = `row-${student.id}`;
 
                 tr.innerHTML = `
-                    <!-- Numéro -->
-                    <td class="py-1 px-1 text-center text-slate-400 font-mono text-[10px]">${index + 1}</td>
+                    <td class="py-1 px-1 text-center text-sky-400 font-mono text-[10px]">${index + 1}</td>
                     
-                    <!-- Nom Prénom -->
                     <td class="py-1 px-1">
                         <input type="text" value="${escapeHtml(student.nom)}" 
                             data-id="${student.id}" data-col="nom"
                             onchange="updateField('${student.id}', 'nom', this.value)"
-                            placeholder="Nom Élève" 
-                            class="w-full px-1.5 py-1 rounded border border-transparent hover:border-slate-300 font-semibold text-slate-800 uppercase focus:bg-white text-[11px] truncate">
+                            placeholder="NOM Prénom" 
+                            class="w-full px-2 py-1 rounded-md border border-transparent hover:border-sky-300 font-semibold text-slate-900 uppercase focus:bg-white text-[11px] truncate">
                     </td>
 
-                    <!-- Sexe (G/F) -->
                     <td class="py-1 px-0.5 text-center">
                         <select onchange="updateField('${student.id}', 'sexe', this.value)" 
                             data-id="${student.id}" data-col="sexe"
-                            class="w-full py-1 text-center rounded border border-transparent hover:border-slate-300 font-bold text-[11px] ${student.sexe === 'F' ? 'text-pink-600 bg-pink-50' : 'text-blue-600 bg-blue-50'}">
+                            class="w-full py-1 text-center rounded-md border border-transparent hover:border-sky-300 font-bold text-[11px] ${student.sexe === 'F' ? 'text-pink-600 bg-pink-50' : 'text-sky-700 bg-sky-50'}">
                             <option value="G" ${student.sexe === 'G' ? 'selected' : ''}>G</option>
                             <option value="F" ${student.sexe === 'F' ? 'selected' : ''}>F</option>
                         </select>
                     </td>
 
-                    <!-- Modalité épreuve (3 options complètes) -->
                     <td class="py-1 px-1">
                         <select onchange="updateField('${student.id}', 'modalite', this.value)" 
                             data-id="${student.id}" data-col="modalite"
-                            class="w-full py-1 px-1 rounded border border-transparent hover:border-slate-300 text-[10px] sm:text-[11px] ${modaliteStyle}">
-                            <option value="COURSE_500" ${student.modalite === 'COURSE_500' ? 'selected' : ''}>🏃 3x500m</option>
-                            <option value="COURSE_250" ${student.modalite === 'COURSE_250' ? 'selected' : ''}>⚡ C. 3x250m</option>
-                            <option value="MARCHE_250" ${student.modalite === 'MARCHE_250' ? 'selected' : ''}>🚶 M. 3x250m</option>
+                            class="w-full py-1 px-1 rounded-md border border-transparent hover:border-sky-300 text-[10px] sm:text-[11px] ${modaliteStyle}">
+                            <option value="COURSE_500" ${student.modalite === 'COURSE_500' ? 'selected' : ''}>🏃 Course 3x500m</option>
+                            <option value="COURSE_250" ${student.modalite === 'COURSE_250' ? 'selected' : ''}>⚡ Course 3x250m</option>
+                            <option value="MARCHE_250" ${student.modalite === 'MARCHE_250' ? 'selected' : ''}>🚶 Marche 3x250m</option>
                         </select>
                     </td>
 
-                    <!-- Annonce C1 UNIQUEMENT (Saisie directe type 142 ou 45) -->
-                    <td class="py-1 px-1 bg-indigo-50/40 border-l border-indigo-100">
+                    <td class="py-1 px-1 bg-sky-50/40 border-l border-sky-100">
                         <input type="text" value="${student.ar1 || ''}" 
                             data-id="${student.id}" data-col="ar1"
                             onblur="onTimeBlur(this, '${student.id}', 'ar1')"
                             onkeydown="handleKeyNav(event, this)"
-                            placeholder="ex 142 / 45" 
-                            class="w-full text-center font-mono-num px-1 py-1 rounded border border-slate-200 hover:border-indigo-400 text-indigo-950 font-bold focus:bg-white text-xs">
+                            placeholder="ex 142" 
+                            class="w-full text-center font-mono-num px-1 py-1 rounded-md border border-sky-200 hover:border-sky-400 text-sky-950 font-bold focus:bg-white text-xs">
                     </td>
 
-                    <!-- Réalisé C1 (ex 142 ou 43) -->
-                    <td class="py-1 px-1 bg-blue-50/30 border-l border-blue-100">
+                    <td class="py-1 px-1 bg-sky-50/20 border-l border-sky-100">
                         <input type="text" value="${student.r1 || ''}" 
                             data-id="${student.id}" data-col="r1"
                             onblur="onTimeBlur(this, '${student.id}', 'r1')"
                             onkeydown="handleKeyNav(event, this)"
-                            placeholder="ex 142 / 43" 
-                            class="w-full text-center font-mono-num px-1 py-1 rounded border border-blue-200 hover:border-blue-400 text-blue-900 font-extrabold text-xs focus:bg-white shadow-xs">
+                            placeholder="ex 142" 
+                            class="w-full text-center font-mono-num px-1 py-1 rounded-md border border-sky-200 hover:border-sky-400 text-alain-900 font-extrabold text-xs focus:bg-white shadow-2xs">
                     </td>
 
-                    <!-- Réalisé C2 -->
-                    <td class="py-1 px-1 bg-blue-50/30">
+                    <td class="py-1 px-1 bg-sky-50/20">
                         <input type="text" value="${student.r2 || ''}" 
                             data-id="${student.id}" data-col="r2"
                             onblur="onTimeBlur(this, '${student.id}', 'r2')"
                             onkeydown="handleKeyNav(event, this)"
-                            placeholder="ex 145 / 44" 
-                            class="w-full text-center font-mono-num px-1 py-1 rounded border border-blue-200 hover:border-blue-400 text-blue-900 font-extrabold text-xs focus:bg-white shadow-xs">
+                            placeholder="ex 145" 
+                            class="w-full text-center font-mono-num px-1 py-1 rounded-md border border-sky-200 hover:border-sky-400 text-alain-900 font-extrabold text-xs focus:bg-white shadow-2xs">
                     </td>
 
-                    <!-- Réalisé C3 -->
-                    <td class="py-1 px-1 bg-blue-50/30">
+                    <td class="py-1 px-1 bg-sky-50/20">
                         <input type="text" value="${student.r3 || ''}" 
                             data-id="${student.id}" data-col="r3"
                             onblur="onTimeBlur(this, '${student.id}', 'r3')"
                             onkeydown="handleKeyNav(event, this)"
-                            placeholder="ex 144 / 43" 
-                            class="w-full text-center font-mono-num px-1 py-1 rounded border border-blue-200 hover:border-blue-400 text-blue-900 font-extrabold text-xs focus:bg-white shadow-xs">
+                            placeholder="ex 144" 
+                            class="w-full text-center font-mono-num px-1 py-1 rounded-md border border-sky-200 hover:border-sky-400 text-alain-900 font-extrabold text-xs focus:bg-white shadow-2xs">
                     </td>
 
-                    <!-- Total Cumulé calculé -->
-                    <td class="py-1 px-1 text-center font-mono-num font-bold text-slate-800 border-l border-slate-200 bg-slate-50/40 text-[11px]">
-                        ${calc.hasAllRuns ? formatDisplay(calc.totalSec) : '<span class="text-slate-300">-</span>'}
+                    <td class="py-1 px-1 text-center font-mono-num font-bold text-slate-800 border-l border-sky-100 bg-sky-50/30 text-[11px]">
+                        ${calc.hasAllRuns ? formatDisplay(calc.totalSec) : '<span class="text-sky-300">-</span>'}
                     </td>
 
-                    <!-- Note Perf /10 -->
-                    <td class="py-1 px-0.5 text-center font-mono-num font-bold text-blue-700 bg-slate-50/20 text-[11px]">
-                        ${calc.hasAllRuns ? calc.notePerf.toFixed(1) : '<span class="text-slate-300">-</span>'}
+                    <td class="py-1 px-0.5 text-center font-mono-num font-bold text-alain-800 bg-sky-50/15 text-[11px]">
+                        ${calc.hasAllRuns ? calc.notePerf.toFixed(1) : '<span class="text-sky-300">-</span>'}
                     </td>
 
-                    <!-- Note Projet /6 -->
-                    <td class="py-1 px-0.5 text-center font-mono-num font-bold text-indigo-700 bg-slate-50/20 text-[11px]">
-                        ${(parseToSeconds(student.r1) > 0 && parseToSeconds(student.ar1) > 0) ? calc.noteProjet.toFixed(1) : '<span class="text-slate-300">-</span>'}
+                    <td class="py-1 px-0.5 text-center font-mono-num font-bold text-sky-800 bg-sky-50/15 text-[11px]">
+                        ${(parseToSeconds(student.r1) > 0 && parseToSeconds(student.ar1) > 0) ? calc.noteProjet.toFixed(1) : '<span class="text-sky-300">-</span>'}
                     </td>
 
-                    <!-- Note Régul /4 -->
-                    <td class="py-1 px-0.5 text-center font-mono-num font-bold text-amber-700 bg-slate-50/20 text-[11px]">
-                        ${calc.hasAllRuns ? calc.noteRegul.toFixed(1) : '<span class="text-slate-300">-</span>'}
+                    <td class="py-1 px-0.5 text-center font-mono-num font-bold text-teal-800 bg-sky-50/15 text-[11px]">
+                        ${calc.hasAllRuns ? calc.noteRegul.toFixed(1) : '<span class="text-sky-300">-</span>'}
                     </td>
 
-                    <!-- NOTE FINALE /20 -->
-                    <td class="py-1 px-1 text-center bg-slate-100/50">
-                        <div class="px-1.5 py-0.5 rounded font-mono-num font-extrabold text-xs ${noteClass}">
+                    <td class="py-1 px-1 text-center bg-sky-50/40 border-l border-sky-100">
+                        <div class="px-1.5 py-0.5 rounded-md font-mono-num text-xs ${noteClass}">
                             ${calc.hasAllRuns ? calc.noteTotale.toFixed(1) : '--'}
                         </div>
                     </td>
 
-                    <!-- Supprimer ligne -->
                     <td class="py-1 px-0.5 text-center no-print">
-                        <button onclick="deleteStudent('${student.id}')" title="Supprimer" class="p-0.5 text-slate-300 hover:text-rose-600 transition">
-                            ✕
+                        <button onclick="deleteStudent('${student.id}')" title="Supprimer la ligne" class="p-0.5 text-sky-300 hover:text-rose-600 transition">
+                            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg>
                         </button>
                     </td>
                 `;
                 tbody.appendChild(tr);
             });
 
-            // Moyenne globale
             const moyVal = countComplete > 0 ? (sumNotes / countComplete).toFixed(1) + '/20' : '-- /20';
             document.getElementById('stat-moyenne-val').innerText = moyVal;
         }
 
-        /**
-         * Navigation verticale clavier (Entrée / Flèche Bas / Haut)
-         */
         function handleKeyNav(e, inputEl) {
             if (e.key === 'Enter' || e.key === 'ArrowDown') {
                 e.preventDefault();
-                inputEl.blur(); // déclenche le formatage et le recalcul
+                inputEl.blur();
                 moveFocusVertical(inputEl, 1);
             } else if (e.key === 'ArrowUp') {
                 e.preventDefault();
@@ -903,9 +981,6 @@
             }
         }
 
-        /**
-         * Sortie du champ chrono : convertit "142" en "1'42\"" ou "45" en "45\""
-         */
         function onTimeBlur(inputEl, id, field) {
             const raw = inputEl.value.trim();
             const s = students.find(item => item.id === id);
@@ -932,9 +1007,6 @@
             }
         }
 
-        /**
-         * Gestion des lignes
-         */
         function addRow() {
             const newId = Date.now().toString();
             students.push({
@@ -973,17 +1045,17 @@
         function setFilter(type) {
             currentFilter = type;
             document.querySelectorAll('.filter-tab').forEach(btn => {
-                btn.className = "filter-tab px-2.5 py-0.5 rounded-full font-semibold bg-slate-100 hover:bg-slate-200 text-slate-700 transition text-[11px]";
+                btn.className = "filter-tab px-3 py-1 rounded-full font-bold bg-sky-50 hover:bg-sky-100 text-alain-700 border border-sky-200 transition text-[11px] flex items-center gap-1";
             });
             const activeBtn = document.getElementById(`filter-btn-${type}`);
             if (activeBtn) {
-                activeBtn.className = "filter-tab px-2.5 py-0.5 rounded-full font-semibold bg-slate-900 text-white transition text-[11px]";
+                activeBtn.className = "filter-tab px-3 py-1 rounded-full font-bold bg-alain-800 text-white transition text-[11px] shadow-xs flex items-center gap-1";
             }
             renderTable();
         }
 
         function clearAllData() {
-            if (confirm("Supprimer tous les élèves et chronos ?")) {
+            if (confirm("Supprimer tous les élèves et chronos enregistrés ?")) {
                 students = [];
                 saveToStorage();
                 renderTable();
@@ -991,17 +1063,14 @@
         }
 
         function resetDemoData() {
-            if (confirm("Recharger les élèves exemples ?")) {
+            if (confirm("Recharger les élèves exemples du Lycée Alain ?")) {
                 students = JSON.parse(JSON.stringify(DEMO_DATA));
                 saveToStorage();
                 renderTable();
-                showToast("Exemples rechargés");
+                showToast("Données d'exemples chargées");
             }
         }
 
-        /**
-         * Import rapide par copier-coller
-         */
         function openImportModal() {
             document.getElementById('importTextarea').value = "";
             document.getElementById('modalImport').classList.remove('hidden');
@@ -1025,7 +1094,6 @@
 
                 if (/\b(F|FILLE|FEMME)\b/i.test(cleaned)) sexe = 'F';
                 
-                // Détection épreuve
                 if (/\b(MARCHE|M250|M\.250)\b/i.test(cleaned)) {
                     modalite = 'MARCHE_250';
                 } else if (/\b(C250|C\.250|250M?|ADAPTE)\b/i.test(cleaned)) {
@@ -1058,30 +1126,27 @@
             showToast(`${addedCount} élève(s) importé(s)`);
         }
 
-        /**
-         * Export CSV pour Pronote / Excel
-         */
         function exportCSV() {
-            let csv = "Nom;Sexe;Epreuve;Annonce_C1;Realise_C1;Realise_C2;Realise_C3;Cumul;Perf_10;Projet_6;Regul_4;Note_Finale_20\n";
+            let csv = "Lycee;Annee;Nom;Sexe;Epreuve;Annonce_C1;Realise_C1;Realise_C2;Realise_C3;Cumul;Perf_10;Projet_6;Regul_4;Note_Finale_20\n";
             students.forEach(s => {
                 const c = calculateStudent(s);
                 let labelEp = "Course 3x500m";
                 if (s.modalite === 'COURSE_250') labelEp = "Course 3x250m";
                 if (s.modalite === 'MARCHE_250') labelEp = "Marche 3x250m";
 
-                csv += `"${s.nom}";"${s.sexe}";"${labelEp}";"${s.ar1}";"${s.r1}";"${s.r2}";"${s.r3}";"${c.hasAllRuns ? formatDisplay(c.totalSec) : ''}";"${c.hasAllRuns ? c.notePerf.toFixed(1) : ''}";"${c.hasAllRuns ? c.noteProjet.toFixed(1) : ''}";"${c.hasAllRuns ? c.noteRegul.toFixed(1) : ''}";"${c.hasAllRuns ? c.noteTotale.toFixed(1) : ''}"\n`;
+                csv += `"Lycée Alain";"2026";"${s.nom}";"${s.sexe}";"${labelEp}";"${s.ar1}";"${s.r1}";"${s.r2}";"${s.r3}";"${c.hasAllRuns ? formatDisplay(c.totalSec) : ''}";"${c.hasAllRuns ? c.notePerf.toFixed(1) : ''}";"${c.hasAllRuns ? c.noteProjet.toFixed(1) : ''}";"${c.hasAllRuns ? c.noteRegul.toFixed(1) : ''}";"${c.hasAllRuns ? c.noteTotale.toFixed(1) : ''}"\n`;
             });
 
             const blob = new Blob(["\uFEFF" + csv], { type: 'text/csv;charset=utf-8;' });
             const url = URL.createObjectURL(blob);
             const a = document.createElement('a');
             a.href = url;
-            a.download = `notes_bac_eps_ca1_${new Date().toISOString().slice(0, 10)}.csv`;
+            a.download = `notes_bac_eps_lycee_alain_2026_${new Date().toISOString().slice(0, 10)}.csv`;
             document.body.appendChild(a);
             a.click();
             document.body.removeChild(a);
             URL.revokeObjectURL(url);
-            showToast("CSV généré");
+            showToast("CSV exporté avec succès");
         }
 
         function openBaremeModal() {
